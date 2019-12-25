@@ -1,0 +1,389 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    @using System.Web.Optimization;
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquerytools")
+    @Styles.Render("~/Content/jquerytools")
+
+    <!--常用的一些组件业务脚本函数,放置此处方便脚本提示-->
+    <script src="~/Scripts/ComponentUtil.js"></script>
+
+    <script type="text/javascript">
+        var Pid = "";
+        //初始化组织机构列表
+        function initDeptTreeview() {
+            //iDeleted   0:显示未删除数据 10：显示所有数据
+            $('#txtPID').combotree({
+                url: '/User/GetMyDeptTreeJson_Server?iDeleted=0 ',
+                //添加图标
+                loadFilter: function (data, parent) {
+                    for (var i = 0; i < data.length; i++) {
+                        getLevel(data[i], 0);
+                    }
+                    return data;
+                },
+                onClick: function (node) {
+                }
+            });
+
+            $('#treeDept').tree({
+                url: '/User/GetMyDeptTreeJson_Server?iDeleted=10 ',            
+                onClick: function (node) {
+                    loadData(node.id);
+                    //getSelected();
+               
+                }
+            });
+            //   reloadRelation();//重新刷新
+        }
+
+         //按节点添加icon
+        function getLevel(node, level) {
+            var children = node.children;          
+            if (level == 0)
+                node.iconCls = "icon-organ";
+            else if (level == 1)
+                node.iconCls = "icon-group-key";
+            else if (level == 2)
+                node.iconCls = "icon-group";
+            else
+                node.iconCls = "icon-man";
+            if (children)
+                for (var i = 0; i < children.length; i++) {
+                    getLevel(children[i], level + 1);
+                }
+        }
+
+        //function getSelected() {
+        //    var node = $('#treeDept').tree('getSelected');
+        //    $('#treeDept').tree('update', {
+        //        target: node.target,
+        //        text: node.text,
+        //        iconCls: 'icon-cancel'
+        //    });
+        //}
+    
+        //供弹出窗口关闭后刷新关系
+        function reloadRelation() {
+            var id = $("#txtID").val();
+            if (id != "") {
+                loadData(id);
+            }
+        }
+
+        //加载制定的对象数据
+        function loadData(id) {
+            $.ajax({
+                type: "get",
+                async: false,
+                url: "/OU/OU_FindById_Server",
+                data: { ID: id },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (json) {
+                    $("#txtID").val(json[0].IntID);
+                    $("#txtName").val(json[0].NvcName);
+                    $("#txtAddress").val(json[0].NvcAddress);
+                    $("#txtNote").val(json[0].NvcNote);
+                    $("#SortCode").val(json[0].NvcSortCode);
+                    $("#HandNo").val(json[0].HandNo);
+                    // $("#Category").combobox("setValue", json.Category);
+                    $("#OuterPhone").val(json[0].NvcOuterPhone);
+                    $("#InnerPhone").val(json[0].NvcInnerPhone);
+                    //$("#txtPID").val(json.PID);
+                    $('#txtPID').combotree('setValue', json[0].IntPID);
+                    $("#Creator").text(json[0].NvcCreator);
+                    $("#CreateTime").text(json[0].DtCreate);
+                    //父节点
+                    Pid = json[0].IntPID;
+                },
+                error: function (err) {
+                    //$.messager.alert("提示", err);
+                }
+            });
+        }
+
+        //保存对象数据
+        function saveData() {
+            if ($("#txtName").val() == "") {
+                $("#txtName").focus();
+                $.messager.alert("提示", "机构名称不能为空"); return;
+            }
+
+            var url = '/OU/OU_Opr_Server';//更新
+
+            var validate = $("#ffAdd").form('validate');
+            if (validate == false) {
+                return false;
+            }
+            var postData = $("#ffAdd").serializeArray();
+            console.log(postData);
+            $.post(url, postData, function (json) {
+                var data = $.parseJSON(json);
+                if (data.IsSuccess) {
+                    //添加成功  1.关闭弹出层，2.刷新DataGird
+                    showTips("保存成功");
+                    initDeptTreeview();
+                    reloadRelation();//重新更新显示
+                }
+                else {
+                    showError("保存失败:" + data.ErrorMsg, 3000);
+                }
+            }).error(function () {
+                $.messager.alert("提示", "您未被授权使用该功能，请联系管理员进行处理。", 'warning');
+            });
+        }
+
+        //新增清空控件
+        function addData() {
+            $("#txtPID").combotree('setValue', $("#txtID").val());
+            $("input[type=text][id*='txt']").val("");
+            $("textarea[id*='txt']").empty();
+            $("select[id*='lbx']").empty();
+            $("#OuterPhone").val("");
+            $("#InnerPhone").val("");
+            $("#Creator").text("");
+            var currentdate = new Date();
+            $("#CreateTime").text(currentdate.toLocaleString());
+        }
+
+        //删除当前记录
+        function delData() {
+            var id = $("#txtID").val();
+            if (id == "") {
+                $.messager.alert("提示", "请选择记录");
+                return;
+            }      
+            $.messager.confirm("删除确认信息", "您要确定删除该条记录吗？", function (action) {
+                if (action) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/OU/OU_Del_Server?id='+id,                    
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.IsSuccess) {
+                                showTips("操作成功");
+                            }
+                            else {
+                                showError("操作失败：" + data.ErrorMsg, 3000);
+                            }
+                        }
+                    });
+                    initDeptTreeview();
+                }
+            });
+        }
+
+        //还原当前记录
+        function Recover() {
+            var id = $("#txtID").val();
+            if (id == "") {
+                $.messager.alert("提示", "请选择记录");
+                return;
+            }
+            var validate = $("#ffAdd").form('validate');
+            if (validate == false) {
+                return false;
+            }
+            if (Pid == "") {
+                 $.messager.alert("提示", "获取父节点参数失败");
+                 return false;
+            }
+
+            var url = '/OU/OU_Recover_Server?Pid='+Pid;//还原
+            var postData = $("#ffAdd").serializeArray();
+            $.messager.confirm("还原确认信息", "您要确定还原该条记录吗？", function (action) {
+                if (action) {
+                    $.post(url, postData, function (json) {
+                        var data = $.parseJSON(json);
+                        if (data.IsSuccess) {
+                            //添加成功  1.关闭弹出层，2.刷新DataGird
+                            showTips("操作成功");
+                            initDeptTreeview();
+                            reloadRelation();//重新更新显示
+                        }
+                        else {
+                            showError("操作失败:" + data.ErrorMsg, 3000);
+                        }
+                    }).error(function () {
+                        $.messager.alert("提示", "您未被授权使用该功能，请联系管理员进行处理。", 'warning');
+                    });
+                    initDeptTreeview();
+                }
+            });
+        }
+
+        //初始化对象
+        $(document).ready(function () {
+            //机构基础信息
+            initDeptTreeview();
+            $("#deptExpand").bind("click", function () {
+                expandAll("treeDept");
+            });
+            $("#deptCollapse").bind("click", function () {
+                collapseAll("treeDept");
+            });
+        });
+    </script>
+    <style>
+        table.view {
+            border: 1px solid #A8CFEB;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+            width: 99%;
+            height: 99%
+        }
+
+        .view th {
+            padding-left: 10px;
+            padding-right: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            width: 100px;
+            border: 1px solid silver;
+            background-color: #F1F6FF;
+        }
+
+        .view td {
+            padding-left: 10px;
+            padding-right: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            width: 150px;
+            border: 1px solid silver;
+            background-color: #FAFCFF;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading" style="display: none;"><img alt="数据正在加载中..." src="~/Content/images/loading02.gif" /></div>
+    <div class="easyui-layout" style="width:700px;height:700px;" fit="true">
+        <div data-options="region:'west',split:true,title:'组织机构列表',iconCls:'icon-book'" style="width: 250px; padding: 1px;">
+            <div title="组织机构列表" style="padding:5px;height:auto" data-options="iconCls:'icon-organ'">
+                <div style="padding: 1px; border: 1px solid #ddd;">
+                    <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" id="deptRefresh" onclick="initDeptTreeview()">刷新</a>
+                    <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-expand'" id="deptExpand" onclick="return false;">展开</a>
+                    <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-collapse'" id="deptCollapse" onclick="return false;">折叠</a>
+                </div>
+                <div style="padding: 1px; border: 1px solid #ddd;">
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-cancel" id="btnDelete" onclick="delData()">删除</a>
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-ok" id="btnRecover" onclick="Recover()">还原</a>
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-add" id="btnAdd" onclick="addData()">添加</a>
+                </div>
+                <div>
+                    <ul id="treeDept"></ul>
+                </div>
+            </div>
+        </div>
+        <div id="tbEdit" data-options="region:'center',split:true,title:'机构详细信息',iconCls:'icon-book'" style="padding:5px;height:auto">
+            <div title="机构详细信息" style="padding:5px;height:auto" data-options="iconCls:'icon-view'">
+                <form id="ffAdd" method="post" novalidate="novalidate">
+                    <table id="tbGroupInfo" style="height:200px;width:500px">
+                        <tr height="10%">
+                            <td align="left" style="width: 95px">
+                                编号(<font color="red">*</font>)
+                            </td>
+                            <td align="left">
+                                <input type="text" class="easyui-validatebox" id="txtID" name="IntID" style="width: 50px;background-color:#F0EAEA;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="95" align="left" style="width: 95px">
+                                机构名(<font color="red">*</font>)：
+                            </td>
+                            <td align="left">
+                                <input class="easyui-validatebox" id="txtName" name="NvcName" style="width: 200px" type="text" maxlength="100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="width: 95px">
+                                上级机构(<font color="red">*</font>)：
+                            </td>
+                            <td align="left">
+                                <select id="txtPID" style="width:200px" name="IntPID"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="HandNo">机构编码：</label>
+                            </th>
+                            <td>
+                                <input class="easyui-validatebox" type="text" id="HandNo" name="NvcHandNo" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="SortCode">排序码：</label>
+                            </th>
+                            <td>
+                                <input class="easyui-validatebox" type="text" id="NvcSortCode" name="SortCode" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="OuterPhone">外线电话：</label>
+                            </th>
+                            <td>
+                                <input class="easyui-validatebox" type="text" id="OuterPhone" name="NvcOuterPhone" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="InnerPhone">内线电话：</label>
+                            </th>
+                            <td>
+                                <input class="easyui-validatebox" type="text" id="InnerPhone" name="NvcInnerPhone" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="95" align="left" style="width: 95px">
+                                机构地址：
+                            </td>
+                            <td align="left">
+                                <input class="easyui-validatebox" id="txtAddress" name="NvcAddress" style="width:400px" type="text" maxlength="200">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="width: 95px">
+                                备注：
+                            </td>
+                            <td align="left">
+                                <textarea class="easyui-validatebox" id="Note" name="NvcNote" style="width:400px; height: 50px"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="width: 95px">
+                                创建人：
+                            </td>
+                            <td colspan="2">
+                                <label id="Creator" style="width:150px" name="NvcCreator" />&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="width: 95px">
+                                创建时间：
+                            </td>
+                            <td colspan="2">
+                                <label id="CreateTime" style="width:150px" name="DtCreate" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 95px"></td>
+                            <td>
+                                <a href="#" class="easyui-linkbutton" iconcls="icon-ok" id="btnSave" onclick="saveData()">保存</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

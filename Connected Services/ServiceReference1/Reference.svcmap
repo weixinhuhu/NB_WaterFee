@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="10a89ebb-bcbd-41d4-8b2f-57d022e94d13" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://118.190.199.54:9009/DbServer/ServAuthority.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServAuthority.xsd" MetadataType="Schema" ID="eb00dc2f-5d4a-4a45-a33a-27cf0df732e1" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServAuthority1.xsd" MetadataType="Schema" ID="75c7b3aa-0257-4b6d-850d-1887edde2ce7" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServAuthority2.xsd" MetadataType="Schema" ID="341c409b-bda9-4db6-9d4c-8090e156f694" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServAuthority3.xsd" MetadataType="Schema" ID="764c7479-a071-4f8e-b026-2867a979bc60" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServAuthority4.xsd" MetadataType="Schema" ID="7701afa6-e1e2-4905-b796-07c09970d783" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd4" />
+    <MetadataFile FileName="ServAuthority5.xsd" MetadataType="Schema" ID="834c107e-00b3-407d-880b-019334682689" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd5" />
+    <MetadataFile FileName="Authority.wsdl" MetadataType="Wsdl" ID="34c1c51d-526b-420f-bccc-852582f03371" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/ServAuthority.svc?wsdl" />
+    <MetadataFile FileName="ServAuthority.disco" MetadataType="Disco" ID="0b3693d8-1689-40c5-90f8-2f018224c496" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/ServAuthority.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
