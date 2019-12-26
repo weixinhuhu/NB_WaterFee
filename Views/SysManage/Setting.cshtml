@@ -53,13 +53,35 @@
         }
     </style>
     <script type="text/javascript">
-        $(function () {
-            $("#ddlPayMode").combobox('setValue',@ViewBag.PayMode);
-            //$("#txtBalanceDay").numberbox('setValue',@ViewBag.BalanceDay);
-            //$("#txtAreaCode").numberbox('setValue',@ViewBag.AreaCode);
+        var id = 0;
+        $(function () {           
+             $.ajax({
+                    url:'/SysManage/Param_EndUser_Qry_Server',
+                    type:'post',
+                    dataType:'json',
+                    data:{},
+                    success:function(json){
+                        if (json.IsSuccess) {
+                            var date =  JSON.parse(json.StrData1);
+                            console.log(date);
+                            $('#ddlPayMode').combobox('setValue', date.IntPayMode);
+                            $('#ddlAutoSwitch').combobox('setValue', date.IntSwitchMode);
+                            $("#txtAreaCode").numberbox('setValue',date.IntRegionCode);
+                            $("#txtBalanceDay").numberbox('setValue',date.IntBalanceDay);
+                            id = date.IntID; 
+                        };                  
+                    },
+                    error:function(){
+                        showError("获取系统信息失败");
+                    }
+                });
+        });
 
-            $("#btnSave").click(function(){
-                var payMode=$("#ddlPayMode").combobox('getValue');
+        function SaveSetting() {
+             $("#btnSave").click(function(){
+                var payMode = $("#ddlPayMode").combobox('getValue');
+                var AutoSwitch= $("#ddlAutoSwitch").combobox('getValue');
+                var AreaCode= $("#txtAreaCode").val()
                 var balanceDay=parseInt( $("#txtBalanceDay").val());
                 if(balanceDay<1||balanceDay>28){
                     showError("结算日请填写1-28中的任意一天.");
@@ -67,12 +89,12 @@
                 }
                 var AreaCode=$("#txtAreaCode").val();
                 $.ajax({
-                    url:'/SysManage/Setting_Save',
+                    url:'/SysManage/Setting_Save_Server',
                     type:'post',
                     dataType:'json',
-                    data:{PayMode:payMode,BalanceDay:balanceDay,AreaCode:AreaCode },
+                    data: { PayMode: payMode, BalanceDay: balanceDay, AreaCode: AreaCode, AutoSwitch: AutoSwitch, ID: id},
                     success:function(ret){
-                        if(ret.Success) showTips("保存成功!");
+                        if(ret.IsSuccess) showTips("保存成功!");
                         else showError("保存失败!");
                     },
                     error:function(){
@@ -80,13 +102,8 @@
                     }
                 });
             });
-
-        });
-
-
+        }
     </script>
-
-
 </head>
 <body>
 
@@ -104,7 +121,7 @@
                         <label for="addIntNo">付费模式：</label>
                     </th>
                     <td style="width: 25%">
-                        <select id="ddlPayMode" class="easyui-combobox" style="width: 100px;">
+                        <select id="ddlPayMode" class="easyui-combobox" style="width: 100px;" required>
                             <option value="0">预付费</option>
                             <option value="1">后付费</option>
                         </select>
@@ -113,7 +130,7 @@
                         <label for="addNvcName">结算日：</label>
                     </th>
                     <td style="width: 25%">
-                        <input class="easyui-numberbox" value='@ViewBag.BalanceDay' type="text" id="txtBalanceDay" style="width: 100px;" data-options="required:true,validType:'length[1,60]'" />
+                        <input class="easyui-numberbox"  type="text" id="txtBalanceDay" style="width: 100px;" data-options="required:true,validType:'length[1,60]'" />
                         <label>1-28中的任意一天.</label>
                     </td>
                 </tr>
@@ -122,22 +139,24 @@
                         <label for="addIntNo">区域码：</label>
                     </th>
                     <td style="width: 25%">
-                        <input class="easyui-numberbox" value='@ViewBag.AreaCode' type="text" id="txtAreaCode" style="width: 100px;" />
+                        <input class="easyui-numberbox" type="text" id="txtAreaCode" style="width: 100px;" required/>
                     </td>
-                    <th style="width: 20%; text-align: center;"></th>
-                    <td style="width: 25%"></td>
-                </tr>
-
+                    <th style="width: 20%; text-align: center;">
+                        <label for="addIntNo">自动开关阀参数设置：</label>
+                    </th>
+                    <td style="width: 25%">
+                        <select id="ddlAutoSwitch" class="easyui-combobox" style="width: 100px;" required>
+                            <option value="0">自动</option>
+                            <option value="1">手动</option>
+                        </select>
+                    </td>
                 <tr>
                     <td colspan="4" style="text-align: center; padding-top: 10px">
-                        <a href="javascript:void(0)" class="easyui-linkbutton" id="btnSave" iconcls="icon-ok">保存</a>
+                        <a href="#" class="easyui-linkbutton" id="btnSave" iconcls="icon-ok" onclick="SaveSetting()">保存</a>
                     </td>
                 </tr>
             </table>
-
-
         </div>
     </div>
-
 </body>
 </html>

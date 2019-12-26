@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="Kxd31enyW90MqZ0i5rcWfW0bkxQ=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="jT5krKv4DYCs1DBzyLlD3vuEiRU=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IAuthority1">
       <properties>
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IAuthority1" contract="ServiceReference1.IAuthority" bindingType="basicHttpBinding" address="http://118.190.199.54:9009/DbServer/ServAuthority.svc" bindingConfiguration="BasicHttpBinding_IAuthority1">
+    <endpoint name="BasicHttpBinding_IAuthority" contract="ServiceReference1.IAuthority" bindingType="basicHttpBinding" address="http://118.190.199.54:9009/DbServer/ServAuthority.svc" bindingConfiguration="BasicHttpBinding_IAuthority1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://118.190.199.54:9009/DbServer/ServAuthority.svc</serializedValue>
@@ -187,7 +187,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_IAuthority1</serializedValue>
+          <serializedValue>BasicHttpBinding_IAuthority</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

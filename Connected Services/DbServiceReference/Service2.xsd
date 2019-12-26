@@ -263,4 +263,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MeterConfig" nillable="true" type="tns:MeterConfig" />
+  <xs:complexType name="ParamEndUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DtCreate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DtLstUpd" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IntBalanceDay" type="xs:int" />
+      <xs:element minOccurs="0" name="IntCreateID" type="xs:int" />
+      <xs:element minOccurs="0" name="IntEndCode" type="xs:int" />
+      <xs:element minOccurs="0" name="IntFactoryCode" type="xs:int" />
+      <xs:element minOccurs="0" name="IntID" type="xs:int" />
+      <xs:element minOccurs="0" name="IntLstUpdID" type="xs:int" />
+      <xs:element minOccurs="0" name="IntPayMode" type="xs:int" />
+      <xs:element minOccurs="0" name="IntRegionCode" type="xs:int" />
+      <xs:element minOccurs="0" name="IntSwitchMode" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ParamEndUser" nillable="true" type="tns:ParamEndUser" />
 </xs:schema>

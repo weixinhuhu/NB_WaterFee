@@ -65,9 +65,9 @@ $.fn.extend({
 $.fn.center = function () {
     this.css("position", "absolute");
     this.css("top", Math.max(0, (($(window).height() - this.outerHeight()) / 2) +
-                                        $(window).scrollTop()) + "px");
+        $(window).scrollTop()) + "px");
     this.css("left", Math.max(0, (($(window).width() - this.outerWidth()) / 2) +
-                                        $(window).scrollLeft()) + "px");
+        $(window).scrollLeft()) + "px");
     return this;
 }
 //在页面中生成GUID的值
@@ -258,66 +258,66 @@ function checkAllTree(tree, checked) {
 //显示错误或提示信息（需要引用jNotify相关文件）
 function showError(tips, TimeShown, autoHide) {
     jError(
-      tips,
-      {
-          autoHide: autoHide || true, // added in v2.0
-          TimeShown: TimeShown || 1500,
-          HorizontalPosition: 'center',
-          VerticalPosition: 'top',
-          ShowOverlay: true,
-          ColorOverlay: '#000',
-          onCompleted: function () { // added in v2.0
-          //alert('jNofity is completed !');
-          }
-      }
+        tips,
+        {
+            autoHide: autoHide || true, // added in v2.0
+            TimeShown: TimeShown || 1500,
+            HorizontalPosition: 'center',
+            VerticalPosition: 'top',
+            ShowOverlay: true,
+            ColorOverlay: '#000',
+            onCompleted: function () { // added in v2.0
+                //alert('jNofity is completed !');
+            }
+        }
     );
 }
 //显示错误或提示信息（需要引用jNotify相关文件）
 function showErrorTop(tips, TimeShown, autoHide) {
     parent.jError(
-       tips,
-       {
-           autoHide: autoHide || true, // added in v2.0
-           TimeShown: TimeShown || 1500,
-           HorizontalPosition: 'center',
-           VerticalPosition: 'top',
-           ShowOverlay: true,
-           ColorOverlay: '#000',
-           onCompleted: function () { // added in v2.0
-           //alert('jNofity is completed !');
-           }
-       }
-     );
+        tips,
+        {
+            autoHide: autoHide || true, // added in v2.0
+            TimeShown: TimeShown || 1500,
+            HorizontalPosition: 'center',
+            VerticalPosition: 'top',
+            ShowOverlay: true,
+            ColorOverlay: '#000',
+            onCompleted: function () { // added in v2.0
+                //alert('jNofity is completed !');
+            }
+        }
+    );
 }
 function showTips(tips, TimeShown, autoHide) {
     jSuccess(
-      tips,
-      {
-          autoHide: autoHide || true, // added in v2.0
-          TimeShown: TimeShown || 1500,
-          HorizontalPosition: 'center',
-          VerticalPosition: 'top',
-          ShowOverlay: true,
-          ColorOverlay: '#000',
-          onCompleted: function () { // added in v2.0
-          //alert('jNofity is completed !');
-          }
-      }
+        tips,
+        {
+            autoHide: autoHide || true, // added in v2.0
+            TimeShown: TimeShown || 1500,
+            HorizontalPosition: 'center',
+            VerticalPosition: 'top',
+            ShowOverlay: true,
+            ColorOverlay: '#000',
+            onCompleted: function () { // added in v2.0
+                //alert('jNofity is completed !');
+            }
+        }
     );
 }
 function showTipsTop(tips, TimeShown, autoHide) {
     parent.jSuccess(
-       tips,
-       {
-           autoHide: autoHide || true, // added in v2.0
-           TimeShown: TimeShown || 1500,
-           HorizontalPosition: 'center',
-           VerticalPosition: 'top',
-           ShowOverlay: true,
-           ColorOverlay: '#000',
-           onCompleted: function () { // added in v2.0
-           //alert('jNofity is completed !');
-           }
-       }
-     );
+        tips,
+        {
+            autoHide: autoHide || true, // added in v2.0
+            TimeShown: TimeShown || 1500,
+            HorizontalPosition: 'center',
+            VerticalPosition: 'top',
+            ShowOverlay: true,
+            ColorOverlay: '#000',
+            onCompleted: function () { // added in v2.0
+                //alert('jNofity is completed !');
+            }
+        }
+    );
 }

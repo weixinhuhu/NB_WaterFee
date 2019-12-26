@@ -12,9 +12,8 @@ namespace NB_WaterFee.Controllers.CustomerInfo
     public class ArcCustomerInfoController : BaseController
     {
         // GET: ArcCustomerInfo
-        public ActionResult Index()
+        public ActionResult List()
         {
-            ViewBag.Title = "档案列表";
             return View();
         }
 
@@ -84,10 +83,8 @@ namespace NB_WaterFee.Controllers.CustomerInfo
         }
 
         public ActionResult Insert_Server(Customer CustomerInfo, Meter MeterInfo)
-        {
-         
+        {       
             CommonResult result = new CommonResult();
-
             try
             {
                 var cInfo = Request["CustomerInfo"];
@@ -110,9 +107,8 @@ namespace NB_WaterFee.Controllers.CustomerInfo
                 var endcode = Session["EndCode"] ?? "0";
                 CustomerInfo.IntEndCode = endcode.ToString().ToInt();
                 MeterInfo.IntEndCode = endcode.ToString().ToInt();
-
-                ServiceDbClient DbServer = new ServiceDbClient();
-                var flg = DbServer.ArcCustMeter_Ins(CustomerInfo, MeterInfo);
+                CustomerInfo.VcWechatNo = "";
+                var flg = new ServiceDbClient().ArcCustMeter_Ins(CustomerInfo, MeterInfo);
                 if (flg == "0")
                 {
                     result.IsSuccess = true;
@@ -160,9 +156,9 @@ namespace NB_WaterFee.Controllers.CustomerInfo
                 var endcode = Session["EndCode"] ?? "0";
                 CustomerInfo.IntEndCode = endcode.ToString().ToInt();
                 MeterInfo.IntEndCode = endcode.ToString().ToInt();
-                //调用后台服务获取集中器信息
-                ServiceDbClient DbServer = new ServiceDbClient();
-                var flg = DbServer.ArcCustMeter_Upd(CustomerInfo, MeterInfo);
+                CustomerInfo.VcWechatNo = "";
+
+                var flg = new ServiceDbClient().ArcCustMeter_Upd(CustomerInfo, MeterInfo);
                 if (flg == "0")
                 {
                     result.IsSuccess = true;

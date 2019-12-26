@@ -21,10 +21,10 @@ namespace WHC.WaterFeeWeb.Controllers
         }
 
         // GET: CustomerInfo
-        public ActionResult Setting()
-        {
-            return View();
-        }
+        //public ActionResult Setting()
+        //{
+        //    return View();
+        //}
       
         public ActionResult GetListJson_Server()
         {

@@ -1985,6 +1985,7 @@ namespace NB_WaterFee.DbServiceReference {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterConfigTree[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterConfigTree))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterConfig))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.ParamEndUser))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<int, double>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.EasyTreeData[]))]
@@ -3135,6 +3136,211 @@ namespace NB_WaterFee.DbServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ParamEndUser", Namespace="http://schemas.datacontract.org/2004/07/DbServer.DTO")]
+    [System.SerializableAttribute()]
+    public partial class ParamEndUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DtCreateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DtLstUpdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntBalanceDayField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntCreateIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntEndCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntFactoryCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntLstUpdIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntPayModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntRegionCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntSwitchModeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DtCreate {
+            get {
+                return this.DtCreateField;
+            }
+            set {
+                if ((this.DtCreateField.Equals(value) != true)) {
+                    this.DtCreateField = value;
+                    this.RaisePropertyChanged("DtCreate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DtLstUpd {
+            get {
+                return this.DtLstUpdField;
+            }
+            set {
+                if ((this.DtLstUpdField.Equals(value) != true)) {
+                    this.DtLstUpdField = value;
+                    this.RaisePropertyChanged("DtLstUpd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntBalanceDay {
+            get {
+                return this.IntBalanceDayField;
+            }
+            set {
+                if ((this.IntBalanceDayField.Equals(value) != true)) {
+                    this.IntBalanceDayField = value;
+                    this.RaisePropertyChanged("IntBalanceDay");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntCreateID {
+            get {
+                return this.IntCreateIDField;
+            }
+            set {
+                if ((this.IntCreateIDField.Equals(value) != true)) {
+                    this.IntCreateIDField = value;
+                    this.RaisePropertyChanged("IntCreateID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntEndCode {
+            get {
+                return this.IntEndCodeField;
+            }
+            set {
+                if ((this.IntEndCodeField.Equals(value) != true)) {
+                    this.IntEndCodeField = value;
+                    this.RaisePropertyChanged("IntEndCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntFactoryCode {
+            get {
+                return this.IntFactoryCodeField;
+            }
+            set {
+                if ((this.IntFactoryCodeField.Equals(value) != true)) {
+                    this.IntFactoryCodeField = value;
+                    this.RaisePropertyChanged("IntFactoryCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntID {
+            get {
+                return this.IntIDField;
+            }
+            set {
+                if ((this.IntIDField.Equals(value) != true)) {
+                    this.IntIDField = value;
+                    this.RaisePropertyChanged("IntID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntLstUpdID {
+            get {
+                return this.IntLstUpdIDField;
+            }
+            set {
+                if ((this.IntLstUpdIDField.Equals(value) != true)) {
+                    this.IntLstUpdIDField = value;
+                    this.RaisePropertyChanged("IntLstUpdID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntPayMode {
+            get {
+                return this.IntPayModeField;
+            }
+            set {
+                if ((this.IntPayModeField.Equals(value) != true)) {
+                    this.IntPayModeField = value;
+                    this.RaisePropertyChanged("IntPayMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntRegionCode {
+            get {
+                return this.IntRegionCodeField;
+            }
+            set {
+                if ((this.IntRegionCodeField.Equals(value) != true)) {
+                    this.IntRegionCodeField = value;
+                    this.RaisePropertyChanged("IntRegionCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntSwitchMode {
+            get {
+                return this.IntSwitchModeField;
+            }
+            set {
+                if ((this.IntSwitchModeField.Equals(value) != true)) {
+                    this.IntSwitchModeField = value;
+                    this.RaisePropertyChanged("IntSwitchMode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DbServiceReference.IServiceDb")]
     public interface IServiceDb {
@@ -3438,6 +3644,18 @@ namespace NB_WaterFee.DbServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Param_MeterConfig_Opr", ReplyAction="http://tempuri.org/IServiceDb/Param_MeterConfig_OprResponse")]
         System.Threading.Tasks.Task<string> Param_MeterConfig_OprAsync(NB_WaterFee.DbServiceReference.MeterConfig MeterConf);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Param_EndUser_Qry", ReplyAction="http://tempuri.org/IServiceDb/Param_EndUser_QryResponse")]
+        NB_WaterFee.DbServiceReference.CommonResult Param_EndUser_Qry(int iCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Param_EndUser_Qry", ReplyAction="http://tempuri.org/IServiceDb/Param_EndUser_QryResponse")]
+        System.Threading.Tasks.Task<NB_WaterFee.DbServiceReference.CommonResult> Param_EndUser_QryAsync(int iCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Param_EndUser_Opr", ReplyAction="http://tempuri.org/IServiceDb/Param_EndUser_OprResponse")]
+        string Param_EndUser_Opr(NB_WaterFee.DbServiceReference.ParamEndUser Param);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Param_EndUser_Opr", ReplyAction="http://tempuri.org/IServiceDb/Param_EndUser_OprResponse")]
+        System.Threading.Tasks.Task<string> Param_EndUser_OprAsync(NB_WaterFee.DbServiceReference.ParamEndUser Param);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3865,6 +4083,22 @@ namespace NB_WaterFee.DbServiceReference {
         
         public System.Threading.Tasks.Task<string> Param_MeterConfig_OprAsync(NB_WaterFee.DbServiceReference.MeterConfig MeterConf) {
             return base.Channel.Param_MeterConfig_OprAsync(MeterConf);
+        }
+        
+        public NB_WaterFee.DbServiceReference.CommonResult Param_EndUser_Qry(int iCode) {
+            return base.Channel.Param_EndUser_Qry(iCode);
+        }
+        
+        public System.Threading.Tasks.Task<NB_WaterFee.DbServiceReference.CommonResult> Param_EndUser_QryAsync(int iCode) {
+            return base.Channel.Param_EndUser_QryAsync(iCode);
+        }
+        
+        public string Param_EndUser_Opr(NB_WaterFee.DbServiceReference.ParamEndUser Param) {
+            return base.Channel.Param_EndUser_Opr(Param);
+        }
+        
+        public System.Threading.Tasks.Task<string> Param_EndUser_OprAsync(NB_WaterFee.DbServiceReference.ParamEndUser Param) {
+            return base.Channel.Param_EndUser_OprAsync(Param);
         }
     }
 }

@@ -88,8 +88,6 @@ namespace WHC.NB_WaterFee
                 "~/Content/JQueryTools/Highcharts/js/highcharts-more.js",
                 "~/Content/JQueryTools/Highcharts/js/highcharts-3d.js"));
 
-
-
             //全部增加到集合里面去
             bundles.Add(css);
             bundles.Add(jquery);

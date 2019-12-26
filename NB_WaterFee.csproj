@@ -165,8 +165,8 @@
     <Compile Include="Controllers\Security\MenuController.cs" />
     <Compile Include="Controllers\Security\OUController.cs" />
     <Compile Include="Controllers\Security\RoleController.cs" />
-    <Compile Include="Controllers\Security\SysManageController.cs" />
     <Compile Include="Controllers\Security\UserController.cs" />
+    <Compile Include="Controllers\SystemManger\SysManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4935,8 +4935,6 @@
     <None Include="Connected Services\ServiceReference1\ServAuthority5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ComponentUtil.js" />
     <Content Include="Scripts\dbjs.js" />
     <Content Include="Content\icons-customed\16\icon.css.vm" />
@@ -5138,12 +5136,13 @@
     <Content Include="Views\ArcMeterInfo\SettingManger.cshtml" />
     <Content Include="Views\ArcMeterInfo\TerminalMeasure.cshtml" />
     <Content Include="Views\ArcMeterInfo\SwitchValveTask.cshtml" />
+    <Content Include="Views\ArcMeterInfo\MeterSettingInfo.cshtml" />
+    <Content Include="Views\ArcCustomerInfo\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\JQueryTools\Highcharts\exporting-server\java\highcharts-export\highcharts-export-web\target\generated-sources\annotations\" />
     <Folder Include="Content\JQueryTools\Highcharts\exporting-server\java\highcharts-export\highcharts-export-web\tmp\" />
-    <Folder Include="Views\ArcCustomerInfo\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

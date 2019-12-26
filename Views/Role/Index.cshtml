@@ -30,7 +30,7 @@
             $('#treeFunctionView').tree({
                 checkbox: true,
                 cascadeCheck: false,
-                data: json,
+                data: json,               
                 onClick: function (node, checked) {
                     console.log(node);
                     if (checked) { //得到父节点
@@ -43,12 +43,34 @@
             });
             $("#loading").fadeOut(500);
         }
-
+          //按节点添加icon
+        function getLevel(node, level) {
+            var children = node.children;
+            if (level == 0)
+                node.iconCls = "icon-organ";
+            else if (level == 1)
+                node.iconCls = "icon-group-key";
+            else if (level == 2)
+                node.iconCls = "icon-group";
+            else
+                node.iconCls = "icon-man";
+            if (children)
+                for (var i = 0; i < children.length; i++) {
+                    getLevel(children[i], level + 1);
+                }
+        }
         //初始化角色列表
         function initRoleTree() {
             $("#loading").show();
             $('#treeRole').tree({
                 url: '/Role/GetMyRoleTreeJson_Server',
+                 //添加图标
+                loadFilter: function (data, parent) {
+                    for (var i = 0; i < data.length; i++) {
+                        getLevel(data[i], 0);
+                    }
+                    return data;
+                },
                 onClick: function (node) {
                     loadData(node.id);
                 }
