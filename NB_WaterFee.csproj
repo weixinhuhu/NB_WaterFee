@@ -147,7 +147,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Base\BaseController.cs" />
-    <Compile Include="Controllers\Base\BaseControllerNew.cs" />
     <Compile Include="Controllers\Base\HomeController.cs" />
     <Compile Include="Controllers\CustomerInfo\ArcCustomerInfoController.cs" />
     <Compile Include="Controllers\FeeInfo\AccDebtController.cs" />
@@ -170,9 +169,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseUser.cs" />
     <Compile Include="Models\EasyTreeData.cs" />
-    <Compile Include="Models\MenuData.cs" />
     <Compile Include="Models\TreeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -225,6 +222,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\demo.css" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\datapattern.js" />
     <Content Include="Content\icons-customed\16\001%281%29.gif" />
     <Content Include="Content\icons-customed\16\001%282%29.gif" />
@@ -4834,10 +4833,7 @@
     <Content Include="Content\themes\Default\line.jpg" />
     <Content Include="Content\themes\Default\login.css" />
     <Content Include="Content\themes\Default\login_body.png" />
-    <Content Include="Content\themes\Default\login_content.png" />
-    <Content Include="Content\themes\Default\login_content2.png" />
-    <Content Include="Content\themes\Default\login_content_new.png" />
-    <Content Include="Content\themes\Default\login_content_SPG.png" />
+    <Content Include="Content\themes\Default\logo.png" />
     <Content Include="Content\themes\Default\LongButton.gif" />
     <Content Include="Content\themes\Default\master_content.gif" />
     <Content Include="Content\themes\Default\master_fieldsetlegend.gif" />
@@ -4886,13 +4882,18 @@
     <Content Include="Content\themes\Default\ShortButton.gif" />
     <Content Include="Content\themes\Default\style.css" />
     <Content Include="Content\themes\Default\submenu_h2.gif" />
+    <Content Include="Content\themes\Default\theme-pic1.jpg" />
+    <Content Include="Content\themes\Default\theme-pic2.jpg" />
     <Content Include="Content\themes\Default\tip16.png" />
     <Content Include="Content\themes\Default\tip32.png" />
     <Content Include="Content\themes\Default\titlebg.jpg" />
     <Content Include="Content\themes\Default\titlepreimg.jpg" />
     <Content Include="Content\themes\Default\user_Icon.gif" />
     <Content Include="Content\themes\Default\User_ui.gif" />
+    <Content Include="Content\themes\login\login-btn.png" />
     <Content Include="Content\themes\Site.css" />
+    <Content Include="Content\themes\login\theme-pic1.jpg" />
+    <Content Include="Content\themes\login\theme-pic2.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -5062,19 +5063,6 @@
     <Content Include="Content\Template\CRM\客户联系人-模板.xls" />
     <Content Include="Content\Template\CustomerInfo\综合档案信息导入模板.xls" />
     <Content Include="Content\Template\政策法规模板.doc" />
-    <Content Include="Content\themes\Default\btn-searchquery.psd" />
-    <Content Include="Content\themes\Default\btn_LastStep.psd" />
-    <Content Include="Content\themes\Default\btn_NextStep.psd" />
-    <Content Include="Content\themes\Default\btn_UpDown.psd" />
-    <Content Include="Content\themes\Default\button_01.psd" />
-    <Content Include="Content\themes\Default\login_content.psd" />
-    <Content Include="Content\themes\Default\login_content2 - 副本.psd" />
-    <Content Include="Content\themes\Default\login_content2.psd" />
-    <Content Include="Content\themes\Default\longButton.psd" />
-    <Content Include="Content\themes\Default\longbutton2.psd" />
-    <Content Include="Content\themes\Default\master_header - 副本.psd" />
-    <Content Include="Content\themes\Default\master_header.psd" />
-    <Content Include="Content\themes\Default\master_Helpheader.psd" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
@@ -5113,7 +5101,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Online.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\Message\TemplateSetting.cshtml" />
     <Content Include="Views\OU\Index.cshtml" />
@@ -5138,12 +5125,15 @@
     <Content Include="Views\ArcMeterInfo\SwitchValveTask.cshtml" />
     <Content Include="Views\ArcMeterInfo\MeterSettingInfo.cshtml" />
     <Content Include="Views\ArcCustomerInfo\List.cshtml" />
+    <Content Include="Views\CountFee\ApproveData.cshtml" />
+    <Content Include="Views\CountFee\CountReleaseFee.cshtml" />
+    <Content Include="Views\CountFee\DepositAccount.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\JQueryTools\Highcharts\exporting-server\java\highcharts-export\highcharts-export-web\target\generated-sources\annotations\" />
     <Folder Include="Content\JQueryTools\Highcharts\exporting-server\java\highcharts-export\highcharts-export-web\tmp\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

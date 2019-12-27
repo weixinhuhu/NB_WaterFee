@@ -43,7 +43,6 @@ namespace WHC.NB_WaterFee.Controllers
 
         public ActionResult ListJson_Server()
         {
-            var endcode = Session["EndCode"] ?? "";
             var WHC_StartDteFreeze = Request["WHC_StratDteFreeze"].ToDateTime();
             var WHC_EndDteFreeze = Request["WHC_EndDteFreeze"].ToDateTime();
             var fuji = Request["WHC_Fuji"];
@@ -78,7 +77,7 @@ namespace WHC.NB_WaterFee.Controllers
                 customerinfo.VcUnitNum = Text;
             }
             //调用后台服务获取集中器信息          
-            var dts = new ServiceDbClient().CollectData_Qry(endcode.ToString().ToInt(), customerinfo, WHC_StartDteFreeze, WHC_EndDteFreeze);
+            var dts = new ServiceDbClient().CollectData_Qry(endcode, customerinfo, WHC_StartDteFreeze, WHC_EndDteFreeze);
 
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
@@ -101,7 +100,6 @@ namespace WHC.NB_WaterFee.Controllers
         
         public ActionResult CollectStatJson_Server()
         {
-            var endcode = Session["EndCode"] ?? "";
             var WHC_StartDteFreeze = Request["WHC_StratDteFreeze"].ToDateTime();
             var WHC_EndDteFreeze = Request["WHC_EndDteFreeze"].ToDateTime();
             var fuji = Request["WHC_Fuji"];
@@ -136,7 +134,7 @@ namespace WHC.NB_WaterFee.Controllers
                 customerinfo.VcUnitNum = Text;
             }
             //调用后台服务获取集中器信息          
-            var dts = new ServiceDbClient().CollectStatus_Qry(endcode.ToString().ToInt(), customerinfo, WHC_StartDteFreeze, WHC_EndDteFreeze);
+            var dts = new ServiceDbClient().CollectStatus_Qry(endcode, customerinfo, WHC_StartDteFreeze, WHC_EndDteFreeze);
 
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
@@ -159,7 +157,6 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult CollectStatJsonTotal_Server()
         {
             CommonResult result = new CommonResult();
-            var endcode = Session["EndCode"] ?? "";
             var WHC_StartDteFreeze = Request["WHC_StratDteFreeze"].ToDateTime();
             var WHC_EndDteFreeze = Request["WHC_EndDteFreeze"].ToDateTime();
             var fuji = Request["WHC_Fuji"];
@@ -194,7 +191,7 @@ namespace WHC.NB_WaterFee.Controllers
                 customerinfo.VcUnitNum = Text;
             }
             //调用后台服务获取集中器信息          
-            var dts = new ServiceDbClient().CollectStatus_Qry(endcode.ToString().ToInt(), customerinfo, WHC_StartDteFreeze, WHC_EndDteFreeze);
+            var dts = new ServiceDbClient().CollectStatus_Qry(endcode, customerinfo, WHC_StartDteFreeze, WHC_EndDteFreeze);
             var m = new CollectStatModel();
             foreach (DataRow item in dts.Rows)
             {
@@ -214,13 +211,12 @@ namespace WHC.NB_WaterFee.Controllers
         [HttpPost]
         public ActionResult WriteNumReading_Server()
         {
-            CommonResult result = new CommonResult();
-            var endcode = Session["EndCode"] ?? "0";
+            CommonResult result = new CommonResult();        
             var IntCustNo = Request["IntCustNo"];
             var VcAddr = Request["VcAddr"];
             var DteFreeze = Request["DteFreeze"].ToDateTime();
             var NumReading = Request["NumReading"].ToDouble();
-            var rs = new ServiceDbClient().CollectData_Ins(endcode.ToString().ToInt(), IntCustNo.ToInt(), VcAddr, DteFreeze, NumReading, Session["UserID"].ToString());
+            var rs = new ServiceDbClient().CollectData_Ins(endcode, IntCustNo.ToInt(), VcAddr, DteFreeze, NumReading, userid.ToString());
             if (rs == "0")
             {
                 result.IsSuccess = true;

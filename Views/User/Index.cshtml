@@ -65,23 +65,6 @@
             });
         };
 
-        //按节点添加icon
-        function getLevel(node, level) {
-            var children = node.children;
-            if (level == 0)
-                node.iconCls = "icon-organ";
-            else if (level == 1)
-                node.iconCls = "icon-group-key";
-            else if (level == 2)
-                node.iconCls = "icon-group";
-            else
-                node.iconCls = "icon-man";
-            if (children)
-                for (var i = 0; i < children.length; i++) {
-                    getLevel(children[i], level + 1);
-                }
-        }
-
         //根据机构加载指定列表
         function loadDataByOu(id) {
             $("#loading").show();

@@ -9,12 +9,10 @@ namespace WHC.NB_WaterFee.Controllers
     {
 
         public ActionResult GetDetailByCustomerNo_Server()
-        {
-            var endcode = Session["EndCode"] ?? "0";
+        {         
             var custno = Request["WHC_IntCustNo"] ?? "0";
-
             ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.Account_GetDepositDetailByCustNo(endcode.ToString().ToInt(), custno.ToInt());
+            var dts = DbServer.Account_GetDepositDetailByCustNo(endcode, custno.ToInt());
 
             //分页参数
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
@@ -40,9 +38,9 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult CurrentDateList_Server()
         {
             var date = Request["WHC_DteAccount"];
-            var UserId = Session["UserID"].ToString().ToInt();
+
             ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.Account_GetDepositDetail(UserId, date.ToDateTime(), date.ToDateTime());
+            var dts = DbServer.Account_GetDepositDetail(userid, date.ToDateTime(), date.ToDateTime());
             //分页参数
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);

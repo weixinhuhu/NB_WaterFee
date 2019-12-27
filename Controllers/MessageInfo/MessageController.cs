@@ -14,7 +14,6 @@ namespace NewWaterFee.Controllers.MessageInfo
         }
         public ActionResult TemplateList_Server()
         {
-            var endcode = Session["EndCode"] ?? "0";
             var Status = Request["WHC_IntStatus"] ?? "-1";
             var id = Request["WHC_IntID"] ?? "0";
             var SmsTemplate_info = new SmsTemplate
@@ -24,7 +23,7 @@ namespace NewWaterFee.Controllers.MessageInfo
                 IntStatus = Status == "" ? 0 : Convert.ToInt32(Status)
             };
             ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.SMS_Template_Qry(Convert.ToInt32(endcode.ToString()), SmsTemplate_info);
+            var dts = DbServer.SMS_Template_Qry(endcode, SmsTemplate_info);
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
             DataTable dat = new DataTable();

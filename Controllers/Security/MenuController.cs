@@ -14,7 +14,6 @@ namespace WHC.NB_WaterFee.Controllers
         }
         public ActionResult GetMenuData_Server()
         {
-            var userid = Convert.ToInt32(Session["UserID"].ToString());
             var SysTypeID = "WareMIS";
             var rs = new AuthorityClient().Sys_Login_GetMenuByUserID(userid, SysTypeID);
             return Content(rs);

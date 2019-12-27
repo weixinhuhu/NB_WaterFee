@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Web.Mvc;
 
-namespace WHC.MVCWebMis.Controllers
+namespace WHC.NB_WaterFee.Controllers
 {
     public class LoginController : Controller
     {
@@ -28,19 +28,9 @@ namespace WHC.MVCWebMis.Controllers
         {
             CommonResult result = new CommonResult();
 
-            bool codeValidated = true;
-            if (this.TempData["ValidateCode"] != null)
-            {
-                codeValidated = (this.TempData["ValidateCode"].ToString() == code);
-            }
-
             if (string.IsNullOrEmpty(username))
             {
                 result.ErrorMsg = "用户名不能为空";
-            }
-            else if (!codeValidated)
-            {
-                result.ErrorMsg = "验证码输入有误";
             }
             else
             {

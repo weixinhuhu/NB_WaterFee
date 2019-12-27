@@ -31,6 +31,35 @@ var loading = {
         $("#divLoadingElementMsg").hide();
     }
 };
+//获取树层级
+var easyui_tree_options = {
+    length: 0,  //层数
+    getLevel: function (treeObj, node) {	//treeObj为tree的dom对象，node为选中的节点
+        while (node != null) {
+            node = $(treeObj).tree('getParent', node.target)
+            easyui_tree_options.length++;
+        }
+        var length1 = easyui_tree_options.length;
+        easyui_tree_options.length = 0;		//重置层数
+        return length1;
+    }
+}
+//按节点添加icon
+function getLevel(node, level) {
+    var children = node.children;
+    if (level == 0)
+        node.iconCls = "icon-house";
+    else if (level == 1)
+        node.iconCls = "icon-house";
+    else if (level == 2)
+        node.iconCls = "icon-organ";
+    else
+        node.iconCls = "icon-group";
+    if (children)
+        for (var i = 0; i < children.length; i++) {
+            getLevel(children[i], level + 1);
+        }
+}
 function initDivloading() {
     var nodeLoading = document.createElement('style');
     var style = "#divLoadingElement{z-index:9999;display:none;position:fixed;width:100%;height:100%;background:black;filter:alpha(opacity=50);opacity:0.5;}";

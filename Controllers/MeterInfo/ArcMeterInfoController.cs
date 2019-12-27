@@ -51,7 +51,7 @@ namespace WHC.NB_WaterFee.Controllers
             {
                 NvcName = Request["WHC_NvcName"] ?? "",
                 NvcAddr = Request["WHC_NvcAddr"] ?? "",
-                IntCustNo = Convert.ToInt32(Request["IntCustNO"] ?? "0"),
+                IntCustNo = (Request["IntCustNO"] ?? "0").ToString().ToInt(),
                 VcMeterAddr = Request["WHC_VcAddr"] ?? ""
             };
 
@@ -100,7 +100,6 @@ namespace WHC.NB_WaterFee.Controllers
         //设置参数
         public ActionResult SettingMangger_Server()
         {
-            var endcode = Session["EndCode"] ?? "0";
             var Strlevel = Request["WHC_Treelevel"];
             var fuji = Request["WHC_Fuji"];
             var Text = Request["WHC_Text"];
@@ -139,7 +138,7 @@ namespace WHC.NB_WaterFee.Controllers
 
             //调用后台服务获取集中器信息
             ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.Terminal_GetMeterSetting(endcode.ToString().ToInt(), custormerinfo, new Meter());
+            var dts = DbServer.Terminal_GetMeterSetting(endcode, custormerinfo, new Meter());
 
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
@@ -181,9 +180,7 @@ namespace WHC.NB_WaterFee.Controllers
         /// <returns></returns>
         public ActionResult GetParam_MeterConfigTreeJson_Server()
         {
-            var endcode = Session["EndCode"] ?? "0";
-            ServiceDbClient DbServer = new ServiceDbClient();
-            var tree = new ServiceDbClient().Param_MeterConfig_GetTree(endcode.ToString().ToInt());
+            var tree = new ServiceDbClient().Param_MeterConfig_GetTree(endcode);
             return ToJsonContentDate(tree);
         }
         /// <summary>
@@ -192,9 +189,8 @@ namespace WHC.NB_WaterFee.Controllers
         /// <returns></returns>
         public ActionResult Param_MeterConfig_Qry()
         {
-            var endcoed = Session["EndCode"] ?? "";
-            var dts = new ServiceDbClient().Param_MeterConfig_Qry(endcoed.ToString().ToInt());
-
+         
+            var dts = new ServiceDbClient().Param_MeterConfig_Qry(endcode);
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
 
@@ -217,11 +213,10 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult Param_MeterConfig_Ins(MeterConfig MeterConf)
         {
             CommonResult result = new CommonResult();
-            var endcode = Session["EndCode"] ?? "0";
             MeterConf.IntID = 0;
-            MeterConf.VcUserID = Session["UserID"].ToString();
-            MeterConf.VcUserIDUpd = Session["UserID"].ToString();
-            MeterConf.IntEndCode = endcode.ToString().ToInt();
+            MeterConf.VcUserID = userid.ToString();
+            MeterConf.VcUserIDUpd = userid.ToString();
+            MeterConf.IntEndCode = endcode;
             MeterConf.DtCreate = DateTime.Now;
             var rs = new ServiceDbClient().Param_MeterConfig_Opr(MeterConf);
             if (rs == "0")
@@ -238,9 +233,8 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult Param_MeterConfig_Upd(MeterConfig MeterConf)
         {
             CommonResult result = new CommonResult();
-            var endcode = Session["EndCode"] ?? "0";
-            MeterConf.VcUserIDUpd = Session["UserID"].ToString() ?? "";
-            MeterConf.IntEndCode = endcode.ToString().ToInt();
+            MeterConf.VcUserIDUpd =userid.ToString();
+            MeterConf.IntEndCode =endcode;
             MeterConf.DtLstUpd = DateTime.Now;
             var rs = new ServiceDbClient().Param_MeterConfig_Opr(MeterConf);
             if (rs == "0")
@@ -268,11 +262,10 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult SettingMeterInfo_Server(String sAddr, String sMeterInfoTypeNo)
         {
             CommonResult result = new CommonResult();
-            var endcode = Session["EndCode"] ?? "0";
             var meterSettingtypeno = sMeterInfoTypeNo.ToInt();
             try
             {
-                var rs = new ServiceDbClient().Terminal_SetMeterConfig(endcode.ToString().ToInt(), sAddr, meterSettingtypeno);
+                var rs = new ServiceDbClient().Terminal_SetMeterConfig(endcode, sAddr, meterSettingtypeno);
                 if (rs == "0")
                 {
                     result.IsSuccess = true;
@@ -351,7 +344,7 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult ChangeTBL_Server(MeterReplaceInfo MeterReplace)
         {
             CommonResult result = new CommonResult();
-            MeterReplace.VcUserID = Session["UserID"].ToString();
+            MeterReplace.VcUserID = userid.ToString();
             MeterReplace.IntEndCode = 0;
             try
             {

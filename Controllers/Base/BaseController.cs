@@ -1,34 +1,23 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace WHC.NB_WaterFee.Controllers
-{
+{  
     /// <summary>
     /// 所有需要进行登录控制的控制器基类
     /// </summary>
     public class BaseController : Controller
     {
-        #region 权限控制内容
-        /// <summary>
-        /// 获取用户的能使用的功能集合
-        /// </summary>
-        protected virtual Dictionary<string, string> Functions
-        {
-            get
-            {
-                Dictionary<string, string> functionDict = Session["Functions"] as Dictionary<string, string>;
-                if (functionDict == null)
-                {
-                    functionDict = new Dictionary<string, string>();
-                }
-                return functionDict;
-            }
-        }
-
-        #endregion
-
+        //客户代码
+        public int endcode;
+        //操作员编号
+        public int userid;
+        //操作员名称
+        public string username;
+        
         #region 异常处理及记录
         /// <summary>
         /// 重新基类在Action执行之前的事情
@@ -37,6 +26,9 @@ namespace WHC.NB_WaterFee.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
+            endcode = (Session["EndCode"] ?? "0").ToString().ToInt();
+            userid = (Session["UserID"] ?? "0").ToString().ToInt();
+            username= (Session["FullName"]??"").ToString();
             if (Session["FullName"] == null)
             {
                 Response.Redirect("/Login/Index");//如果用户为空跳转到登录界面

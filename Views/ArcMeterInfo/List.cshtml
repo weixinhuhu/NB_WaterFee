@@ -37,6 +37,13 @@
         function initRoleTree() {
             $('#treeRole').tree({
                 url: '/ArcConcentratorInfo/TreeJson',
+                 //添加图标
+                loadFilter: function (data, parent) {
+                    for (var i = 0; i < data.length; i++) {
+                        getLevel(data[i], 0);
+                    }
+                    return data;
+                },
                 onClick: function (node) {
                     $("#editIntUpID").val(node.id);
                     $("#editIntUpName").val(node.text);

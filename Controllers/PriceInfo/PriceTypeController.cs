@@ -16,35 +16,21 @@ namespace WHC.WaterFeeWeb.Controllers
 
         public ActionResult ListJson_Server()
         {
-            var endcode = Session["EndCode"] ?? "0";
-            //调用后台服务获取集中器信息
-            ServiceDbClient DbServer = new ServiceDbClient();
-
-            var dts = DbServer.PriceType_Qry(endcode.ToString().ToInt());
-
+            var dts = new ServiceDbClient().PriceType_Qry(endcode);
             return ToJsonContentDate(dts);
         }
      
         public ActionResult GetTreeJson_Server()
         {
-            var endcode = Session["EndCode"] ?? "0";
-            //调用后台服务获取集中器信息
-            ServiceDbClient DbServer = new ServiceDbClient();
-
-            var dts = DbServer.PriceType_GetTreeJson(endcode.ToString().ToInt());
-
+            var dts = new ServiceDbClient().PriceType_GetTreeJson(endcode);
             return ToJsonContentDate(dts);
         }
 
         public ActionResult Insert_Server(PriceType info)
         {         
             CommonResult result = new CommonResult();
-            try
-            {
-                var endcode = Session["EndCode"] ?? "0";
-                //调用后台服务获取集中器信息
-                ServiceDbClient DbServer = new ServiceDbClient();
-                var flag = DbServer.PriceType_Ins(endcode.ToString().ToInt(), info);
+            try { 
+                var flag = new ServiceDbClient().PriceType_Ins(endcode.ToString().ToInt(), info);
                 if (flag == "0")
                 {
                     result.IsSuccess = true;
@@ -67,8 +53,7 @@ namespace WHC.WaterFeeWeb.Controllers
             CommonResult result = new CommonResult();
             try
             {
-                ServiceDbClient DbServer = new ServiceDbClient();
-                var flag = DbServer.PriceType_Upd(info);
+                var flag = new ServiceDbClient().PriceType_Upd(info);
                 if (flag == "0")
                 {
                     result.IsSuccess = true;

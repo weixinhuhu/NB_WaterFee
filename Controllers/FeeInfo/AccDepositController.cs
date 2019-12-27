@@ -47,10 +47,9 @@ namespace WHC.NB_WaterFee.Controllers
                 custormerinfo.VcUnitNum = Text;
             }
 
-            var endcode = Session["EndCode"] ?? "0";
             //调用后台服务获取集中器信息
             ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.Account_GetMoney(endcode.ToString().ToInt(), custormerinfo);
+            var dts = DbServer.Account_GetMoney(endcode, custormerinfo);
 
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);

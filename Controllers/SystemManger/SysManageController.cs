@@ -16,7 +16,6 @@ namespace NB_WaterFee.Controllers.SystemManger
             CommonResult result = new CommonResult();
             try
             {
-                var endcode = Session["EndCode"] ?? "0";
                 var ID = Request["ID"].ToIntOrDefault();
                 //0预付费,1后付费
                 var payMode = Request["payMode"].ToIntOrDefault(1);
@@ -27,13 +26,13 @@ namespace NB_WaterFee.Controllers.SystemManger
 
                 var Parm = new ParamEndUser();
                 Parm.IntID = ID;
-                Parm.IntEndCode = endcode.ToString().ToInt();
+                Parm.IntEndCode = endcode;
                 Parm.IntPayMode = payMode;
                 Parm.IntBalanceDay = balanceDay;
                 Parm.IntSwitchMode = AutoSwitch;
                 Parm.IntRegionCode = AreaCode.ToInt();
-                Parm.IntLstUpdID = Session["UserID"].ToString().ToInt();
-                Parm.IntCreateID = Session["UserID"].ToString().ToInt();
+                Parm.IntLstUpdID =userid;
+                Parm.IntCreateID = userid;
                 Parm.DtLstUpd = DateTime.Now;
 
                 var rs = new ServiceDbClient().Param_EndUser_Opr(Parm);
@@ -59,8 +58,7 @@ namespace NB_WaterFee.Controllers.SystemManger
             CommonResult result = new CommonResult();
             try
             {
-               var endcode = Session["EndCode"] ?? "0";
-               result= new ServiceDbClient().Param_EndUser_Qry(endcode.ToString().ToInt());
+               result= new ServiceDbClient().Param_EndUser_Qry(endcode);
             }
             catch (Exception ex)
             {

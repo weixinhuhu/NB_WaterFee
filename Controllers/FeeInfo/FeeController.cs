@@ -48,9 +48,8 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult GetAccDebtByIntCustNo_Server()
         {
             var custno = Request["IntCustNo"] ?? "0";
-            var endcode = Session["EndCode"] ?? "0";
             ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.Account_GetDebtByCustNo(endcode.ToString().ToInt(), custno.ToInt());
+            var dts = DbServer.Account_GetDebtByCustNo(endcode, custno.ToInt());
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
             DataTable dat = new DataTable();
@@ -75,7 +74,6 @@ namespace WHC.NB_WaterFee.Controllers
         /// <returns></returns>  
         public ActionResult GetPaymentNoticeList_Server()
         {
-            var endcode = Session["IntEndCode"] ?? "0";
             var CustNo = Request["WHC_IntCustNo"] ?? "";
             var NvcName = Request["WHC_NvcName"] ?? "";
             var NvcAddr = Request["WHC_NvcAddr"] ?? "";
@@ -87,7 +85,7 @@ namespace WHC.NB_WaterFee.Controllers
                 NvcAddr = NvcAddr,
                 VcMobile = VcMobile
             };
-            var dt = new ServiceDbClient().Account_GetPaymentNotice(endcode.ToString().ToInt(), custinfo);
+            var dt = new ServiceDbClient().Account_GetPaymentNotice(endcode, custinfo);
             var result = new { total = dt.Rows.Count, rows = dt };
             return ToJsonContentDate(result);
         }
@@ -103,13 +101,12 @@ namespace WHC.NB_WaterFee.Controllers
             CommonResult result = new CommonResult();
             try
             {
-                var endcode = Session["EndCode"] ?? "0";
                 var payMoney = Request["payMoney"] ?? "0";
                 var sRemark = "";
-                var iUserID = Session["UserID"].ToString().ToInt();
+                var iUserID = userid;
                 var sReceiptNo = "";
                 ServiceDbClient DbServer = new ServiceDbClient();
-                var flag = DbServer.Account_DepositOperate(endcode.ToString().ToInt(), custNo.ToInt(), payMoney.ToDouble(), sRemark, iUserID, sReceiptNo);
+                var flag = DbServer.Account_DepositOperate(endcode, custNo.ToInt(), payMoney.ToDouble(), sRemark, iUserID, sReceiptNo);
                 if (flag.IsSuccess)
                 {
                     result.IsSuccess = true;
@@ -133,11 +130,10 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult CloseAccount_Query_Server(string custNo)
         {
             CommonResult result = new CommonResult();
-            var endcode = Session["EndCode"].ToString() ?? "0";
             var intcustno = custNo ?? "0";
             try
             {
-                var rs = new ServiceDbClient().Account_GetBillByCustNo(endcode.ToInt(), intcustno.ToInt());
+                var rs = new ServiceDbClient().Account_GetBillByCustNo(endcode, intcustno.ToInt());
                 if (rs.IsSuccess)
                 {
                     if (rs.Tbl1.Rows.Count > 0)
@@ -177,9 +173,8 @@ namespace WHC.NB_WaterFee.Controllers
             CommonResult result = new CommonResult();
             try
             {
-                var endcode = Session["EndCode"].ToString() ?? "0";
                 var intcustno = custNo ?? "0";
-                var flag = new ServiceDbClient().ArcCloseAccount(endcode.ToInt(), intcustno.ToInt());
+                var flag = new ServiceDbClient().ArcCloseAccount(endcode, intcustno.ToInt());
 
                 if (flag == "0")
                 {
@@ -200,19 +195,18 @@ namespace WHC.NB_WaterFee.Controllers
 
         public ActionResult PaymentNoticeExport()
         {
-            var endcode = Session["IntEndCode"] ?? "0";
-            var CustNo = Request["WHC_IntCustNo"];
+            var CustNo = Request["WHC_IntCustNo"] ?? "0";
             var NvcName = Request["WHC_NvcName"];
             var NvcAddr = Request["WHC_NvcAddr"];
             var VcMobile = Request["WHC_VcMobile"];
             var custinfo = new Customer
             {
-                IntNo = CustNo == "" ? 0 : CustNo.ToInt(),
+                IntNo = CustNo.ToIntOrDefault(),
                 NvcName = NvcName,
                 NvcAddr = NvcAddr,
                 VcMobile = VcMobile
             };
-            var dt = new ServiceDbClient().Account_GetPaymentNotice(endcode.ToString().ToInt(), custinfo);
+            var dt = new ServiceDbClient().Account_GetPaymentNotice(endcode, custinfo);
             if (dt.Rows.Count > 0)
             {
                 //导出目录创建与清空
@@ -245,9 +239,7 @@ namespace WHC.NB_WaterFee.Controllers
         /// </summary>           
         public ActionResult PayGetMoneyPrint(string flowNo)
         {
-            var endcode = Session["EndCode"] ?? "0";
-
-            var dt = new ServiceDbClient().Account_GetDepositInvoiceInfo(endcode.ToString().ToInt(), flowNo);
+            var dt = new ServiceDbClient().Account_GetDepositInvoiceInfo(endcode, flowNo);
             if (dt.Rows.Count > 0)
             {
                 ViewBag.IntCustNo = dt.Rows[0]["IntCustNo"].ToString();
@@ -271,11 +263,10 @@ namespace WHC.NB_WaterFee.Controllers
         /// <returns></returns>
         public ActionResult PrintTicketDetail(int IntFeeID)
         {
-            var endcode = Session["EndCode"] ?? "0";
             var DtStart = Request["WHC_DtStart"] ?? DateTime.Now.ToString();
             var Dtend = Request["WHC_DtEnd"] ?? DateTime.Now.ToString(); ;
             var custinfo = new Customer();
-            var dt = new ServiceDbClient().Account_GetPaymentDetail(endcode.ToString().ToInt(), IntFeeID, DtStart.ToDateTime(), Dtend.ToDateTime(), custinfo);
+            var dt = new ServiceDbClient().Account_GetPaymentDetail(endcode, IntFeeID, DtStart.ToDateTime(), Dtend.ToDateTime(), custinfo);
             if (dt.Rows.Count > 0)
             {
                 ViewBag.IntCustNo = dt.Rows[0]["IntCustNo"].ToString();

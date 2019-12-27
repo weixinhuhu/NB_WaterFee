@@ -22,23 +22,17 @@
             InitGrid();
         });
 
-        var easyui_tree_options = {
-            length: 0,  //层数
-            getLevel: function (treeObj, node) {	//treeObj为tree的dom对象，node为选中的节点
-                while (node != null) {
-                    node = $(treeObj).tree('getParent', node.target)
-                    easyui_tree_options.length++;
-                }
-                var length1 = easyui_tree_options.length;
-                easyui_tree_options.length = 0;		//重置层数
-                return length1;
-            }
-        }
-
         function initDeptTreeview() {
             $("#loading").show();
             $('#treeDept1').tree({
                 url: '/ArcCustomerInfo/TreeCommunity_Server',
+                 //添加图标
+                loadFilter: function (data, parent) {
+                    for (var i = 0; i < data.length; i++) {
+                        getLevel(data[i], 0);
+                    }
+                    return data;
+                },
                 onBeforeSelect: function (node) {
                     fujiText = node.text;
                 },

@@ -9,7 +9,6 @@ namespace WHC.NB_WaterFee.Controllers
     {
         public ActionResult CounterReverseData_Server()
         {
-            var endcode = Session["EndCode"] ?? "0";
             var CustNo = Request["WHC_IntCustNo"] ?? "";
             var NvcName = Request["WHC_NvcName"] ?? "";
             var NvcAddr = Request["WHC_NvcAddr"] ?? "";
@@ -23,7 +22,7 @@ namespace WHC.NB_WaterFee.Controllers
                 NvcAddr = NvcAddr,
                 VcMobile = VcMobile
             };
-            var dt = new ServiceDbClient().Account_GetPaymentDetail(endcode.ToString().ToInt(), 0, DtStart.ToDateTime(), Dtend.ToDateTime(), custinfo);
+            var dt = new ServiceDbClient().Account_GetPaymentDetail(endcode, 0, DtStart.ToDateTime(), Dtend.ToDateTime(), custinfo);
             var result = new { total = dt.Rows.Count, rows = dt };
             return ToJsonContentDate(result);
         }
@@ -32,9 +31,7 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult CounterReverseDataByIntCustNo_Server()
         {
             var custno = Request["WHC_IntCustNo"] ?? "0";
-            var endcode = Session["EndCode"] ?? "0";
-            ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.Account_GetWriteoffByCustNo(endcode.ToString().ToInt(), custno.ToInt());
+            var dts = new ServiceDbClient().Account_GetWriteoffByCustNo(endcode, custno.ToInt());
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
             DataTable dat = new DataTable();

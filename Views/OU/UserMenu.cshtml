@@ -21,10 +21,13 @@
             $("#loading").show();
             $('#treeDept').tree({
                 url: '/User/GetMyDeptTreeLevel2Json_Server',
-                ////数据过滤
-                //loadFilter: function (data) {
-                //    return FormatTreeData(data);
-                //},
+                //添加图标
+                loadFilter: function (data, parent) {
+                    for (var i = 0; i < data.length; i++) {
+                        getLevel(data[i], 0);
+                    }
+                    return data;
+                },
                 onClick: function (node) {                 
                     initTreeFunction();                   
                 },          
@@ -32,19 +35,23 @@
             $("#loading").fadeOut(500);
         }
 
-        //过滤数据
-        function FormatTreeData(data) {
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].children.length > 0) {
-                    // 定义一个数组
-                    var newData = new Array();
-                    newData.push(data[i]);
-                    return newData;
+        //按节点添加icon
+        function getLevel(node, level) {
+            var children = node.children;          
+            if (level == 0)
+                node.iconCls = "icon-organ";
+            else if (level == 1)
+                node.iconCls = "icon-group-key";
+            else if (level == 2)
+                node.iconCls = "icon-group";
+            else
+                node.iconCls = "icon-man";
+            if (children)
+                for (var i = 0; i < children.length; i++) {
+                    getLevel(children[i], level + 1);
                 }
-            }
-            return data;
         }
-
+       
         //根据用户角色初始化功能树
         function initTreeFunction() {
             var node = $('#treeDept').tree('getSelected');
@@ -106,6 +113,12 @@
             //初始化菜单
             initTreeFunction();
             $("#functionExpand").bind("click", function () {
+                expandAll("treeDept");
+            });
+            $("#functionCollapse").bind("click", function () {
+                collapseAll("treeDept");
+            });
+              $("#functionExpand").bind("click", function () {
                 expandAll("treeFunctionView");
             });
             $("#functionCollapse").bind("click", function () {
@@ -122,9 +135,9 @@
         <div data-options="region:'west',split:true,title:'组织机构列表',iconCls:'icon-book'" style="width: 250px; padding: 1px;">
             <div title="组织机构列表" style="padding:5px;height:auto" data-options="iconCls:'icon-organ'">
                 <div style="padding: 1px; border: 1px solid #ddd;">
-                    @*<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" id="deptRefresh" onclick="initDeptTreeview()">刷新</a>
+                    <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" id="deptRefresh" onclick="initDeptTreeview()">刷新</a>
                     <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-expand'" id="deptExpand" onclick="return false;">展开</a>
-                    <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-collapse'" id="deptCollapse" onclick="return false;">折叠</a>*@
+                    <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-collapse'" id="deptCollapse" onclick="return false;">折叠</a>
                 </div>
                 <div>
                     <ul id="treeDept"></ul>

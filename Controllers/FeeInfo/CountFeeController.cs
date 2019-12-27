@@ -7,7 +7,6 @@ namespace WHC.NB_WaterFee.Controllers
     /// </summary>
     public class CountFeeController : BaseController
     {
-        object objLock = new object();
         //审核抄表数据
         public ActionResult ApproveData()
         {

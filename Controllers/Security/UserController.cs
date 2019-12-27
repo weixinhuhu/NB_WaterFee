@@ -27,8 +27,8 @@ namespace NewWaterFee.Controllers.Security
         /// <returns></returns>
         public ActionResult GetMyDeptTreeJson_Server(int iDeleted)
         {
-            var userid = Convert.ToInt32(Session["UserId"].ToString());
-            var treelist = new AuthorityClient().Sys_OU_GetTree(userid, iDeleted, 1);
+            var userid = Session["UserID"]??"0";      
+            var treelist = new AuthorityClient().Sys_OU_GetTree(userid.ToString().ToInt(), iDeleted, 1);
             return ToJsonContentDate(treelist);
         }
 
@@ -38,7 +38,7 @@ namespace NewWaterFee.Controllers.Security
         /// <returns></returns>
         public ActionResult Sys_User_Qry_Server()
         {
-            var endcode = Convert.ToInt32(Session["EndCode"].ToString());
+            var endcode = (Session["EndCode"] ?? "0").ToString().ToInt();
             User userinfo = new User
             {
                 NvcHandNo = Request["WHC_HandNo"] ?? "",

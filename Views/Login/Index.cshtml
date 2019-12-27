@@ -9,6 +9,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquerytools")
     @Styles.Render("~/Content/jquerytools")
+    <link href="~/Content/css/login.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/css/demo.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
     <!--常用的一些组件业务脚本函数,放置此处方便脚本提示-->
     <script src="~/Scripts/ComponentUtil.js"></script>
 
@@ -52,14 +54,11 @@
         //实现用户登录
         function LoginUserInfo() {
             //获取单击用户登录按钮的事件
-            $("#btnLogin").click(function () {
-                //首先获取到要传递到控制器的参数，并且狗造成Json。UserName，UserPassword，Code
+            $("#btnLogin").click(function () {             
                 var postData = {
                     UserName: $("#UserName").val(),
-                    Password: $("#Password").val(),
-                    Code: $("#Code").val()
+                    Password: $("#Password").val()                   
                 };
-
                 loading.show();
 
                 //发送异步请求实现登录 ajax
@@ -71,7 +70,6 @@
                     data: postData,
                     success: function (data) {
                         if (data.IsSuccess) {
-                            console.log(data);
                             window.location.href = "/Home/Index";
                         }
                         else {
@@ -85,7 +83,6 @@
                     }
                 });
             });
-
         }
     </script>
     <style type="text/css">
@@ -104,130 +101,55 @@
         .style5 {
             height: 18px;
         }
-    </style>
-    <script language="javascript">
-        //表单重置
-        function doReset() {
-            document.Forms[0].reset();
-            return false;
-        }
-    </script>
+    </style>   
 </head>
 <body>
     <div id="divLoading"></div>
     <div id="divLoadingMsg">正在处理，请稍待。。。</div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <form id="form1">
-        <table height="413" cellspacing="0" cellpadding="0" width="612" align="center" border="0">
-            <tbody>
-                <tr>
-                    <td valign="top" width="600" background="~/Content/Themes/Default/login_content_new.png" height="412">
-                        <div align="center">
-                            <table width="100%" height="392" border="0" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2" height="181">
-                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                <tr>
-                                                    <td>
-                                                        &nbsp;
+    <div class="header">
+        <h1 class="headerLogo"><a title="无线水表采集收费管理系统"></a></h1>
+        <div class="headerNav">
+            <a target="_blank" href="http://www.rthitech.com.cn">融通官网</a>
+            <a target="_blank" href="http://www.rthitech.com.cn/#">关于融通</a>
+            <a target="_blank" href="http://www.rthitech.com.cn/Applications/Wireless_remote_meter_Solution.shtml">应用方案</a>
+            <a target="_blank" href="http://www.rthitech.com.cn/ContactUs/Contacts.shtml">意见反馈</a>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="login-aside">
+            <div id="o-box-up"></div>
+            <div id="o-box-down" style="table-layout:fixed;">
+                <div class="error-box"></div>
+                <form id="form1" class="registerform">
+                    <div class="fm-item">
+                        <label for="logonId" class="form-label">系统登陆：</label>
+                        <input type="text" value="输入账号" maxlength="100" id="UserName" class="i-text">
+                        <div class="ui-form-explain"></div>
+                    </div>
+                    <div class="fm-item">
+                        <label for="logonId" class="form-label">登陆密码：</label>
+                        <input type="password" value="" maxlength="100" id="Password" class="i-text">
+                        <div class="ui-form-explain"></div>
+                    </div>
+                    <div class="fm-item">
+                        <label for="btnLogin" class="form-label"></label>
+                        <input tabindex="4" id="btnLogin" class="btn-login">
+                        <div class="ui-form-explain"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="bd">
+            <ul>
+                <li style="background:url(../../Content/themes/login/theme-pic1.jpg) #CCE1F3 center 0 no-repeat;"></li>
+                <li style="background:url(../../Content/themes/login/theme-pic2.jpg) #BCE0FF center 0 no-repeat;"></li>
+            </ul>
+        </div>
+        <div class="hd"><ul></ul></div>
+    </div>
 
-                                                    </td>
-                                                    <td>
-                                                        &nbsp;
-
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        &nbsp;
-
-                                                    </td>
-                                                    <td>
-                                                        <div align="right" style="margin-right: 20px;">
-                                                            <p>&nbsp;</p>
-                                                            <p>&nbsp;</p>
-                                                            <p style="display: none">
-                                                                <strong>
-                                                                    <font color="#990000">
-                                                                        <br>CopyRihgt: 2015
-                                                                    </font>&nbsp;&nbsp;
-                                                                    <font color='yellow'>( MVC + EasyUI + Ajax + Enterprise Library)</font>
-                                                                </strong>&nbsp;&nbsp;
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" align="center" height="30">
-                                            &nbsp;
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="38%" height="180">
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <div align="center"></div>
-                                        </td>
-                                        <td width="62%">
-                                            <table cellspacing="0" cellpadding="0" width="100%" border="0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td width="4" class="ssa">&nbsp;</td>
-                                                        <td width="264" height="40" align="left">
-                                                            <input class="easyui-textbox" id="UserName" data-options="prompt:'用户名',iconCls:'icon-user',iconWidth:30" style="width: 165px; height: 40px" value="admin" />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style1"></td>
-                                                        <td width="4" class="style1"></td>
-                                                        <td width="264" class="style1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style4"></td>
-                                                        <td width="4" class="style4">
-                                                            &nbsp;
-
-                                                        </td>
-                                                        <td width="264" align="left" class="style4">
-                                                            <input class="easyui-textbox" type="password" id="Password" data-options="prompt:'密码',iconCls:'icon-lock',iconWidth:30" style="width: 165px; height: 40px" />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style3"></td>
-                                                        <td class="style3"></td>
-                                                        <td valign="bottom" class="style3"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3" align="center" class="style5">
-                                                            <img src="~/Content/Themes/Default/btn_reset2.png" style="height: 30px; width: 65px; margin-right: 40px; margin-left: 15px; cursor: pointer" onclick='doReset()'>
-                                                            <img src="~/Content/Themes/Default/btn_login2.png" id="btnLogin" width="65" height="30" border="0" style="cursor: pointer" />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3" height="40px">&nbsp;</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
+    <div class="footer">
+        <p>Copyright &copy; 2019.Company name All rights reserved.<a target="_blank" href="http://www.rthitech.com.cn"></a></p>
+    </div>
 </body>
 </html>

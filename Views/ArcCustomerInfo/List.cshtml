@@ -13,8 +13,7 @@
     <script src="~/Scripts/ComponentUtil.js"></script>
 
     <script type="text/javascript">
-        //标识是新增还是编辑对话框弹出，用于删除附件的操作
-        var isAddOrEdit = 'add';
+      
         $(function () {
             $(document).keydown(function (event) {
                 if (event.keyCode == 13) {
@@ -39,7 +38,7 @@
             //价格属性事件
             meterIntChannal();
         });
-        var isAdd = false;
+
         function InputNvcName(obj) {
             $("#addNvcInvName").val($(obj).val());
         }
@@ -85,8 +84,8 @@
                     { title: '客户楼栋', field: 'VcBuilding', width: 80, sortable: true },
                     { title: '单元编号', field: 'VcUnitNum', width: 80, sortable: true },
                     { title: '门牌编号', field: 'VcRoomNum', width: 80, sortable: true },
-                    { title: '姓名查询码', field: 'VcNameCode', width: 80, sortable: true },
-                    { title: '地址查询码', field: 'VcAddrCode', width: 80, sortable: true },
+                    //{ title: '姓名查询码', field: 'VcNameCode', width: 80, sortable: true },
+                    //{ title: '地址查询码', field: 'VcAddrCode', width: 80, sortable: true },
                     { title: '移动电话', field: 'VcMobile', width: 80, sortable: true },
                     { title: '固定电话', field: 'VcTelNo', width: 80, sortable: true },
                     { title: '身份证号', field: 'VcIDNo', width: 80, sortable: true },
@@ -209,15 +208,15 @@
             $("#ddlArcConcentratorInfo").next().hide();
             //隐藏采样点
             $("#meterIntMP").next().hide();
+            //允许修改通讯地址
+            $('#meterVcAddr').validatebox('enableValidation');
+            $("#meterVcAddr").attr("readonly", false);
 
             $("#ffCustomerInfo").form("clear");
             setMeterInfoDefault();
-             //允许修改通讯地址
-            $('#meterVcAddr').validatebox('enableValidation');
-            $("#meterVcAddr").attr("readonly", false);
+          
             $("#DivAdd").dialog('open').dialog('setTitle', '添加信息');
             BindAddEvent();
-            isAdd = true;
             return;
         }
         //绑定添加按钮的事件
@@ -333,12 +332,22 @@
                 $.messager.alert("提示", "每次只能修改/查看一条记录，你已经选择了<font color='red'  size='6'>" + rows.length + "</font>条", "error");
                 return;
             }
-            isAdd = false;
+           
             BindEditInfo(rows[0]);
             $("#DivAdd").dialog('open').dialog('setTitle', '修改信息');
-            //不允许修改通讯地址
-            $('#meterVcAddr').validatebox('disableValidation');
-            $("#meterVcAddr").attr("readonly",true);
+            //判断是否可修改通讯地址
+            console.log(rows[0].bVcAddr);
+
+            if (rows[0].bVcAddr== null) {
+                //不允许修改通讯地址            
+                $('#meterVcAddr').validatebox('enableValidation');
+                $("#meterVcAddr").attr("readonly", false);
+            } else {
+                //允许修改通讯地址
+                $('#meterVcAddr').validatebox('disableValidation');
+                $("#meterVcAddr").attr("readonly", true);
+            }   
+            
             BindEditEvent();
             OldddlPriceProperty = $("#ddlPriceProperty").combobox("getText");
         }
@@ -363,7 +372,6 @@
             $("#meterDtLastUpd").val("");
             $("#meterDtCreate").val("");
         }
-
         //绑定编辑详细信息的方法
         function BindEditInfo(info) {
             if (info == null) {
@@ -420,7 +428,6 @@
             //校表周期
             $("#meterIntCycle").numberbox("setValue", info.IntCycle);
         }
-
         //绑定修改按钮的事件
         function BindEditEvent() {
             $("#btnAddOK").unbind("click");
@@ -435,7 +442,6 @@
                 }
             });
         }
-
         //价格属性在字段值发生更改的时候触发
         function txtddlPriceProperty() {
             $("#ddlPriceProperty").combobox({
@@ -494,23 +500,18 @@
                 required: true,
             });
         }
-        var easyui_tree_options = {
-            length: 0,  //层数
-            getLevel: function (treeObj, node) {	//treeObj为tree的dom对象，node为选中的节点
-                while (node != null) {
-                    node = $(treeObj).tree('getParent', node.target)
-                    easyui_tree_options.length++;
-                }
-                var length1 = easyui_tree_options.length;
-                easyui_tree_options.length = 0;		//重置层数
-                return length1;
-            }
-        }
         function initDeptTreeview() {
             $("#loading").show();
             var queryData = "";
             $('#treeDept1').tree({
                 url: '/ArcCustomerInfo/TreeCommunity_Server',
+                 //添加图标
+                loadFilter: function (data, parent) {
+                    for (var i = 0; i < data.length; i++) {
+                        getLevel(data[i], 0);
+                    }
+                    return data;
+                },
                 onBeforeSelect: function (node) {
                     fujiText = node.text;
                 },

@@ -31,8 +31,7 @@ namespace NB_WaterFee.Controllers.CustomerInfo
                 NvcAddr = Request["WHC_NvcAddr"] ?? "",
                 VcMobile = Request["WHC_VcMobile"] ?? ""
             };
-            var useno = Request["WHC_IntNo"] ?? "0";
-            custormerinfo.IntNo = useno.Equals("") ? 0 : useno.ToInt();
+            custormerinfo.IntNo = (Request["WHC_IntNo"] ?? "0").ToString().ToInt();
 
             if (Strlevel == "1")
             {
@@ -56,11 +55,10 @@ namespace NB_WaterFee.Controllers.CustomerInfo
                 custormerinfo.VcBuilding = fuji;
                 custormerinfo.VcUnitNum = Text;
             }
-
-            var endcode = Session["EndCode"] ?? "0";
+           
             //调用后台服务获取集中器信息
             ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.ArcCustomer_Qry(endcode.ToString().ToInt(), custormerinfo);
+            var dts = DbServer.ArcCustomer_Qry(endcode, custormerinfo);
 
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
@@ -97,14 +95,13 @@ namespace NB_WaterFee.Controllers.CustomerInfo
                 MeterInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<Meter>(mInfo, setting);
                 //CustomerInfo = ReflectionHelper.ReplacePropertyValue(CustomerInfo, typeof(string), null, string.Empty);
                 //MeterInfo = ReflectionHelper.ReplacePropertyValue(MeterInfo, typeof(string), null, string.Empty);
-                CustomerInfo.IntUserID = Session["UserID"].ToString().ToInt();
+                CustomerInfo.IntUserID = userid;
                 CustomerInfo.IntStatus = 1;
                 CustomerInfo.DteOpen = DateTime.Now;
                 CustomerInfo.DteCancel = DateTime.Now;
                 MeterInfo.IntCustNO = CustomerInfo.IntNo;
                 CustomerInfo.VcAddrCode = "";
-                CustomerInfo.VcNameCode = "";
-                var endcode = Session["EndCode"] ?? "0";
+                CustomerInfo.VcNameCode = "";    
                 CustomerInfo.IntEndCode = endcode.ToString().ToInt();
                 MeterInfo.IntEndCode = endcode.ToString().ToInt();
                 CustomerInfo.VcWechatNo = "";
@@ -142,7 +139,7 @@ namespace NB_WaterFee.Controllers.CustomerInfo
                 //CustomerInfo = ReflectionHelper.ReplacePropertyValue(CustomerInfo, typeof(string), null, string.Empty);
                 //MeterInfo = ReflectionHelper.ReplacePropertyValue(MeterInfo, typeof(string), null, string.Empty);
 
-                CustomerInfo.IntUserID = Session["UserID"].ToString().ToInt();
+                CustomerInfo.IntUserID = userid;
                 CustomerInfo.IntStatus = 1;
 
                 CustomerInfo.DteCancel = DateTime.Now;
@@ -153,9 +150,8 @@ namespace NB_WaterFee.Controllers.CustomerInfo
                 MeterInfo.IntCustNO = CustomerInfo.IntNo;
                 CustomerInfo.VcAddrCode ="";
                 CustomerInfo.VcNameCode = "";
-                var endcode = Session["EndCode"] ?? "0";
-                CustomerInfo.IntEndCode = endcode.ToString().ToInt();
-                MeterInfo.IntEndCode = endcode.ToString().ToInt();
+                CustomerInfo.IntEndCode = endcode;
+                MeterInfo.IntEndCode = endcode;
                 CustomerInfo.VcWechatNo = "";
 
                 var flg = new ServiceDbClient().ArcCustMeter_Upd(CustomerInfo, MeterInfo);
@@ -239,11 +235,8 @@ namespace NB_WaterFee.Controllers.CustomerInfo
             return ToJsonContentDate(list);
         }
         public ActionResult TreeCommunity_Server()
-        {
-            var endcode = Session["EndCode"] ?? "0";
-
-            var treelist = new ServiceDbClient().ArcCustomer_TreeCommunity(endcode.ToString().ToInt());
-
+        {        
+            var treelist = new ServiceDbClient().ArcCustomer_TreeCommunity(endcode);
             return ToJsonContentDate(treelist);
         }
     }

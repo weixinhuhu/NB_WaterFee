@@ -12,6 +12,7 @@
     <script src="../../Content/My97DatePicker/WdatePicker.js"></script>
     <script src="~/Scripts/dbjs.js"></script>
 
+    <script src="~/Scripts/ComponentUtil.js"></script>
     <script type="text/javascript">
         var sNvcVillage = "";
         var sVcBuilding = "";
@@ -22,18 +23,6 @@
             initDeptTreeview();
         });
 
-        var easyui_tree_options = {
-            length: 0,  //层数
-            getLevel: function (treeObj, node) {	//treeObj为tree的dom对象，node为选中的节点
-                while (node != null) {
-                    node = $(treeObj).tree('getParent', node.target)
-                    easyui_tree_options.length++;
-                }
-                var length1 = easyui_tree_options.length;
-                easyui_tree_options.length = 0;		//重置层数
-                return length1;
-            }
-        }
         function GetMeterSettingInfo() {
             $('#MeterSettingInfo').combobox({
                 url: '/ArcMeterInfo/GetParam_MeterConfigTreeJson_Server',
@@ -46,6 +35,13 @@
             $("#loading").show();
             $('#treeDept1').tree({
                 url: '/ArcCustomerInfo/TreeCommunity_Server',
+                //添加图标
+                loadFilter: function (data, parent) {
+                    for (var i = 0; i < data.length; i++) {
+                        getLevel(data[i], 0);
+                    }
+                    return data;
+                },
                 onBeforeSelect: function (node) {
                     fujiText = node.text;
                 },
@@ -148,7 +144,7 @@
                     { title: '用户单元', field: 'VcUnitNum', width: 80, sortable: true },
                     { title: '用户门牌号', field: 'VcRoomNum', width: 80, sortable: true },
                     { title: '用户电话', field: 'VcMobile', width: 120, sortable: true },
-                
+
                     //{ title: '采样点', field: 'VcPoint', width: 80, hidden: true },
                     //{ title: '初始读数', field: 'VcInitReading', width: 80, hidden: true },
                     //{ title: '报警电压', field: 'VcAlertVolt', width: 80, hidden: true },
@@ -166,7 +162,7 @@
                         }
                     },
                     { title: '定量上传值', field: 'ChrUpAmount', width: 80, hidden: true },
-                   // { title: '阀门运行时间', field: 'VcValveRuning', width: 80, hidden: true },
+                    // { title: '阀门运行时间', field: 'VcValveRuning', width: 80, hidden: true },
                     {
                         field: 'opt', title: '查看表端参数', width: 200, align: 'center',
                         formatter: function () {
@@ -185,14 +181,14 @@
             });
         };
         ShowDetail = function () {
-          // ShowEditOrViewDialog();
+            // ShowEditOrViewDialog();
         }
         //修改或查看明细信息（绑定显示数据）
         function ShowEditOrViewDialog() {
             //首先取出来用户选择的数据的ID
             var rows = $("#gridSettingInfo").datagrid("getSelections");
             BindEditInfo(rows[0]);
-            $("#DivAdd").dialog('open').dialog('setTitle','用户名【'+rows[0].NvcName+'】表端参数信息');         
+            $("#DivAdd").dialog('open').dialog('setTitle', '用户名【' + rows[0].NvcName + '】表端参数信息');
         }
         //绑定编辑详细信息的方法
         function BindEditInfo(info) {
@@ -200,7 +196,7 @@
                 showError("数据有误!");
                 return false;
             }
-            console.log(info);           
+            console.log(info);
             $("#VcAllowUsed").val(info.ChrAllowUsed);
             $("#VcFreezeDay").val(info.ChrFreezeDay);
             $("#VcUpTiming").val(info.ChrUpTiming);

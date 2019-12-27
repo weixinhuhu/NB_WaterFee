@@ -21,16 +21,14 @@ namespace WHC.WaterFeeWeb.Controllers
         }
 
         // GET: CustomerInfo
-        //public ActionResult Setting()
-        //{
-        //    return View();
-        //}
-      
+        public ActionResult Setting()
+        {
+            return View();
+        }
+
         public ActionResult GetListJson_Server()
         {
-            ServiceDbClient DbServer = new ServiceDbClient();
-            var endcode = Session["EndCode"] ?? "0";
-            var list = DbServer.PriceProperty_GetList(endcode.ToString().ToInt());
+            var list = new ServiceDbClient().PriceProperty_GetList(endcode);
             var tree = new List<TreeData>();
             foreach (var item in list)
             {
@@ -45,18 +43,14 @@ namespace WHC.WaterFeeWeb.Controllers
         }
         public ActionResult GetTreeJson_Server()
         {
-            var endcode = Session["EndCode"] ?? "0";
-            ServiceDbClient DbServer = new ServiceDbClient();
-            var tree = DbServer.PriceProperty_GetTreeJson(endcode.ToString().ToInt());
+            var tree = new ServiceDbClient().PriceProperty_GetTreeJson(endcode);
             return ToJsonContentDate(tree);
         }
    
         public ActionResult GetInfoByIntPropertyNo_Server()
         {
             var IntPropertyNo = Request["IntPropertyNo"].ToInt();
-            //var IntPropertyNo = 1003;
-            ServiceDbClient DbServer = new ServiceDbClient();
-            var dt = DbServer.PriceProperty_GetByNo(IntPropertyNo);
+            var dt =new ServiceDbClient().PriceProperty_GetByNo(IntPropertyNo);
             return ToJsonContentDate(dt);
         }
 
@@ -91,15 +85,13 @@ namespace WHC.WaterFeeWeb.Controllers
                 price_detail_info.Price = price_info;
                 lstPrice.Add(price_detail_info);
             }
-            //厂家编码
-            var endcode = Session["EndCode"] ?? "0";
-            info.IntEndCode = endcode.ToString().ToInt();
+    
+            info.IntEndCode = endcode;
             //操作员
-            info.IntUserNo = Session["UserID"].ToString().ToInt();
+            info.IntUserNo =userid;
             try
             {
-                ServiceDbClient DbServer = new ServiceDbClient();
-                var flag = DbServer.PriceProperty_AddOrUpdate(info, lstPrice.ToArray());
+                var flag = new ServiceDbClient().PriceProperty_AddOrUpdate(info, lstPrice.ToArray());
                 if (flag == "0")
                 {
                     result.IsSuccess = true;
