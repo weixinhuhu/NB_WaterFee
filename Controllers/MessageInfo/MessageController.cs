@@ -45,7 +45,7 @@ namespace NewWaterFee.Controllers.MessageInfo
         {
             CommonResult result = new CommonResult();
             var endcode = Session["EndCode"].ToString() ?? "0";
-            info.IntEndCode = endcode.ToInt();
+            info.IntEndCode = endcode.ToIntOrZero();
             try
             {
                 ServiceDbClient DbServer = new ServiceDbClient();

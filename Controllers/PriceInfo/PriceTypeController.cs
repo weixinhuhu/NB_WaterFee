@@ -30,7 +30,7 @@ namespace WHC.WaterFeeWeb.Controllers
         {         
             CommonResult result = new CommonResult();
             try { 
-                var flag = new ServiceDbClient().PriceType_Ins(endcode.ToString().ToInt(), info);
+                var flag = new ServiceDbClient().PriceType_Ins(endcode.ToString().ToIntOrZero(), info);
                 if (flag == "0")
                 {
                     result.IsSuccess = true;

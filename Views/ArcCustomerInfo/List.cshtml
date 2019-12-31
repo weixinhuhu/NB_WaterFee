@@ -13,7 +13,7 @@
     <script src="~/Scripts/ComponentUtil.js"></script>
 
     <script type="text/javascript">
-      
+
         $(function () {
             $(document).keydown(function (event) {
                 if (event.keyCode == 13) {
@@ -21,7 +21,7 @@
                     return;
                 }
             });
-             //绑定查询按钮事件
+            //绑定查询按钮事件
             BindSearchEvent();
             //初始化导航树
             initDeptTreeview();
@@ -49,7 +49,7 @@
                 url: '/ArcCustomerInfo/ListJson_Server',
                 title: '客户档案',
                 iconCls: 'icon-view',
-                height: document.body.clientHeight * 0.9 ,
+                height: document.body.clientHeight * 0.9,
                 width: function () { return document.body.clientWidth * 0.9 },//自动宽度
                 nowrap: true,
                 autoRowHeight: true,
@@ -170,11 +170,11 @@
                 required: true,
             });
             $('#ddlPriceProperty2').combobox({
-                            url: '/PriceProperty/GetTreeJson_Server',
-                            valueField: 'id',
-                            textField: 'text',
-                            required: true,
-                        });
+                url: '/PriceProperty/GetTreeJson_Server',
+                valueField: 'id',
+                textField: 'text',
+                required: true,
+            });
         }
         //绑定搜索按钮的的点击事件
         function BindSearchEvent() {
@@ -214,7 +214,7 @@
 
             $("#ffCustomerInfo").form("clear");
             setMeterInfoDefault();
-          
+
             $("#DivAdd").dialog('open').dialog('setTitle', '添加信息');
             BindAddEvent();
             return;
@@ -269,38 +269,38 @@
             }
             var ddlPriceProperty = $("#ddlPriceProperty").combobox("getText");
             if (ddlPriceProperty != OldddlPriceProperty) {
-                con = confirm("确定修改价格属性？？？");
-                if (con == false) {
-                    return;
-                }
+                $.messager.confirm("修改价格属性确认信息", "确定修改价格属性？", function (action) {
+                    if (action) {
+                        //判断表地址长度
+                        if ($("#meterVcAddr").val().length < 14) {
+                            $("#meterVcAddr").val(addzone($("#meterVcAddr").val(), 14));
+                        }
+                        //判断表单的信息是否通过验证
+                        var validate = $("#ffCustomerInfo").form('validate');
+                        if (validate == false) {
+                            return $.messager.alert("提示", "请校验数据是否填写完整。", 'warning')
+                            return false;
+                        }
+                        var customerInfo = JSON.stringify($("#ffCustomerInfo").serializeJSON());
+                        var meterInfo = JSON.stringify($("#ffMeterInfo").serializeJSON());
+                        var postData = { CustomerInfo: customerInfo, MeterInfo: meterInfo };
+                        $.post("/ArcCustomerInfo/Update_Server", postData, function (json) {
+                            var data = $.parseJSON(json);
+                            if (data.IsSuccess) {
+                                showTips("修改成功");
+                                $("#DivAdd").dialog("close");
+                                $("#grid").datagrid("reload");
+                                $("#ffAdd").form("clear");
+                            }
+                            else {
+                                showError("修改失败:" + data.ErrorMsg, 3000);
+                            }
+                        }).error(function () {
+                            $.messager.alert("提示", "您未被授权使用该功能，请联系管理员进行处理。", 'warning');
+                        });
+                    }
+                });
             }
-            //判断表地址长度
-            if ($("#meterVcAddr").val().length < 14) {
-                $("#meterVcAddr").val(addzone($("#meterVcAddr").val(), 14));
-            }
-            //判断表单的信息是否通过验证
-            var validate = $("#ffCustomerInfo").form('validate');
-            if (validate == false) {
-                return $.messager.alert("提示", "请校验数据是否填写完整。", 'warning')
-                return false;
-            }
-            var customerInfo = JSON.stringify($("#ffCustomerInfo").serializeJSON());
-            var meterInfo = JSON.stringify($("#ffMeterInfo").serializeJSON());
-            var postData = { CustomerInfo: customerInfo, MeterInfo: meterInfo };
-            $.post("/ArcCustomerInfo/Update_Server", postData, function (json) {
-                var data = $.parseJSON(json);
-                if (data.IsSuccess) {                  
-                    showTips("修改成功");                                    
-                    $("#DivAdd").dialog("close");
-                    $("#grid").datagrid("reload");
-                    $("#ffAdd").form("clear");
-                }
-                else {
-                    showError("修改失败:" + data.ErrorMsg, 3000);
-                }
-            }).error(function () {
-                $.messager.alert("提示", "您未被授权使用该功能，请联系管理员进行处理。", 'warning');
-            });
         }
         var OldddlPriceProperty;
         //修改或查看明细信息（绑定显示数据）
@@ -332,22 +332,22 @@
                 $.messager.alert("提示", "每次只能修改/查看一条记录，你已经选择了<font color='red'  size='6'>" + rows.length + "</font>条", "error");
                 return;
             }
-           
+
             BindEditInfo(rows[0]);
             $("#DivAdd").dialog('open').dialog('setTitle', '修改信息');
             //判断是否可修改通讯地址
             console.log(rows[0].bVcAddr);
 
-            if (rows[0].bVcAddr== null) {
-                //不允许修改通讯地址            
+            if (rows[0].bVcAddr == null) {
+                //不允许修改通讯地址
                 $('#meterVcAddr').validatebox('enableValidation');
                 $("#meterVcAddr").attr("readonly", false);
             } else {
                 //允许修改通讯地址
                 $('#meterVcAddr').validatebox('disableValidation');
                 $("#meterVcAddr").attr("readonly", true);
-            }   
-            
+            }
+
             BindEditEvent();
             OldddlPriceProperty = $("#ddlPriceProperty").combobox("getText");
         }
@@ -505,7 +505,7 @@
             var queryData = "";
             $('#treeDept1').tree({
                 url: '/ArcCustomerInfo/TreeCommunity_Server',
-                 //添加图标
+                //添加图标
                 loadFilter: function (data, parent) {
                     for (var i = 0; i < data.length; i++) {
                         getLevel(data[i], 0);

@@ -74,68 +74,327 @@
                     return;
                 }
             });
+            ForMatterDateBox("attYearMonth");
+            var data = {};
+            InitGridAccDebt(data);
+            initDeptTreeview();
             BindSearchEvent();
         });
 
+        function initDeptTreeview() {
+            $("#loading").show();
+            $('#treeDept1').tree({
+                url: '/ArcCustomerInfo/TreeCommunity_Server',
+                //添加图标
+                loadFilter: function (data, parent) {
+                    for (var i = 0; i < data.length; i++) {
+                        getLevel(data[i], 0);
+                    }
+                    return data;
+                },
+                onBeforeSelect: function (node) {
+                    fujiText = node.text;
+                },
+                onClick: function (node) {
+                    var Text = $("#treeDept1").tree("getParent", node.target);
+                    var Treelevel = easyui_tree_options.getLevel(this, node);
+                    var ParentText = "";
+                    if (Treelevel == 4) {
+                        ParentText = $("#treeDept1").tree("getParent", Text.target)
+                    }
+                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
+                    UserInfoGrid(queryData);
+                }
+            });
+            $("#loading").fadeOut(500);
+        }
+
+        //待发行费用客户档案
+        function UserInfoGrid(queryData) {
+            $('#usergrid').datagrid({
+                //指向后台的Action来获取当前用户的信息的Json格式的数据
+                url: '/CountFee/Account_CalcFee_Qry_Server',
+                title: '待算费用户档案',
+                iconCls: 'icon-view',
+                height: document.body.clientHeight * 0.5,
+                width: function () { return document.body.clientWidth * 0.9 },//自动宽度
+                nowrap: true,
+                autoRowHeight: true,
+                striped: true,
+                collapsible: true,
+                pagination: true,
+                pageSize: 50,
+                pageList: [50, 100, 200],
+                rownumbers: true,
+                sortOrder: 'asc',
+                remoteSort: false,
+               //singleSelect: true,
+                queryParams: queryData,
+                columns: [[
+                    { field: 'ck', checkbox: true },   //选择
+                    { title: 'ID', field: 'IntID', width: 80, sortable: true, hidden: true },
+                    { title: '客户编号', field: '客户编号', width: 80, sortable: true },
+                    { title: '客户姓名', field: '客户姓名', width: 100, sortable: true },
+                    { title: '客户地址', field: '客户地址', width: 120, sortable: true },
+                    { title: '费用编号', field: '费用编号', width: 120, sortable: true },
+                    { title: '通信地址', field: '表地址', width: 100, sortable: true },
+                    {
+                        title: '费用日期', field: '费用日期', width: 100, align: 'center', sortable: true, formatter: function (val) {
+                            if (val != null){  return val == "9999-09-09 00:00:00" ? "-" : val.substring(0, 10); }                        
+                        }
+                    },
+                    { title: '上期读数', field: '上期读数', width: 80, sortable: true },
+                    { title: '本期读数', field: '本期读数', width: 80, sortable: true },
+                    { title: '本期用量', field: '本期用量', width: 80, sortable: true },
+                ]],
+
+                toolbar: [{
+                    id: 'btnAdd',
+                    text: '计算发行算费用',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        getSelectVcUserID();
+                    }
+                }],
+                onClickRow: function () {
+                    viewAccDebt();
+                }
+            });
+        };
+
+        function viewAccDebt() {
+            var rows = $("#usergrid").datagrid("getSelections");
+            if (rows.length < 1) {
+                $.messager.alert("温馨提示", "请至少选择一条记录!");
+                return;
+            }
+            var data = { "IntCustNo": rows[0].客户编号 };
+            InitGridAccDebt(data);
+            name = rows[0].客户姓名;
+            var Newtitle = '用户名称 【' + name + '】' + '    的欠费记录'
+            $('#gridAccDebt').datagrid("getPanel").panel("setTitle", Newtitle)
+        }
+
+        //显示用户欠费
+        function InitGridAccDebt(queryData) {
+            //定位到Table标签，Table标签的ID是grid
+            $('#gridAccDebt').datagrid({
+                //指向后台的Action来获取当前用户的信息的Json格式的数据
+                url: '/Fee/GetAccDebtByIntCustNo_Server',
+                title: '欠费信息',
+                iconCls: 'icon-view',
+                height: document.body.clientHeight * 0.35,
+                //自动宽度
+                width: function () { return document.body.clientWidth * 0.9 },
+                nowrap: true,
+                autoRowHeight: true,
+                striped: true,
+                collapsible: true,
+                pagination: true,
+                singleSelect: true,
+                pageSize: 50,
+                pageList: [50, 100, 200],
+                rownumbers: true,
+                sortOrder: 'asc',
+                remoteSort: false,
+                queryParams: queryData,  //异步查询的参数
+                columns: [[
+                    //{ field: 'ck', checkbox: true },   //选择
+                    { title: 'ID', field: 'IntFeeID', width: 80, sortable: true, hidden: true },
+                    { title: '客户编号', field: 'IntCustNo', width: 80, sortable: true, align: 'right' },
+                    { title: '费用年月', field: 'IntYearMon', width: 80, sortable: true, align: 'center' },
+                    {
+                        title: '费用日期', field: 'DteFee', width: 100, sortable: true, align: 'center',
+                        formatter: function (val) {
+                            return val == "9999-09-09 00:00:00" ? "-" : val.substring(0, 10);
+                        }
+                    },
+                    { title: '费用金额', field: 'MonFee', width: 80, sortable: true, align: 'right' },
+                    { title: '实际执行费用金额', field: 'MonFeeExec', width: 110, sortable: true, align: 'right' },
+                    { title: '违约金', field: 'MonPenal', width: 110, sortable: true, align: 'right' },
+                    {
+                        title: '状态', field: 'IntStatus', width: 80, sortable: true, align: 'center',
+                        formatter: function (val, obj, index) {
+                            //状态0:未收1:加锁2:在途4:呆坏帐 6:已免水费
+                            switch (parseInt(val)) {
+                                case 0: return "未收"; break;
+                                case 1: return "加锁"; break;
+                                case 2: return "在途"; break;
+                                case 4: return "呆坏帐"; break;
+                                case 6: return "已免水费"; break;
+                                default: return "未知标识:" + val; break;
+                            }
+                        }
+                    },
+                    { title: '建立时间', field: 'DtCreate', width: 150, sortable: true, align: 'center' }
+                ]],
+                onLoadSuccess: function () {
+                },
+                //改变行背景颜色
+                rowStyler: function (index, row) {
+                    console.log(row.IntStatus);
+                    if (row.IntStatus == 0) {
+                        return 'background-color:#FFF0F5;';
+                    }
+                }
+            });
+        };
+
+        function getSelectVcUserID() {
+            var rows = $('#usergrid').datagrid('getChecked');
+            var sAdrs = "";
+            if (rows.length == 0) {
+                showError("请先勾选待算费的用户档案!");
+                return null;
+            }
+            for (var i = 0; i < rows.length; i++) {
+                if (i == 0) {
+                    sAdrs = rows[i].表地址
+                } else {
+                    sAdrs += "," + rows[i].表地址;
+                }
+            }
+            CountRelease(sAdrs)
+        }
+        //算费
+        function CountRelease(sAdrs) {
+            loading.show();
+            var DtDate = $("#attYearMonth").datebox("getValue");
+            $.ajax({
+                url: '/CountFee/Account_CalcFee_Calc_Server',
+                dataType: 'json',
+                data: { sAdrs: sAdrs, WHC_DtDate: DtDate },
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        loading.hide();
+                        showTips("算费成功");
+                        $("#usergrid").datagrid("reload");;
+                    } else {
+                        loading.hide();
+                        showError("算费失败"+" "+result.ErrorMsg);
+                    }
+                }
+            });
+            return false;
+        }
         //绑定搜索按钮的的点击事件
         function BindSearchEvent() {
             //按条件进行查询数据，首先我们得到数据的值
             $("#btnSearch").click(function () {
-                var intCustNo = $("#txtIntNo").val();
-                if (intCustNo == "") {
-                    showError("请输入客户编号!", 1000);
-                    return;
+                var queryData = {
+                    WHC_IntNo: $("#txtIntNo").val(),
+                    WHC_NvcName: $("#txtNvcName").val(),
+                    WHC_NvcAddr: $("#txtNvcAddr").val(),
+                    WHC_VcMobile: $("#txtVcMobile").val(),
+                    WHC_DtDate: $("#attYearMonth").datebox("getValue"),
+                    WHC_IntFlag: $("#orderType").combobox('getValue')
                 }
-                $.messager.progress({
-                    //title: '温馨提示',
-                    text: '正在处理中,请稍后......'
-                });
-                $.ajax({
-                    url: '/CountFee/CountReleaseFee?intCustNo=' + intCustNo,
-                    type: 'post',
-                    dataType: 'json',
-                    //async: false,
-                    success: function (json) {
-                        console.log(json);
-                        $.messager.progress('close');
-                        if (json.Success) {
-                            $.messager.alert("温馨提示", "操作成功!");
-                            reloadGrid();
-                        }
-                        else {
-                            $.messager.alert("温馨提示", json.ErrorMessage);
-                        }
-                    },
-                    error: function () {
-                        showError("网络错误!");
-                        $.messager.progress('close');
-                    }
-                });
+                UserInfoGrid(queryData);
             });
         }
     </script>
+    <style>
+        table.view {
+            border: 1px solid #A8CFEB;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+            vertical-align: top;
+            height: 98%;
+            width: 98%;
+        }
+
+        .view th {
+            padding-left: 10px;
+            padding-right: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            height: 23px;
+            width: 150px;
+            border: 1px solid silver;
+            background-color: #F1F6FF;
+        }
+
+        .view td {
+            padding-left: 10px;
+            padding-right: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            height: 23px;
+            width: 150px;
+            border: 1px solid silver;
+            background-color: #FAFCFF;
+        }
+
+        .view input {
+            width: 99%;
+        }
+    </style>
 </head>
 <body>
     <div id="loading" style="display: none;"><img alt="数据正在加载中..." src="~/Content/images/loading02.gif" /></div>
     <div class="easyui-layout" style="width:700px;height:700px;" fit="true">
+        <div data-options="region:'west',split:true,title:'',iconCls:'icon-book'" style="width: 230px; padding: 1px;">
+            <div class="easyui-tabs" style="width:200px;">
+                <div title="用户列表" style="padding:10px">
+                    <ul id="treeDept1"></ul>
+                </div>
+            </div>
+        </div>
         <div id="tb" data-options="region:'center',title:'',iconCls:'icon-book'" style="padding:5px;height:auto">
             <!-------------------------------搜索框----------------------------------->
             <fieldset>
-                <legend>信息查询</legend>
-                <div id="ffSearch" method="post">
+                <legend>用户查询</legend>
+                <form id="ffSearch" method="post">
                     <div id="toolbar">
                         <table cellspacing="0" cellpadding="0">
                             <tr>
-                                <th style='padding:3px;'><label for="txtIntNo">客户编号：</label></th>
-                                <td style='padding:3px;'><input type="text" id="txtIntNo" class="text-info" style="width:100px" /></td>
+                                <th style='padding: 3px;'>
+                                    <label for="txtIntNo">客户编号：</label>
+                                </th>
+                                <td style='padding: 3px;'>
+                                    <input type="text" id="txtIntNo" class="easyui-numberbox" style="width: 100px" />
+                                </td>
+                                <th style='padding: 3px;'>
+                                    <label for="txtNvcName">客户姓名：</label>
+                                </th>
+                                <td style='padding: 3px;'>
+                                    <input type="text" id="txtNvcName" style="width: 100px" />
+                                </td>
+                                <th style='padding: 3px;'>
+                                    <label for="txtNvcAddr">客户地址：</label>
+                                </th>
+                                <td style='padding: 3px;'>
+                                    <input type="text" id="txtNvcAddr" style="width: 100px" />
+                                </td>
+                                <th style='padding: 3px;'>
+                                    <label for="txtVcMobile">移动号码：</label>
+                                </th>
+                                <td style='padding: 3px;'>
+                                    <input type="text" id="txtVcMobile" class="easyui-numberbox" style="width: 100px" />
+                                </td>
+                                <th style='padding:3px;'>
+                                    <label for="attYearMonth">费用日期：</label>
+                                </th>
+                                <td style='padding:3px;'>
+                                    <input type="text" class="easyui-datebox" id="attYearMonth" style="width:100px" value="true" />
+                                </td>
+                                <td style='padding: 3px;'>
+                                    <select id="orderType" name="orderType" class="easyui-combobox" style="width: 100px;" data-options="required:true">
+                                        <option value="0">全部</option>
+                                        <option value="1">未算费客户</option>
+                                    </select>
+                                </td>
                                 <td style='padding:3px;text-align:right'>
-                                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="btnSearch">生成账单</a>
+                                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="btnSearch" onclick="BindSearchEvent()">查询</a>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                </div>
+                </form>
             </fieldset>
+            <!-------------------------------详细信息展示表格----------------------------------->
+            <table id="usergrid" style="width: 940px" title="抄表信息" data-options="iconCls:'icon-view'"></table>
+            <table id="gridAccDebt" style="width: 940px" title="用户信息" data-options="iconCls:'icon-view'"></table>
         </div>
     </div>
 </body>

@@ -211,6 +211,9 @@
     <Content Include="Connected Services\ServiceReference1\NB_WaterFee.ServiceReference1.LogonUser.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\DbServiceReference\Service6.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReference1\ServAuthority.disco" />
     <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />

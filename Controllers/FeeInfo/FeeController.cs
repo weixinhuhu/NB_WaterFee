@@ -49,7 +49,7 @@ namespace WHC.NB_WaterFee.Controllers
         {
             var custno = Request["IntCustNo"] ?? "0";
             ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.Account_GetDebtByCustNo(endcode, custno.ToInt());
+            var dts = DbServer.Account_GetDebtByCustNo(endcode, custno.ToIntOrZero());
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
             DataTable dat = new DataTable();
@@ -74,13 +74,13 @@ namespace WHC.NB_WaterFee.Controllers
         /// <returns></returns>  
         public ActionResult GetPaymentNoticeList_Server()
         {
-            var CustNo = Request["WHC_IntCustNo"] ?? "";
+            var CustNo = Request["WHC_IntCustNo"] ?? "0";
             var NvcName = Request["WHC_NvcName"] ?? "";
             var NvcAddr = Request["WHC_NvcAddr"] ?? "";
             var VcMobile = Request["WHC_VcMobile"] ?? "";
             var custinfo = new Customer
             {
-                IntNo = CustNo == "" ? 0 : CustNo.ToInt(),
+                IntNo = CustNo.ToIntOrZero(),
                 NvcName = NvcName,
                 NvcAddr = NvcAddr,
                 VcMobile = VcMobile
@@ -106,7 +106,7 @@ namespace WHC.NB_WaterFee.Controllers
                 var iUserID = userid;
                 var sReceiptNo = "";
                 ServiceDbClient DbServer = new ServiceDbClient();
-                var flag = DbServer.Account_DepositOperate(endcode, custNo.ToInt(), payMoney.ToDouble(), sRemark, iUserID, sReceiptNo);
+                var flag = DbServer.Account_DepositOperate(endcode, custNo.ToIntOrZero(), payMoney.ToDouble(), sRemark, iUserID, sReceiptNo);
                 if (flag.IsSuccess)
                 {
                     result.IsSuccess = true;
@@ -133,7 +133,7 @@ namespace WHC.NB_WaterFee.Controllers
             var intcustno = custNo ?? "0";
             try
             {
-                var rs = new ServiceDbClient().Account_GetBillByCustNo(endcode, intcustno.ToInt());
+                var rs = new ServiceDbClient().Account_GetBillByCustNo(endcode, intcustno.ToIntOrZero());
                 if (rs.IsSuccess)
                 {
                     if (rs.Tbl1.Rows.Count > 0)
@@ -174,7 +174,7 @@ namespace WHC.NB_WaterFee.Controllers
             try
             {
                 var intcustno = custNo ?? "0";
-                var flag = new ServiceDbClient().ArcCloseAccount(endcode, intcustno.ToInt());
+                var flag = new ServiceDbClient().ArcCloseAccount(endcode, intcustno.ToIntOrZero());
 
                 if (flag == "0")
                 {

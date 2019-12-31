@@ -9,7 +9,7 @@ namespace WHC.NB_WaterFee.Controllers
     {
         public ActionResult CounterReverseData_Server()
         {
-            var CustNo = Request["WHC_IntCustNo"] ?? "";
+            var CustNo = Request["WHC_IntCustNo"] ?? "0";
             var NvcName = Request["WHC_NvcName"] ?? "";
             var NvcAddr = Request["WHC_NvcAddr"] ?? "";
             var VcMobile = Request["WHC_VcMobile"] ?? DateTime.Now.ToString();
@@ -17,7 +17,7 @@ namespace WHC.NB_WaterFee.Controllers
             var Dtend = Request["WHC_DtEnd"] ?? "";
             var custinfo = new Customer
             {
-                IntNo = CustNo == "" ? 0 : CustNo.ToInt(),
+                IntNo = CustNo.ToIntOrZero(),
                 NvcName = NvcName,
                 NvcAddr = NvcAddr,
                 VcMobile = VcMobile
@@ -31,7 +31,7 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult CounterReverseDataByIntCustNo_Server()
         {
             var custno = Request["WHC_IntCustNo"] ?? "0";
-            var dts = new ServiceDbClient().Account_GetWriteoffByCustNo(endcode, custno.ToInt());
+            var dts = new ServiceDbClient().Account_GetWriteoffByCustNo(endcode, custno.ToIntOrZero());
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);
             DataTable dat = new DataTable();

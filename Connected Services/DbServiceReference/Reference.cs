@@ -1965,343 +1965,6 @@ namespace NB_WaterFee.DbServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CommonResult", Namespace="http://schemas.datacontract.org/2004/07/DbServer.Model")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.Concentrator))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.Concentrator[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.Customer))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.Meter))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterReplaceInfo))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceType))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceType[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PricePropertyTree[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PricePropertyTree))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceProperty))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceProperty[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceDetail[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceDetail))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.SmsTemplate))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterConfigTree[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterConfigTree))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterConfig))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.ParamEndUser))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<int, double>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.EasyTreeData[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.EasyTreeData))]
-    public partial class CommonResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ErrorMsgField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsSuccessField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private object[] LstObjField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StrData1Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StrData2Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StrData3Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Data.DataTable Tbl1Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Data.DataTable Tbl2Field;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ErrorMsg {
-            get {
-                return this.ErrorMsgField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ErrorMsgField, value) != true)) {
-                    this.ErrorMsgField = value;
-                    this.RaisePropertyChanged("ErrorMsg");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsSuccess {
-            get {
-                return this.IsSuccessField;
-            }
-            set {
-                if ((this.IsSuccessField.Equals(value) != true)) {
-                    this.IsSuccessField = value;
-                    this.RaisePropertyChanged("IsSuccess");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public object[] LstObj {
-            get {
-                return this.LstObjField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LstObjField, value) != true)) {
-                    this.LstObjField = value;
-                    this.RaisePropertyChanged("LstObj");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StrData1 {
-            get {
-                return this.StrData1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StrData1Field, value) != true)) {
-                    this.StrData1Field = value;
-                    this.RaisePropertyChanged("StrData1");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StrData2 {
-            get {
-                return this.StrData2Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StrData2Field, value) != true)) {
-                    this.StrData2Field = value;
-                    this.RaisePropertyChanged("StrData2");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StrData3 {
-            get {
-                return this.StrData3Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StrData3Field, value) != true)) {
-                    this.StrData3Field = value;
-                    this.RaisePropertyChanged("StrData3");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Data.DataTable Tbl1 {
-            get {
-                return this.Tbl1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Tbl1Field, value) != true)) {
-                    this.Tbl1Field = value;
-                    this.RaisePropertyChanged("Tbl1");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Data.DataTable Tbl2 {
-            get {
-                return this.Tbl2Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Tbl2Field, value) != true)) {
-                    this.Tbl2Field = value;
-                    this.RaisePropertyChanged("Tbl2");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MeterReplaceQryCondition", Namespace="http://schemas.datacontract.org/2004/07/DbServer.DTO")]
-    [System.SerializableAttribute()]
-    public partial class MeterReplaceQryCondition : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IntCustNoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IntEndNoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NvcAddrField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NvcNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NvcVillageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string VcBuildingField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string VcMeterAddrField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string VcUnitNumField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IntCustNo {
-            get {
-                return this.IntCustNoField;
-            }
-            set {
-                if ((this.IntCustNoField.Equals(value) != true)) {
-                    this.IntCustNoField = value;
-                    this.RaisePropertyChanged("IntCustNo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IntEndNo {
-            get {
-                return this.IntEndNoField;
-            }
-            set {
-                if ((this.IntEndNoField.Equals(value) != true)) {
-                    this.IntEndNoField = value;
-                    this.RaisePropertyChanged("IntEndNo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NvcAddr {
-            get {
-                return this.NvcAddrField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NvcAddrField, value) != true)) {
-                    this.NvcAddrField = value;
-                    this.RaisePropertyChanged("NvcAddr");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NvcName {
-            get {
-                return this.NvcNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NvcNameField, value) != true)) {
-                    this.NvcNameField = value;
-                    this.RaisePropertyChanged("NvcName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NvcVillage {
-            get {
-                return this.NvcVillageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NvcVillageField, value) != true)) {
-                    this.NvcVillageField = value;
-                    this.RaisePropertyChanged("NvcVillage");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string VcBuilding {
-            get {
-                return this.VcBuildingField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.VcBuildingField, value) != true)) {
-                    this.VcBuildingField = value;
-                    this.RaisePropertyChanged("VcBuilding");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string VcMeterAddr {
-            get {
-                return this.VcMeterAddrField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.VcMeterAddrField, value) != true)) {
-                    this.VcMeterAddrField = value;
-                    this.RaisePropertyChanged("VcMeterAddr");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string VcUnitNum {
-            get {
-                return this.VcUnitNumField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.VcUnitNumField, value) != true)) {
-                    this.VcUnitNumField = value;
-                    this.RaisePropertyChanged("VcUnitNum");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MeterReplaceInfo", Namespace="http://schemas.datacontract.org/2004/07/DbServer.DTO")]
     [System.SerializableAttribute()]
     public partial class MeterReplaceInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -2699,6 +2362,345 @@ namespace NB_WaterFee.DbServiceReference {
                 if ((object.ReferenceEquals(this.VcUserIDField, value) != true)) {
                     this.VcUserIDField = value;
                     this.RaisePropertyChanged("VcUserID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MeterReplaceQryCondition", Namespace="http://schemas.datacontract.org/2004/07/DbServer.DTO")]
+    [System.SerializableAttribute()]
+    public partial class MeterReplaceQryCondition : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntCustNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntEndNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NvcAddrField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NvcNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NvcVillageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VcBuildingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VcMeterAddrField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VcUnitNumField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntCustNo {
+            get {
+                return this.IntCustNoField;
+            }
+            set {
+                if ((this.IntCustNoField.Equals(value) != true)) {
+                    this.IntCustNoField = value;
+                    this.RaisePropertyChanged("IntCustNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntEndNo {
+            get {
+                return this.IntEndNoField;
+            }
+            set {
+                if ((this.IntEndNoField.Equals(value) != true)) {
+                    this.IntEndNoField = value;
+                    this.RaisePropertyChanged("IntEndNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NvcAddr {
+            get {
+                return this.NvcAddrField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NvcAddrField, value) != true)) {
+                    this.NvcAddrField = value;
+                    this.RaisePropertyChanged("NvcAddr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NvcName {
+            get {
+                return this.NvcNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NvcNameField, value) != true)) {
+                    this.NvcNameField = value;
+                    this.RaisePropertyChanged("NvcName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NvcVillage {
+            get {
+                return this.NvcVillageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NvcVillageField, value) != true)) {
+                    this.NvcVillageField = value;
+                    this.RaisePropertyChanged("NvcVillage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VcBuilding {
+            get {
+                return this.VcBuildingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VcBuildingField, value) != true)) {
+                    this.VcBuildingField = value;
+                    this.RaisePropertyChanged("VcBuilding");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VcMeterAddr {
+            get {
+                return this.VcMeterAddrField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VcMeterAddrField, value) != true)) {
+                    this.VcMeterAddrField = value;
+                    this.RaisePropertyChanged("VcMeterAddr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VcUnitNum {
+            get {
+                return this.VcUnitNumField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VcUnitNumField, value) != true)) {
+                    this.VcUnitNumField = value;
+                    this.RaisePropertyChanged("VcUnitNum");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CommonResult", Namespace="http://schemas.datacontract.org/2004/07/DbServer.Model")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.Concentrator))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.Concentrator[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.Customer))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.Meter))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterReplaceInfo))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceType[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PricePropertyTree[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PricePropertyTree))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceProperty[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceDetail[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.PriceDetail))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.SmsTemplate))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterConfigTree[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterConfigTree))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.MeterConfig))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.ParamEndUser))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.AccCalcQryCondition))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<int, double>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.EasyTreeData[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.EasyTreeData))]
+    public partial class CommonResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMsgField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private object[] LstObjField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StrData1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StrData2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StrData3Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Data.DataTable Tbl1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Data.DataTable Tbl2Field;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMsg {
+            get {
+                return this.ErrorMsgField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMsgField, value) != true)) {
+                    this.ErrorMsgField = value;
+                    this.RaisePropertyChanged("ErrorMsg");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object[] LstObj {
+            get {
+                return this.LstObjField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LstObjField, value) != true)) {
+                    this.LstObjField = value;
+                    this.RaisePropertyChanged("LstObj");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StrData1 {
+            get {
+                return this.StrData1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StrData1Field, value) != true)) {
+                    this.StrData1Field = value;
+                    this.RaisePropertyChanged("StrData1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StrData2 {
+            get {
+                return this.StrData2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StrData2Field, value) != true)) {
+                    this.StrData2Field = value;
+                    this.RaisePropertyChanged("StrData2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StrData3 {
+            get {
+                return this.StrData3Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StrData3Field, value) != true)) {
+                    this.StrData3Field = value;
+                    this.RaisePropertyChanged("StrData3");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Data.DataTable Tbl1 {
+            get {
+                return this.Tbl1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Tbl1Field, value) != true)) {
+                    this.Tbl1Field = value;
+                    this.RaisePropertyChanged("Tbl1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Data.DataTable Tbl2 {
+            get {
+                return this.Tbl2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Tbl2Field, value) != true)) {
+                    this.Tbl2Field = value;
+                    this.RaisePropertyChanged("Tbl2");
                 }
             }
         }
@@ -3341,6 +3343,179 @@ namespace NB_WaterFee.DbServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AccCalcQryCondition", Namespace="http://schemas.datacontract.org/2004/07/DbServer")]
+    [System.SerializableAttribute()]
+    public partial class AccCalcQryCondition : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DtFeeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntEndCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntFlagField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NvcNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NvcVillageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VcBuildingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VcRoomNumField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VcUnitNumField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DtFee {
+            get {
+                return this.DtFeeField;
+            }
+            set {
+                if ((this.DtFeeField.Equals(value) != true)) {
+                    this.DtFeeField = value;
+                    this.RaisePropertyChanged("DtFee");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntEndCode {
+            get {
+                return this.IntEndCodeField;
+            }
+            set {
+                if ((this.IntEndCodeField.Equals(value) != true)) {
+                    this.IntEndCodeField = value;
+                    this.RaisePropertyChanged("IntEndCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntFlag {
+            get {
+                return this.IntFlagField;
+            }
+            set {
+                if ((this.IntFlagField.Equals(value) != true)) {
+                    this.IntFlagField = value;
+                    this.RaisePropertyChanged("IntFlag");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IntNo {
+            get {
+                return this.IntNoField;
+            }
+            set {
+                if ((this.IntNoField.Equals(value) != true)) {
+                    this.IntNoField = value;
+                    this.RaisePropertyChanged("IntNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NvcName {
+            get {
+                return this.NvcNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NvcNameField, value) != true)) {
+                    this.NvcNameField = value;
+                    this.RaisePropertyChanged("NvcName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NvcVillage {
+            get {
+                return this.NvcVillageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NvcVillageField, value) != true)) {
+                    this.NvcVillageField = value;
+                    this.RaisePropertyChanged("NvcVillage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VcBuilding {
+            get {
+                return this.VcBuildingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VcBuildingField, value) != true)) {
+                    this.VcBuildingField = value;
+                    this.RaisePropertyChanged("VcBuilding");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VcRoomNum {
+            get {
+                return this.VcRoomNumField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VcRoomNumField, value) != true)) {
+                    this.VcRoomNumField = value;
+                    this.RaisePropertyChanged("VcRoomNum");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VcUnitNum {
+            get {
+                return this.VcUnitNumField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VcUnitNumField, value) != true)) {
+                    this.VcUnitNumField = value;
+                    this.RaisePropertyChanged("VcUnitNum");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DbServiceReference.IServiceDb")]
     public interface IServiceDb {
@@ -3405,6 +3580,24 @@ namespace NB_WaterFee.DbServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/ArcCustMeter_Upd", ReplyAction="http://tempuri.org/IServiceDb/ArcCustMeter_UpdResponse")]
         System.Threading.Tasks.Task<string> ArcCustMeter_UpdAsync(NB_WaterFee.DbServiceReference.Customer Cust, NB_WaterFee.DbServiceReference.Meter meter);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/ArcCloseAccount", ReplyAction="http://tempuri.org/IServiceDb/ArcCloseAccountResponse")]
+        string ArcCloseAccount(int iCode, int iCustNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/ArcCloseAccount", ReplyAction="http://tempuri.org/IServiceDb/ArcCloseAccountResponse")]
+        System.Threading.Tasks.Task<string> ArcCloseAccountAsync(int iCode, int iCustNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/ArcMeter_Replace", ReplyAction="http://tempuri.org/IServiceDb/ArcMeter_ReplaceResponse")]
+        string ArcMeter_Replace(NB_WaterFee.DbServiceReference.MeterReplaceInfo MeterReplace);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/ArcMeter_Replace", ReplyAction="http://tempuri.org/IServiceDb/ArcMeter_ReplaceResponse")]
+        System.Threading.Tasks.Task<string> ArcMeter_ReplaceAsync(NB_WaterFee.DbServiceReference.MeterReplaceInfo MeterReplace);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/GetMeterReplaceList", ReplyAction="http://tempuri.org/IServiceDb/GetMeterReplaceListResponse")]
+        System.Data.DataTable GetMeterReplaceList(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition QryCondi);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/GetMeterReplaceList", ReplyAction="http://tempuri.org/IServiceDb/GetMeterReplaceListResponse")]
+        System.Threading.Tasks.Task<System.Data.DataTable> GetMeterReplaceListAsync(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition QryCondi);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/FindMaxIntMPByIntConID", ReplyAction="http://tempuri.org/IServiceDb/FindMaxIntMPByIntConIDResponse")]
         NB_WaterFee.DbServiceReference.CommonResult FindMaxIntMPByIntConID(int IntConID);
         
@@ -3434,24 +3627,6 @@ namespace NB_WaterFee.DbServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/GetDictMeterReplaceType", ReplyAction="http://tempuri.org/IServiceDb/GetDictMeterReplaceTypeResponse")]
         System.Threading.Tasks.Task<System.Data.DataTable> GetDictMeterReplaceTypeAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/GetMeterReplaceList", ReplyAction="http://tempuri.org/IServiceDb/GetMeterReplaceListResponse")]
-        System.Data.DataTable GetMeterReplaceList(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition QryCondi);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/GetMeterReplaceList", ReplyAction="http://tempuri.org/IServiceDb/GetMeterReplaceListResponse")]
-        System.Threading.Tasks.Task<System.Data.DataTable> GetMeterReplaceListAsync(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition QryCondi);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/ArcMeter_Replace", ReplyAction="http://tempuri.org/IServiceDb/ArcMeter_ReplaceResponse")]
-        string ArcMeter_Replace(NB_WaterFee.DbServiceReference.MeterReplaceInfo MeterReplace);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/ArcMeter_Replace", ReplyAction="http://tempuri.org/IServiceDb/ArcMeter_ReplaceResponse")]
-        System.Threading.Tasks.Task<string> ArcMeter_ReplaceAsync(NB_WaterFee.DbServiceReference.MeterReplaceInfo MeterReplace);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/ArcCloseAccount", ReplyAction="http://tempuri.org/IServiceDb/ArcCloseAccountResponse")]
-        string ArcCloseAccount(int iCode, int iCustNo);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/ArcCloseAccount", ReplyAction="http://tempuri.org/IServiceDb/ArcCloseAccountResponse")]
-        System.Threading.Tasks.Task<string> ArcCloseAccountAsync(int iCode, int iCustNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/PriceType_Qry", ReplyAction="http://tempuri.org/IServiceDb/PriceType_QryResponse")]
         System.Data.DataTable PriceType_Qry(int iCode);
@@ -3572,6 +3747,18 @@ namespace NB_WaterFee.DbServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Account_GetPaymentDetail", ReplyAction="http://tempuri.org/IServiceDb/Account_GetPaymentDetailResponse")]
         System.Threading.Tasks.Task<System.Data.DataTable> Account_GetPaymentDetailAsync(int iCode, int iFeeID, System.DateTime DtStart, System.DateTime DtEnd, NB_WaterFee.DbServiceReference.Customer Cust);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Account_CalcFee_Qry", ReplyAction="http://tempuri.org/IServiceDb/Account_CalcFee_QryResponse")]
+        System.Data.DataTable Account_CalcFee_Qry(NB_WaterFee.DbServiceReference.AccCalcQryCondition Condi);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Account_CalcFee_Qry", ReplyAction="http://tempuri.org/IServiceDb/Account_CalcFee_QryResponse")]
+        System.Threading.Tasks.Task<System.Data.DataTable> Account_CalcFee_QryAsync(NB_WaterFee.DbServiceReference.AccCalcQryCondition Condi);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Account_CalcFee_Calc", ReplyAction="http://tempuri.org/IServiceDb/Account_CalcFee_CalcResponse")]
+        string Account_CalcFee_Calc(int iCode, int iUserID, System.DateTime DtFee, string[] LstMeterAddr);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Account_CalcFee_Calc", ReplyAction="http://tempuri.org/IServiceDb/Account_CalcFee_CalcResponse")]
+        System.Threading.Tasks.Task<string> Account_CalcFee_CalcAsync(int iCode, int iUserID, System.DateTime DtFee, string[] LstMeterAddr);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/StatDepositData", ReplyAction="http://tempuri.org/IServiceDb/StatDepositDataResponse")]
         NB_WaterFee.DbServiceReference.CommonResult StatDepositData(int iCode, int iParamMode, string sParamValue, int iStatMode, System.DateTime DteBegin, System.DateTime DteEnd);
@@ -3765,6 +3952,30 @@ namespace NB_WaterFee.DbServiceReference {
             return base.Channel.ArcCustMeter_UpdAsync(Cust, meter);
         }
         
+        public string ArcCloseAccount(int iCode, int iCustNo) {
+            return base.Channel.ArcCloseAccount(iCode, iCustNo);
+        }
+        
+        public System.Threading.Tasks.Task<string> ArcCloseAccountAsync(int iCode, int iCustNo) {
+            return base.Channel.ArcCloseAccountAsync(iCode, iCustNo);
+        }
+        
+        public string ArcMeter_Replace(NB_WaterFee.DbServiceReference.MeterReplaceInfo MeterReplace) {
+            return base.Channel.ArcMeter_Replace(MeterReplace);
+        }
+        
+        public System.Threading.Tasks.Task<string> ArcMeter_ReplaceAsync(NB_WaterFee.DbServiceReference.MeterReplaceInfo MeterReplace) {
+            return base.Channel.ArcMeter_ReplaceAsync(MeterReplace);
+        }
+        
+        public System.Data.DataTable GetMeterReplaceList(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition QryCondi) {
+            return base.Channel.GetMeterReplaceList(QryCondi);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataTable> GetMeterReplaceListAsync(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition QryCondi) {
+            return base.Channel.GetMeterReplaceListAsync(QryCondi);
+        }
+        
         public NB_WaterFee.DbServiceReference.CommonResult FindMaxIntMPByIntConID(int IntConID) {
             return base.Channel.FindMaxIntMPByIntConID(IntConID);
         }
@@ -3803,30 +4014,6 @@ namespace NB_WaterFee.DbServiceReference {
         
         public System.Threading.Tasks.Task<System.Data.DataTable> GetDictMeterReplaceTypeAsync() {
             return base.Channel.GetDictMeterReplaceTypeAsync();
-        }
-        
-        public System.Data.DataTable GetMeterReplaceList(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition QryCondi) {
-            return base.Channel.GetMeterReplaceList(QryCondi);
-        }
-        
-        public System.Threading.Tasks.Task<System.Data.DataTable> GetMeterReplaceListAsync(NB_WaterFee.DbServiceReference.MeterReplaceQryCondition QryCondi) {
-            return base.Channel.GetMeterReplaceListAsync(QryCondi);
-        }
-        
-        public string ArcMeter_Replace(NB_WaterFee.DbServiceReference.MeterReplaceInfo MeterReplace) {
-            return base.Channel.ArcMeter_Replace(MeterReplace);
-        }
-        
-        public System.Threading.Tasks.Task<string> ArcMeter_ReplaceAsync(NB_WaterFee.DbServiceReference.MeterReplaceInfo MeterReplace) {
-            return base.Channel.ArcMeter_ReplaceAsync(MeterReplace);
-        }
-        
-        public string ArcCloseAccount(int iCode, int iCustNo) {
-            return base.Channel.ArcCloseAccount(iCode, iCustNo);
-        }
-        
-        public System.Threading.Tasks.Task<string> ArcCloseAccountAsync(int iCode, int iCustNo) {
-            return base.Channel.ArcCloseAccountAsync(iCode, iCustNo);
         }
         
         public System.Data.DataTable PriceType_Qry(int iCode) {
@@ -3987,6 +4174,22 @@ namespace NB_WaterFee.DbServiceReference {
         
         public System.Threading.Tasks.Task<System.Data.DataTable> Account_GetPaymentDetailAsync(int iCode, int iFeeID, System.DateTime DtStart, System.DateTime DtEnd, NB_WaterFee.DbServiceReference.Customer Cust) {
             return base.Channel.Account_GetPaymentDetailAsync(iCode, iFeeID, DtStart, DtEnd, Cust);
+        }
+        
+        public System.Data.DataTable Account_CalcFee_Qry(NB_WaterFee.DbServiceReference.AccCalcQryCondition Condi) {
+            return base.Channel.Account_CalcFee_Qry(Condi);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataTable> Account_CalcFee_QryAsync(NB_WaterFee.DbServiceReference.AccCalcQryCondition Condi) {
+            return base.Channel.Account_CalcFee_QryAsync(Condi);
+        }
+        
+        public string Account_CalcFee_Calc(int iCode, int iUserID, System.DateTime DtFee, string[] LstMeterAddr) {
+            return base.Channel.Account_CalcFee_Calc(iCode, iUserID, DtFee, LstMeterAddr);
+        }
+        
+        public System.Threading.Tasks.Task<string> Account_CalcFee_CalcAsync(int iCode, int iUserID, System.DateTime DtFee, string[] LstMeterAddr) {
+            return base.Channel.Account_CalcFee_CalcAsync(iCode, iUserID, DtFee, LstMeterAddr);
         }
         
         public NB_WaterFee.DbServiceReference.CommonResult StatDepositData(int iCode, int iParamMode, string sParamValue, int iStatMode, System.DateTime DteBegin, System.DateTime DteEnd) {

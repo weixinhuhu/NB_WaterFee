@@ -22,7 +22,7 @@ namespace WHC.NB_WaterFee.Controllers
                 VcMobile = Request["WHC_VcMobile"] ?? ""
             };
             var useno = Request["Key"] ?? "0";
-            custormerinfo.IntNo = useno.Equals("") ? 0 : useno.ToInt();
+            custormerinfo.IntNo = useno.ToIntOrZero();
 
             if (Strlevel == "1")
             {

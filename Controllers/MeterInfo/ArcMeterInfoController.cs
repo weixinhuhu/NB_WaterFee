@@ -51,7 +51,7 @@ namespace WHC.NB_WaterFee.Controllers
             {
                 NvcName = Request["WHC_NvcName"] ?? "",
                 NvcAddr = Request["WHC_NvcAddr"] ?? "",
-                IntCustNo = (Request["IntCustNO"] ?? "0").ToString().ToInt(),
+                IntCustNo = (Request["IntCustNO"] ?? "0").ToString().ToIntOrZero(),
                 VcMeterAddr = Request["WHC_VcAddr"] ?? ""
             };
 
@@ -74,7 +74,9 @@ namespace WHC.NB_WaterFee.Controllers
                 QryCondi.VcBuilding = fuji;
                 QryCondi.VcUnitNum = Text;
             }
-            //调用后台服务获取集中器信息          
+
+            QryCondi.IntEndNo = endcode;
+                  
             var dts = new ServiceDbClient().GetMeterReplaceList(QryCondi);
 
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
@@ -111,7 +113,7 @@ namespace WHC.NB_WaterFee.Controllers
                 VcMobile = Request["WHC_VcMobile"] ?? ""
             };
             var useno = Request["WHC_IntNo"] ?? "0";
-            custormerinfo.IntNo = useno.Equals("") ? 0 : useno.ToInt();
+            custormerinfo.IntNo = useno.ToIntOrZero();
 
             if (Strlevel == "1")
             {
@@ -262,7 +264,7 @@ namespace WHC.NB_WaterFee.Controllers
         public ActionResult SettingMeterInfo_Server(String sAddr, String sMeterInfoTypeNo)
         {
             CommonResult result = new CommonResult();
-            var meterSettingtypeno = sMeterInfoTypeNo.ToInt();
+            var meterSettingtypeno = sMeterInfoTypeNo.ToIntOrZero();
             try
             {
                 var rs = new ServiceDbClient().Terminal_SetMeterConfig(endcode, sAddr, meterSettingtypeno);

@@ -31,7 +31,7 @@ namespace NB_WaterFee.Controllers.CustomerInfo
                 NvcAddr = Request["WHC_NvcAddr"] ?? "",
                 VcMobile = Request["WHC_VcMobile"] ?? ""
             };
-            custormerinfo.IntNo = (Request["WHC_IntNo"] ?? "0").ToString().ToInt();
+            custormerinfo.IntNo = (Request["WHC_IntNo"] ?? "0").ToString().ToIntOrZero();
 
             if (Strlevel == "1")
             {
@@ -102,8 +102,8 @@ namespace NB_WaterFee.Controllers.CustomerInfo
                 MeterInfo.IntCustNO = CustomerInfo.IntNo;
                 CustomerInfo.VcAddrCode = "";
                 CustomerInfo.VcNameCode = "";    
-                CustomerInfo.IntEndCode = endcode.ToString().ToInt();
-                MeterInfo.IntEndCode = endcode.ToString().ToInt();
+                CustomerInfo.IntEndCode = endcode.ToString().ToIntOrZero();
+                MeterInfo.IntEndCode = endcode.ToString().ToIntOrZero();
                 CustomerInfo.VcWechatNo = "";
                 var flg = new ServiceDbClient().ArcCustMeter_Ins(CustomerInfo, MeterInfo);
                 if (flg == "0")

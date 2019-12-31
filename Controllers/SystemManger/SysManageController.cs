@@ -30,7 +30,7 @@ namespace NB_WaterFee.Controllers.SystemManger
                 Parm.IntPayMode = payMode;
                 Parm.IntBalanceDay = balanceDay;
                 Parm.IntSwitchMode = AutoSwitch;
-                Parm.IntRegionCode = AreaCode.ToInt();
+                Parm.IntRegionCode = AreaCode.ToIntOrZero();
                 Parm.IntLstUpdID =userid;
                 Parm.IntCreateID = userid;
                 Parm.DtLstUpd = DateTime.Now;

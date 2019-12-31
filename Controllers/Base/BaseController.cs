@@ -26,8 +26,8 @@ namespace WHC.NB_WaterFee.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            endcode = (Session["EndCode"] ?? "0").ToString().ToInt();
-            userid = (Session["UserID"] ?? "0").ToString().ToInt();
+            endcode = (Session["EndCode"] ?? "0").ToString().ToIntOrZero();
+            userid = (Session["UserID"] ?? "0").ToString().ToIntOrZero();
             username= (Session["FullName"]??"").ToString();
             if (Session["FullName"] == null)
             {

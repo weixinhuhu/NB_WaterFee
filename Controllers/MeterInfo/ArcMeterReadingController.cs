@@ -55,7 +55,7 @@ namespace WHC.NB_WaterFee.Controllers
                 VcMobile = Request["WHC_VcMobile"] ?? "",
             };
             var custno = Request["WHC_IntCustNo"] ?? "0";
-            customerinfo.IntNo = custno == "" ? 0 : custno.ToInt();
+            customerinfo.IntNo = custno.ToIntOrZero();
 
             if (Strlevel == "1")
             {
@@ -112,7 +112,7 @@ namespace WHC.NB_WaterFee.Controllers
                 VcMobile = Request["WHC_VcMobile"] ?? "",
             };
             var custno = Request["WHC_IntCustNo"] ?? "0";
-            customerinfo.IntNo = custno == "" ? 0 : custno.ToInt();
+            customerinfo.IntNo = custno.ToIntOrZero();
 
             if (Strlevel == "1")
             {
@@ -169,7 +169,7 @@ namespace WHC.NB_WaterFee.Controllers
                 VcMobile = Request["WHC_VcMobile"] ?? "",
             };
             var custno = Request["WHC_IntCustNo"] ?? "0";
-            customerinfo.IntNo = custno == "" ? 0 : custno.ToInt();
+            customerinfo.IntNo = custno.ToIntOrZero();
 
             if (Strlevel == "1")
             {
@@ -216,7 +216,7 @@ namespace WHC.NB_WaterFee.Controllers
             var VcAddr = Request["VcAddr"];
             var DteFreeze = Request["DteFreeze"].ToDateTime();
             var NumReading = Request["NumReading"].ToDouble();
-            var rs = new ServiceDbClient().CollectData_Ins(endcode, IntCustNo.ToInt(), VcAddr, DteFreeze, NumReading, userid.ToString());
+            var rs = new ServiceDbClient().CollectData_Ins(endcode, IntCustNo.ToIntOrZero(), VcAddr, DteFreeze, NumReading, userid.ToString());
             if (rs == "0")
             {
                 result.IsSuccess = true;

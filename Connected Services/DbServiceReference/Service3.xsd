@@ -2,6 +2,8 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DbServer.DTO" />
   <xs:import schemaLocation="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/DbServer.Model" />
+  <xs:import schemaLocation="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/DbServer" />
+  <xs:import schemaLocation="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="SayHello">
     <xs:complexType>
       <xs:sequence>
@@ -168,6 +170,61 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ArcCloseAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="iCode" type="xs:int" />
+        <xs:element minOccurs="0" name="iCustNo" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ArcCloseAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ArcCloseAccountResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ArcMeter_Replace">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="MeterReplace" nillable="true" type="q11:MeterReplaceInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ArcMeter_ReplaceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ArcMeter_ReplaceResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeterReplaceList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="QryCondi" nillable="true" type="q12:MeterReplaceQryCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeterReplaceListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetMeterReplaceListResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="FindMaxIntMPByIntConID">
     <xs:complexType>
       <xs:sequence>
@@ -178,7 +235,7 @@
   <xs:element name="FindMaxIntMPByIntConIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="FindMaxIntMPByIntConIDResult" nillable="true" type="q11:CommonResult" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="FindMaxIntMPByIntConIDResult" nillable="true" type="q13:CommonResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -192,7 +249,7 @@
   <xs:element name="FindByIntCustNoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="FindByIntCustNoResult" nillable="true" type="q12:CommonResult" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="FindByIntCustNoResult" nillable="true" type="q14:CommonResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -265,61 +322,6 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMeterReplaceList">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="QryCondi" nillable="true" type="q13:MeterReplaceQryCondition" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMeterReplaceListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="GetMeterReplaceListResult" nillable="true">
-          <xs:complexType>
-            <xs:annotation>
-              <xs:appinfo>
-                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
-              </xs:appinfo>
-            </xs:annotation>
-            <xs:sequence>
-              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ArcMeter_Replace">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="MeterReplace" nillable="true" type="q14:MeterReplaceInfo" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ArcMeter_ReplaceResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="ArcMeter_ReplaceResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ArcCloseAccount">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="iCode" type="xs:int" />
-        <xs:element minOccurs="0" name="iCustNo" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ArcCloseAccountResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="ArcCloseAccountResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -756,6 +758,49 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Account_CalcFee_Qry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/DbServer" minOccurs="0" name="Condi" nillable="true" type="q29:AccCalcQryCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Account_CalcFee_QryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Account_CalcFee_QryResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Account_CalcFee_Calc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="iCode" type="xs:int" />
+        <xs:element minOccurs="0" name="iUserID" type="xs:int" />
+        <xs:element minOccurs="0" name="DtFee" type="xs:dateTime" />
+        <xs:element xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="LstMeterAddr" nillable="true" type="q30:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Account_CalcFee_CalcResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Account_CalcFee_CalcResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="StatDepositData">
     <xs:complexType>
       <xs:sequence>
@@ -771,7 +816,7 @@
   <xs:element name="StatDepositDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="StatDepositDataResult" nillable="true" type="q29:CommonResult" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="StatDepositDataResult" nillable="true" type="q31:CommonResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -789,7 +834,7 @@
   <xs:element name="StatUsedWaterDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="StatUsedWaterDataResult" nillable="true" type="q30:CommonResult" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="StatUsedWaterDataResult" nillable="true" type="q32:CommonResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -805,7 +850,7 @@
   <xs:element name="StatClientArcDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="StatClientArcDataResult" nillable="true" type="q31:CommonResult" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="StatClientArcDataResult" nillable="true" type="q33:CommonResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -813,7 +858,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="iCode" type="xs:int" />
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Cust" nillable="true" type="q32:Customer" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Cust" nillable="true" type="q34:Customer" />
         <xs:element minOccurs="0" name="DteStart" type="xs:dateTime" />
         <xs:element minOccurs="0" name="DteEnd" type="xs:dateTime" />
       </xs:sequence>
@@ -842,7 +887,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="iCode" type="xs:int" />
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Cust" nillable="true" type="q33:Customer" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Cust" nillable="true" type="q35:Customer" />
         <xs:element minOccurs="0" name="DteStart" type="xs:dateTime" />
         <xs:element minOccurs="0" name="DteEnd" type="xs:dateTime" />
       </xs:sequence>
@@ -906,8 +951,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="iCode" type="xs:int" />
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Cust" nillable="true" type="q34:Customer" />
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="meter" nillable="true" type="q35:Meter" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Cust" nillable="true" type="q36:Customer" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="meter" nillable="true" type="q37:Meter" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -944,7 +989,7 @@
   <xs:element name="Terminal_GetValveTaskResultResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="Terminal_GetValveTaskResultResult" nillable="true" type="q36:CommonResult" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="Terminal_GetValveTaskResultResult" nillable="true" type="q38:CommonResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -958,7 +1003,7 @@
   <xs:element name="Param_MeterConfig_GetTreeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Param_MeterConfig_GetTreeResult" nillable="true" type="q37:ArrayOfMeterConfigTree" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Param_MeterConfig_GetTreeResult" nillable="true" type="q39:ArrayOfMeterConfigTree" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -991,7 +1036,7 @@
   <xs:element name="Param_MeterConfig_Opr">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="MeterConf" nillable="true" type="q38:MeterConfig" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="MeterConf" nillable="true" type="q40:MeterConfig" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1012,14 +1057,14 @@
   <xs:element name="Param_EndUser_QryResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="Param_EndUser_QryResult" nillable="true" type="q39:CommonResult" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="Param_EndUser_QryResult" nillable="true" type="q41:CommonResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Param_EndUser_Opr">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Param" nillable="true" type="q40:ParamEndUser" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/DbServer.DTO" minOccurs="0" name="Param" nillable="true" type="q42:ParamEndUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

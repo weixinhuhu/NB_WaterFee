@@ -8,6 +8,7 @@
       <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
       <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/DbServer.Model" />
       <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/DbServer" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceDb_SayHello_InputMessage">
@@ -70,6 +71,24 @@
   <wsdl:message name="IServiceDb_ArcCustMeter_Upd_OutputMessage">
     <wsdl:part name="parameters" element="tns:ArcCustMeter_UpdResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceDb_ArcCloseAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:ArcCloseAccount" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_ArcCloseAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ArcCloseAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_ArcMeter_Replace_InputMessage">
+    <wsdl:part name="parameters" element="tns:ArcMeter_Replace" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_ArcMeter_Replace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ArcMeter_ReplaceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_GetMeterReplaceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeterReplaceList" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_GetMeterReplaceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeterReplaceListResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceDb_FindMaxIntMPByIntConID_InputMessage">
     <wsdl:part name="parameters" element="tns:FindMaxIntMPByIntConID" />
   </wsdl:message>
@@ -99,24 +118,6 @@
   </wsdl:message>
   <wsdl:message name="IServiceDb_GetDictMeterReplaceType_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDictMeterReplaceTypeResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServiceDb_GetMeterReplaceList_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetMeterReplaceList" />
-  </wsdl:message>
-  <wsdl:message name="IServiceDb_GetMeterReplaceList_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetMeterReplaceListResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServiceDb_ArcMeter_Replace_InputMessage">
-    <wsdl:part name="parameters" element="tns:ArcMeter_Replace" />
-  </wsdl:message>
-  <wsdl:message name="IServiceDb_ArcMeter_Replace_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ArcMeter_ReplaceResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServiceDb_ArcCloseAccount_InputMessage">
-    <wsdl:part name="parameters" element="tns:ArcCloseAccount" />
-  </wsdl:message>
-  <wsdl:message name="IServiceDb_ArcCloseAccount_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ArcCloseAccountResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceDb_PriceType_Qry_InputMessage">
     <wsdl:part name="parameters" element="tns:PriceType_Qry" />
@@ -237,6 +238,18 @@
   </wsdl:message>
   <wsdl:message name="IServiceDb_Account_GetPaymentDetail_OutputMessage">
     <wsdl:part name="parameters" element="tns:Account_GetPaymentDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_Account_CalcFee_Qry_InputMessage">
+    <wsdl:part name="parameters" element="tns:Account_CalcFee_Qry" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_Account_CalcFee_Qry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Account_CalcFee_QryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_Account_CalcFee_Calc_InputMessage">
+    <wsdl:part name="parameters" element="tns:Account_CalcFee_Calc" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_Account_CalcFee_Calc_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Account_CalcFee_CalcResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceDb_StatDepositData_InputMessage">
     <wsdl:part name="parameters" element="tns:StatDepositData" />
@@ -363,6 +376,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/ArcCustMeter_Upd" message="tns:IServiceDb_ArcCustMeter_Upd_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/ArcCustMeter_UpdResponse" message="tns:IServiceDb_ArcCustMeter_Upd_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ArcCloseAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/ArcCloseAccount" message="tns:IServiceDb_ArcCloseAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/ArcCloseAccountResponse" message="tns:IServiceDb_ArcCloseAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ArcMeter_Replace">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/ArcMeter_Replace" message="tns:IServiceDb_ArcMeter_Replace_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/ArcMeter_ReplaceResponse" message="tns:IServiceDb_ArcMeter_Replace_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeterReplaceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/GetMeterReplaceList" message="tns:IServiceDb_GetMeterReplaceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/GetMeterReplaceListResponse" message="tns:IServiceDb_GetMeterReplaceList_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="FindMaxIntMPByIntConID">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/FindMaxIntMPByIntConID" message="tns:IServiceDb_FindMaxIntMPByIntConID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/FindMaxIntMPByIntConIDResponse" message="tns:IServiceDb_FindMaxIntMPByIntConID_OutputMessage" />
@@ -382,18 +407,6 @@
     <wsdl:operation name="GetDictMeterReplaceType">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/GetDictMeterReplaceType" message="tns:IServiceDb_GetDictMeterReplaceType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/GetDictMeterReplaceTypeResponse" message="tns:IServiceDb_GetDictMeterReplaceType_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetMeterReplaceList">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/GetMeterReplaceList" message="tns:IServiceDb_GetMeterReplaceList_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/GetMeterReplaceListResponse" message="tns:IServiceDb_GetMeterReplaceList_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ArcMeter_Replace">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/ArcMeter_Replace" message="tns:IServiceDb_ArcMeter_Replace_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/ArcMeter_ReplaceResponse" message="tns:IServiceDb_ArcMeter_Replace_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ArcCloseAccount">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/ArcCloseAccount" message="tns:IServiceDb_ArcCloseAccount_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/ArcCloseAccountResponse" message="tns:IServiceDb_ArcCloseAccount_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PriceType_Qry">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/PriceType_Qry" message="tns:IServiceDb_PriceType_Qry_InputMessage" />
@@ -474,6 +487,14 @@
     <wsdl:operation name="Account_GetPaymentDetail">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/Account_GetPaymentDetail" message="tns:IServiceDb_Account_GetPaymentDetail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/Account_GetPaymentDetailResponse" message="tns:IServiceDb_Account_GetPaymentDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Account_CalcFee_Qry">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/Account_CalcFee_Qry" message="tns:IServiceDb_Account_CalcFee_Qry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/Account_CalcFee_QryResponse" message="tns:IServiceDb_Account_CalcFee_Qry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Account_CalcFee_Calc">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/Account_CalcFee_Calc" message="tns:IServiceDb_Account_CalcFee_Calc_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/Account_CalcFee_CalcResponse" message="tns:IServiceDb_Account_CalcFee_Calc_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="StatDepositData">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/StatDepositData" message="tns:IServiceDb_StatDepositData_InputMessage" />
@@ -624,6 +645,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ArcCloseAccount">
+      <soap:operation soapAction="http://tempuri.org/IServiceDb/ArcCloseAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArcMeter_Replace">
+      <soap:operation soapAction="http://tempuri.org/IServiceDb/ArcMeter_Replace" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeterReplaceList">
+      <soap:operation soapAction="http://tempuri.org/IServiceDb/GetMeterReplaceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="FindMaxIntMPByIntConID">
       <soap:operation soapAction="http://tempuri.org/IServiceDb/FindMaxIntMPByIntConID" style="document" />
       <wsdl:input>
@@ -662,33 +710,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetDictMeterReplaceType">
       <soap:operation soapAction="http://tempuri.org/IServiceDb/GetDictMeterReplaceType" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetMeterReplaceList">
-      <soap:operation soapAction="http://tempuri.org/IServiceDb/GetMeterReplaceList" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ArcMeter_Replace">
-      <soap:operation soapAction="http://tempuri.org/IServiceDb/ArcMeter_Replace" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ArcCloseAccount">
-      <soap:operation soapAction="http://tempuri.org/IServiceDb/ArcCloseAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -869,6 +890,24 @@
     </wsdl:operation>
     <wsdl:operation name="Account_GetPaymentDetail">
       <soap:operation soapAction="http://tempuri.org/IServiceDb/Account_GetPaymentDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Account_CalcFee_Qry">
+      <soap:operation soapAction="http://tempuri.org/IServiceDb/Account_CalcFee_Qry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Account_CalcFee_Calc">
+      <soap:operation soapAction="http://tempuri.org/IServiceDb/Account_CalcFee_Calc" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

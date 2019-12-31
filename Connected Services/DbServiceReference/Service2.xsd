@@ -96,19 +96,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Meter" nillable="true" type="tns:Meter" />
-  <xs:complexType name="MeterReplaceQryCondition">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="IntCustNo" type="xs:int" />
-      <xs:element minOccurs="0" name="IntEndNo" type="xs:int" />
-      <xs:element minOccurs="0" name="NvcAddr" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NvcName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NvcVillage" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="VcBuilding" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="VcMeterAddr" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="VcUnitNum" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="MeterReplaceQryCondition" nillable="true" type="tns:MeterReplaceQryCondition" />
   <xs:complexType name="MeterReplaceInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="DtReplace" type="xs:dateTime" />
@@ -138,6 +125,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MeterReplaceInfo" nillable="true" type="tns:MeterReplaceInfo" />
+  <xs:complexType name="MeterReplaceQryCondition">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IntCustNo" type="xs:int" />
+      <xs:element minOccurs="0" name="IntEndNo" type="xs:int" />
+      <xs:element minOccurs="0" name="NvcAddr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NvcName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NvcVillage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VcBuilding" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VcMeterAddr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VcUnitNum" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MeterReplaceQryCondition" nillable="true" type="tns:MeterReplaceQryCondition" />
   <xs:complexType name="PriceType">
     <xs:sequence>
       <xs:element minOccurs="0" name="DtCreate" type="xs:dateTime" />

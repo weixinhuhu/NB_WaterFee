@@ -49,7 +49,7 @@ namespace WHC.WaterFeeWeb.Controllers
    
         public ActionResult GetInfoByIntPropertyNo_Server()
         {
-            var IntPropertyNo = Request["IntPropertyNo"].ToInt();
+            var IntPropertyNo = Request["IntPropertyNo"].ToIntOrZero();
             var dt =new ServiceDbClient().PriceProperty_GetByNo(IntPropertyNo);
             return ToJsonContentDate(dt);
         }
@@ -59,7 +59,7 @@ namespace WHC.WaterFeeWeb.Controllers
             CommonResult result = new CommonResult();
             //价格明细
             var lstPrice = new List<PriceDetail>();
-            var stepCount = Request["IntStepCount"].ToInt();
+            var stepCount = Request["IntStepCount"].ToIntOrZero();
             //阶梯,如果是则是页面的阶梯数,不是则为1
             stepCount = info.IntStep == 1 ? stepCount : 1;
             for (int i = 1; i <= stepCount; i++)
@@ -80,7 +80,7 @@ namespace WHC.WaterFeeWeb.Controllers
                 var arrTypeNo = Request["ArrTypeNo"].Split(',');
                 foreach (var intTypeNo in arrTypeNo)
                 {
-                    price_info.Add(intTypeNo.ToInt(), (double)Request["NumPrice" + i + "_" + intTypeNo].ToDecimalOrZero());
+                    price_info.Add(intTypeNo.ToIntOrZero(), (double)Request["NumPrice" + i + "_" + intTypeNo].ToDecimalOrZero());
                 }
                 price_detail_info.Price = price_info;
                 lstPrice.Add(price_detail_info);

@@ -28,6 +28,7 @@
     <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="5ed97309-85c8-4704-8143-1259002fb48c" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd2" />
     <MetadataFile FileName="ServiceDb.wsdl" MetadataType="Wsdl" ID="de788f93-8616-4229-88ad-eacbe9050a42" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/Service.svc?wsdl" />
     <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="a8fee5d4-f49d-4ed2-bf71-edc5398201a0" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service6.xsd" MetadataType="Schema" ID="896ee159-4efe-4207-b09e-dd993e83bc77" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd6" />
     <MetadataFile FileName="Service4.xsd" MetadataType="Schema" ID="558c549d-24e4-44e8-942d-fd239286808f" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd5" />
     <MetadataFile FileName="Service5.xsd" MetadataType="Schema" ID="ea62ff54-50a6-4586-8685-554679dbcbec" SourceId="1" SourceUrl="http://118.190.199.54:9009/DbServer/Service.svc?xsd=xsd4" />
   </Metadata>

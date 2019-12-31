@@ -12,7 +12,7 @@ namespace WHC.NB_WaterFee.Controllers
         {         
             var custno = Request["WHC_IntCustNo"] ?? "0";
             ServiceDbClient DbServer = new ServiceDbClient();
-            var dts = DbServer.Account_GetDepositDetailByCustNo(endcode, custno.ToInt());
+            var dts = DbServer.Account_GetDepositDetailByCustNo(endcode, custno.ToIntOrZero());
 
             //分页参数
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
