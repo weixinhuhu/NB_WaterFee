@@ -18,53 +18,29 @@
         var sNvcVillage = "";
         var sVcBuilding = "";
         $(function () {
-            initDeptTreeview();
-            InitGrid();
-        });
-
-        function initDeptTreeview() {
-            $("#loading").show();
-            $('#treeDept1').tree({
-                url: '/ArcCustomerInfo/TreeCommunity_Server',
-                 //添加图标
-                loadFilter: function (data, parent) {
-                    for (var i = 0; i < data.length; i++) {
-                        getLevel(data[i], 0);
-                    }
-                    return data;
-                },
-                onBeforeSelect: function (node) {
-                    fujiText = node.text;
-                },
-                onClick: function (node) {
-
-                    var Text = $("#treeDept1").tree("getParent", node.target);
-
-                    var Treelevel = easyui_tree_options.getLevel(this, node);
-
-                    var ParentText = "";
-
-                    if (Treelevel == 4) {
-
-                        ParentText = $("#treeDept1").tree("getParent", Text.target)
-
-                    }
-                    var queryData = {
-                        WHC_VcMobile: $("#VcMobile").val(),
-                        WHC_NvcName: $("#NvcName").val(),
-                        WHC_IntCustNo: $("#IntCustNo").val(),
-                        WHC_StratDteFreeze: $("#StartDteFreeze").datebox("getValue"),
-                        WHC_EndDteFreeze: $("#EndDteFreeze").datebox("getValue"),
-                        WHC_Fuji: Text.text,
-                        WHC_Text: node.text,
-                        WHC_Treelevel: Treelevel.toString(),
-                        WHC_TreePrentText: ParentText.text
-                    };
-                    InitGrid(queryData);
+            $(document).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnSearch").click();
+                    return;
                 }
             });
-            $("#loading").fadeOut(500);
-        }
+
+            $("#StartDteFreeze").datebox('setValue', getYestoday(new Date()));
+            var queryData = {
+                WHC_VcMobile: $("#VcMobile").val(),
+                WHC_NvcName: $("#NvcName").val(),
+                WHC_IntCustNo: $("#IntCustNo").val(),
+                WHC_StratDteFreeze: $("#StartDteFreeze").datebox("getValue"),
+                WHC_EndDteFreeze: $("#EndDteFreeze").datebox("getValue"),
+            };
+            InitGrid(queryData);
+
+            //绑定查询按钮事件
+            BindSearchEvent();
+            //初始化导航树
+            initDeptTreeview("treeDept1");
+
+        });
 
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
@@ -93,7 +69,7 @@
                     {
                         title: '冻结日期', field: 'DteFreeze', width: 120, sortable: true,
                         formatter: function (val, rowObj, index) {
-                           return val == "9999-09-09 00:00:00" ? "-" : val.substring(0, 10);
+                            return val == "9999-09-09 00:00:00" ? "-" : val.substring(0, 10);
                         }
                     },
                     { title: '读数', field: 'NumReading', width: 80, sortable: true },
@@ -129,16 +105,51 @@
         };
 
         //绑定搜索按钮的的点击事件
-        function SearchEvent() {
-            var queryData = {
-                WHC_VcMobile: $("#VcMobile").val(),
-                WHC_NvcName: $("#NvcName").val(),
-                WHC_IntCustNo: $("#IntCustNo").val(),
-                WHC_StratDteFreeze: $("#StartDteFreeze").datebox("getValue"),
-                WHC_EndDteFreeze: $("#EndDteFreeze").datebox("getValue"),
-            };
-            InitGrid(queryData);
-            return false;
+        function BindSearchEvent() {
+            //按条件进行查询数据，首先我们得到数据的值
+            $("#btnSearch").click(function () {
+                //得到用户输入的参数
+                var queryData = {
+                    WHC_VcMobile: $("#VcMobile").val(),
+                    WHC_NvcName: $("#NvcName").val(),
+                    WHC_IntCustNo: $("#IntCustNo").val(),
+                    WHC_StratDteFreeze: $("#StartDteFreeze").datebox("getValue"),
+                    WHC_EndDteFreeze: $("#EndDteFreeze").datebox("getValue"),
+                };
+                InitGrid(queryData);
+                return false;
+            });
+
+            $('#treeDept1').tree({
+                onBeforeSelect: function (node) {
+                    fujiText = node.text;
+                },
+                onClick: function (node) {
+                    var Text = $("#treeDept1").tree("getParent", node.target);
+
+                    var Treelevel = easyui_tree_options.getLevel(this, node);
+
+                    var ParentText = "";
+
+                    if (Treelevel == 4) {
+
+                        ParentText = $("#treeDept1").tree("getParent", Text.target)
+
+                    }
+                    var queryData = {
+                        WHC_VcMobile: $("#VcMobile").val(),
+                        WHC_NvcName: $("#NvcName").val(),
+                        WHC_IntCustNo: $("#IntCustNo").val(),
+                        WHC_StratDteFreeze: $("#StartDteFreeze").datebox("getValue"),
+                        WHC_EndDteFreeze: $("#EndDteFreeze").datebox("getValue"),
+                        WHC_Fuji: Text.text,
+                        WHC_Text: node.text,
+                        WHC_Treelevel: Treelevel.toString(),
+                        WHC_TreePrentText: ParentText.text
+                    };
+                    InitGrid(queryData);
+                }
+            });
         }
     </script>
 
@@ -229,7 +240,7 @@
                                     <input type="text" class="easyui-datebox" id="EndDteFreeze" style="width:100px" value="true" />
                                 </td>
                                 <td style='padding:3px;text-align:right'>
-                                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="btnSearch" onclick="SearchEvent()">查询</a>
+                                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="btnSearch">查询</a>
                                 </td>
                             </tr>
                         </table>

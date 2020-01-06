@@ -15,54 +15,17 @@
 
     <script type="text/javascript">
         $(function () {
-            initDeptTreeview();            
+            $(document).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnSearch").click();
+                    return;
+                }
+            });
+            //初始化导航树
+            initDeptTreeview("treeDept1");
             InitGrid();
             BindSearchEvent();
         });
-
-        function initDeptTreeview() {
-            $("#loading").show();
-            $('#treeDept1').tree({
-                url: '/ArcCustomerInfo/TreeCommunity_Server',
-                 //添加图标
-                loadFilter: function (data, parent) {
-                    for (var i = 0; i < data.length; i++) {
-                        getLevel(data[i], 0);
-                    }
-                    return data;
-                },
-                onBeforeSelect: function (node) {
-                    fujiText = node.text;
-                },
-                onClick: function (node) {
-
-                    var Text = $("#treeDept1").tree("getParent", node.target);
-
-                    var Treelevel = easyui_tree_options.getLevel(this, node);
-
-                    var ParentText = "";
-
-                    if (Treelevel == 4) {
-
-                        ParentText = $("#treeDept1").tree("getParent", Text.target)
-
-                    }
-                    var queryData = {
-                        WHC_VcMobile: $("#VcMobile").val(),
-                        WHC_NvcName: $("#NvcName").val(),
-                        WHC_IntCustNo: $("#IntCustNo").val(),
-                        WHC_StratDteFreeze: $("#StartDteFreeze").datebox("getValue"),
-                        WHC_EndDteFreeze: $("#EndDteFreeze").datebox("getValue"),
-                        WHC_Fuji: Text.text,
-                        WHC_Text: node.text,
-                        WHC_Treelevel: Treelevel.toString(),
-                        WHC_TreePrentText: ParentText.text
-                    };
-                    InitGrid(queryData);
-                }
-            });
-            $("#loading").fadeOut(500);
-        }
 
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
@@ -115,7 +78,7 @@
                 WHC_NvcName: $("#NvcName").val(),
                 WHC_IntCustNo: $("#IntCustNo").val(),
                 WHC_StratDteFreeze: start,
-                WHC_EndDteFreeze:end,
+                WHC_EndDteFreeze: end,
             }
             $.ajax({
                 url: '/ArcMeterReading/CollectStatJsonTotal_Server',
@@ -125,7 +88,7 @@
                 success: function (json) {
                     var data1 = JSON.parse(json.Data1);
                     var data2 = JSON.parse(json.Data2);
-                    var summoney=data2.toFixed(2);
+                    var summoney = data2.toFixed(2);
                     var Newtitle = '用水日期  【' + start + ' 至 ' + end + '】 总用水户 【' + data1 + '】  总用水量  【' + summoney + ' 吨 】';
                     $('#grid').datagrid("getPanel").panel("setTitle", Newtitle)
                 }
@@ -150,6 +113,24 @@
                 //将值传递给
                 InitGrid(queryData);
                 return false;
+            });
+
+            $('#treeDept1').tree({
+                onBeforeSelect: function (node) {
+                    fujiText = node.text;
+                },
+                onClick: function (node) {
+                    var Text = $("#treeDept1").tree("getParent", node.target);
+                    var Treelevel = easyui_tree_options.getLevel(this, node);
+                    var ParentText = "";
+                    if (Treelevel == 4) {
+                        ParentText = $("#treeDept1").tree("getParent", Text.target)
+                    }
+                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
+                    //将值传递给
+                    InitGrid(queryData);
+                    return false;
+                }
             });
         }
     </script>

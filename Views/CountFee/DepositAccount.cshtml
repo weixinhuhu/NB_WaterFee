@@ -72,40 +72,15 @@
                     return;
                 }
             });
-            initDeptTreeview()
+            //初始化导航树
+            initDeptTreeview("treeDept1");
             ForMatterDateBox("attYearMonth");
             var queryData = {
             };//可添加一些预设条件
             InitGrid(queryData);
             BindSearchEvent();
         });
-        function initDeptTreeview() {
-            $("#loading").show();
-            $('#treeDept1').tree({
-                url: '/ArcCustomerInfo/TreeCommunity_Server',
-                //添加图标
-                loadFilter: function (data, parent) {
-                    for (var i = 0; i < data.length; i++) {
-                        getLevel(data[i], 0);
-                    }
-                    return data;
-                },
-                onBeforeSelect: function (node) {
-                    fujiText = node.text;
-                },
-                onClick: function (node) {
-                    var Text = $("#treeDept1").tree("getParent", node.target);
-                    var Treelevel = easyui_tree_options.getLevel(this, node);
-                    var ParentText = "";
-                    if (Treelevel == 4) {
-                        ParentText = $("#treeDept1").tree("getParent", Text.target)
-                    }
-                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
-                    UserInfoGrid(queryData);
-                }
-            });
-            $("#loading").fadeOut(500);
-        }
+     
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
             $('#grid').datagrid({   //定位到Table标签，Table标签的ID是grid
@@ -266,9 +241,6 @@
         }
         //绑定搜索按钮的的点击事件
         function BindSearchEvent() {
-            //$("#txtYearMonth").click(function () {
-            //    WdatePicker({dateFmt:'yyyyMM'})
-            //});
             //按条件进行查询数据，首先我们得到数据的值
             $("#btnSearch").click(function () {
                 //得到用户输入的参数
@@ -278,6 +250,22 @@
                 return false;
             });
             $("#btnDepositAccountBatch").click(depositAccountBatch);
+
+            $('#treeDept1').tree({
+                onBeforeSelect: function (node) {
+                    fujiText = node.text;
+                },
+                onClick: function (node) {
+                    var Text = $("#treeDept1").tree("getParent", node.target);
+                    var Treelevel = easyui_tree_options.getLevel(this, node);
+                    var ParentText = "";
+                    if (Treelevel == 4) {
+                        ParentText = $("#treeDept1").tree("getParent", Text.target)
+                    }
+                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
+                    InitGrid(queryData);
+                }
+            });
 
             $.extend($.fn.validatebox.defaults.rules, {
                 //校验正整数，并计算码洋

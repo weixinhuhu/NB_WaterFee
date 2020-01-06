@@ -18,20 +18,21 @@
         var sNvcVillage = "";
         var sVcBuilding = "";
         $(function () {
-            initDeptTreeview();
+            //初始化导航树
+            initDeptTreeview("treeDept1");
             //初始化Datagrid表格数据
-            var queryData = {};         
+            var queryData = {};
             InitGrid(queryData);
             //价格属性
             InitPriceProperty();
             txtddlPriceProperty();
             //字典类型
-            option();                     
+            option();
             //价格属性事件
             meterIntChannal();
             BindSearchEvent();//绑定查询按钮事件
         });
-          function InitPriceProperty() {
+        function InitPriceProperty() {
             $('#ddlPriceProperty').combobox({
                 url: '/PriceProperty/GetTreeJson_Server',
                 valueField: 'id',
@@ -46,37 +47,6 @@
              });    
         }
            
-        function initDeptTreeview() {
-            $("#loading").show();
-            var queryData = "";
-            //厂家编码
-            var code = 0;
-            $('#treeDept1').tree({
-                url: '/ArcCustomerInfo/TreeCommunity_Server', //添加图标
-                loadFilter: function (data, parent) {
-                    for (var i = 0; i < data.length; i++) {
-                        getLevel(data[i], 0);
-                    }
-                    return data;
-                },
-
-                onBeforeSelect: function (node) {
-                    fujiText = node.text;
-                },
-                onClick: function (node) {
-                    var Text = $("#treeDept1").tree("getParent", node.target);
-                    var Treelevel = easyui_tree_options.getLevel(this, node);
-                    var ParentText = "";
-                    if (Treelevel == 4) {
-                        ParentText = $("#treeDept1").tree("getParent", Text.target)
-                    }
-                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
-                    InitGrid(queryData);
-                }
-            });
-            $("#loading").fadeOut(500);
-        }
-
         //实现对DataGird控件的绑定操作
         var pageSize;
         function InitGrid(queryData) {
@@ -158,12 +128,28 @@
                     WHC_IntCustNO: $("#IntCustNO").val(),
                     WHC_NvcName: $("#NvcName").val(),
                     WHC_VcAddr: $("#VcAddr").val(),
-                    WHC_NvcAddr: $("#NvcAddr").val(),                     
+                    WHC_NvcAddr: $("#NvcAddr").val(),
                 }
                 //将值传递给
                 InitGrid(queryData);
                 return false;
             });
+
+            $('#treeDept1').tree({
+                onBeforeSelect: function (node) {
+                    fujiText = node.text;
+                },
+                onClick: function (node) {
+                    var Text = $("#treeDept1").tree("getParent", node.target);
+                    var Treelevel = easyui_tree_options.getLevel(this, node);
+                    var ParentText = "";
+                    if (Treelevel == 4) {
+                        ParentText = $("#treeDept1").tree("getParent", Text.target)
+                    }
+                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
+                    InitGrid(queryData);
+                }
+            });        
         }
 
         function Insert() {

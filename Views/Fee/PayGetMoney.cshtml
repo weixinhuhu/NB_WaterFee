@@ -22,7 +22,8 @@
                  });
             var queryData = {}
             InitGrid(queryData);
-            initDeptTreeview();
+            //初始化导航树
+            initDeptTreeview("treeDept1");
             BindSearchEvent();
         });
 
@@ -30,35 +31,6 @@
         var sVcBuilding = "";
         var name = "";
        
-       function initDeptTreeview() {
-            $("#loading").show();
-            var queryData = "";           
-            $('#treeDept1').tree({
-                url: '/ArcCustomerInfo/TreeCommunity_Server',
-                 //添加图标
-                loadFilter: function (data, parent) {
-                    for (var i = 0; i < data.length; i++) {
-                        getLevel(data[i], 0);
-                    }
-                    return data;
-                },
-                onBeforeSelect: function (node) {
-                    fujiText = node.text;
-                },
-                onClick: function (node) {
-                    var Text = $("#treeDept1").tree("getParent", node.target);
-                    var Treelevel = easyui_tree_options.getLevel(this, node);
-                    var ParentText = "";
-                    if (Treelevel == 4) {
-                        ParentText = $("#treeDept1").tree("getParent", Text.target)
-                    }
-                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };   
-                    InitGrid(queryData); 
-                }
-            });
-            $("#loading").fadeOut(500);
-        }
-
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
             $('#grid').datagrid({   //定位到Table标签，Table标签的ID是grid
@@ -532,6 +504,22 @@
             });
             $("#btnPayOK").click(PayMoneyOK);
             $("#btnGetOK").click(GetMoneyOK);
+
+             $('#treeDept1').tree({
+                onBeforeSelect: function (node) {
+                    fujiText = node.text;
+                },
+                onClick: function (node) {
+                    var Text = $("#treeDept1").tree("getParent", node.target);
+                    var Treelevel = easyui_tree_options.getLevel(this, node);
+                    var ParentText = "";
+                    if (Treelevel == 4) {
+                        ParentText = $("#treeDept1").tree("getParent", Text.target)
+                    }
+                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
+                    InitGrid(queryData);
+                }
+            });        
         }
             
     </script>

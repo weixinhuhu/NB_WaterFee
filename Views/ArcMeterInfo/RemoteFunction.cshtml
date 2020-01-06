@@ -16,55 +16,18 @@
     <script type="text/javascript">     
         var username = "";
         $(function () {
-            var queryData = {};
-            Init(queryData);       
-            initDeptTreeview();
-        });
-
-        function initDeptTreeview() {
-            $("#loading").show();
-            $('#treeDept1').tree({
-                url: '/ArcCustomerInfo/TreeCommunity_Server',
-                 //添加图标
-                loadFilter: function (data, parent) {
-                    for (var i = 0; i < data.length; i++) {
-                        getLevel(data[i], 0);
-                    }
-                    return data;
-                },
-                onBeforeSelect: function (node) {
-                    fujiText = node.text;
-
-                },
-                onClick: function (node) {
-
-                    var Text = $("#treeDept1").tree("getParent", node.target);
-
-                    var Treelevel = easyui_tree_options.getLevel(this, node);
-
-                    var ParentText = "";
-                                                               
-                    if (Treelevel == 4) {
-
-                        ParentText = $("#treeDept1").tree("getParent", Text.target)
-
-                    }
-                    var queryData = {
-                        "IntCustNO": $("#IntCustNO").val(),
-                        "NvcName": $("#NvcName").val(),
-                        "VcMobile": $("#VcMobile").val(),
-                        "VcAddr": $("#VcAddr").val(),
-                        "flag": $("#flag").combobox("getValue"),
-                        WHC_Fuji: Text.text,
-                        WHC_Text: node.text,
-                        WHC_Treelevel: Treelevel.toString(),
-                        WHC_TreePrentText: ParentText.text
-                    }; 
-                    Init(queryData);
+            $(document).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnSearch").click();
+                    return;
                 }
             });
-            $("#loading").fadeOut(500);
-        }
+            //初始化导航树
+            initDeptTreeview("treeDept1");
+            var queryData = {};
+            InitGrid(queryData);     
+            BindSearchEvent()
+        });
 
         var IDgridOpenClose = '#gridOpenClose';
 
@@ -111,9 +74,9 @@
         }
 
         //信息查询
-        function Init(queryData) {
+        function InitGrid(queryData) {
             $(IDgridOpenClose).datagrid({   //定位到Table标签，Table标签的ID是grid
-                url: '/ArcMeterInfo/ListJson_Server',   //指向后台的Action来获取当前用户的信息的Json格式的数据
+                url: '',   //指向后台的Action来获取当前用户的信息的Json格式的数据
                 // title: '水表列表',
                 // iconCls: 'icon-view',
                 height: document.body.clientHeight - 163,
@@ -131,7 +94,7 @@
                 remoteSort: false,
                
                 //singleSelect: true,
-                idField: 'IntID', //不设置idField，翻页不会记录选择
+                //idField: 'IntID', //不设置idField，翻页不会记录选择
                 queryParams: queryData,  //异步查询的参数
                 columns: [[
                     { field: 'ck', checkbox: true },   //选择
@@ -148,6 +111,7 @@
                         title: '账户余额', field: 'Fee', width: 80, sortable: true,align: 'right',
                         //改变cell字体
                         formatter: function (value, index, row) {
+                            if(value==null) return
                             if (value <= 0) { return '<span style="color:red">' + value + '</span>' } else {
                                 return '<span style="color:green">' + value + '</span>'
                             }
@@ -159,28 +123,65 @@
                 onLoadSuccess: function () {
                     $(this).datagrid('clearSelections');
                 },
+
                 //改变行背景颜色
                 //rowStyler: function (index, row) {
                 //    if (row.Fee <= 0) {
                 //        return 'background-color:#FFF0F5;';
                 //    }
                 //},
-                onDblClickRow: function (rowIndex, rowData) {
-
-                }
-
+               
             });
         };
-        function submit() {
-            var queryData = {
-                "IntCustNO": $("#IntCustNO").val(),
+
+         //绑定搜索按钮的的点击事件
+        function BindSearchEvent() {
+            //按条件进行查询数据，首先我们得到数据的值
+            $("#btnSearch").click(function () {
+                //得到用户输入的参数
+                var queryData = {
+                  "IntCustNO": $("#IntCustNO").val(),
                 "NvcName": $("#NvcName").val(),
                 "VcMobile": $("#VcMobile").val(),
                 "VcAddr": $("#VcAddr").val(),
-                "flag": $("#flag").combobox("getValue"),              
-            };
-            Init(queryData);
-            return false;
+                "flag": $("#flag").combobox("getValue"),  
+                }
+                //将值传递给
+                InitGrid(queryData);
+                return false;
+            });
+
+            $('#treeDept1').tree({
+                onBeforeSelect: function (node) {
+                    fujiText = node.text;
+                },
+                onClick: function (node) {
+                    var Text = $("#treeDept1").tree("getParent", node.target);
+
+                    var Treelevel = easyui_tree_options.getLevel(this, node);
+
+                    var ParentText = "";
+                                                               
+                    if (Treelevel == 4) {
+
+                        ParentText = $("#treeDept1").tree("getParent", Text.target)
+
+                    }
+                    var queryData = {
+                        "IntCustNO": $("#IntCustNO").val(),
+                        "NvcName": $("#NvcName").val(),
+                        "VcMobile": $("#VcMobile").val(),
+                        "VcAddr": $("#VcAddr").val(),
+                        "flag": $("#flag").combobox("getValue"),
+                        WHC_Fuji: Text.text,
+                        WHC_Text: node.text,
+                        WHC_Treelevel: Treelevel.toString(),
+                        WHC_TreePrentText: ParentText.text
+                    }; 
+                 //将值传递给
+                InitGrid(queryData);
+                }
+            });
         }
 
         //对象居中的函数，调用例子：$("#loading").center();
@@ -245,7 +246,7 @@
                                         </select>
                                     </td>
                                     <td style='padding: 3px; text-align: right'>
-                                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="btnSearch" onclick="submit()">查询</a>
+                                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="btnSearch" >查询</a>
                                     </td>
                                 </tr>
                             </table>

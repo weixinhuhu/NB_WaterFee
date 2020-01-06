@@ -18,6 +18,16 @@
         var sVcBuilding = "";
 
         $(function () {
+             $(document).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnSearch").click();
+                    return;
+                }
+            });
+            //绑定查询按钮事件
+            BindSearchEvent();
+            //初始化导航树
+            initDeptTreeview("treeDept1");
             InitGrid();
             GetMeterSettingInfo();
             initDeptTreeview();
@@ -31,6 +41,7 @@
                 required: true,
             });
         }
+
         function initDeptTreeview() {
             $("#loading").show();
             $('#treeDept1').tree({
@@ -180,9 +191,7 @@
                 }
             });
         };
-        ShowDetail = function () {
-            // ShowEditOrViewDialog();
-        }
+
         //修改或查看明细信息（绑定显示数据）
         function ShowEditOrViewDialog() {
             //首先取出来用户选择的数据的ID
@@ -204,15 +213,40 @@
             $("#VcUpAmount").val(info.ChrUpAmount);
             $("#VcValveMaint").val(info.ChrValveMaint);
         }
-        function Query() {
-            var queryData = {
-                WHC_IntNo: $("#txtIntNo").val(),
-                WHC_NvcName: $("#txtNvcName").val(),
-                WHC_NvcAddr: $("#txtNvcAddr").val(),
-                WHC_VcMobile: $("#txtVcMobile").val()
-            };
-            InitGrid(queryData);
-            return false;
+  
+        //绑定搜索按钮的的点击事件
+        function BindSearchEvent() {
+            //按条件进行查询数据，首先我们得到数据的值
+            $("#btnSearch").click(function () {
+                //得到用户输入的参数
+                var queryData = {
+                    WHC_IntNo: $("#txtIntNo").val(),
+                    WHC_NvcName: $("#txtNvcName").val(),
+                    WHC_NvcAddr: $("#txtNvcAddr").val(),
+                    WHC_VcMobile: $("#txtVcMobile").val()
+                }
+                //将值传递给
+                InitGrid(queryData);
+                return false;
+            });
+
+            $('#treeDept1').tree({
+                onBeforeSelect: function (node) {
+                    fujiText = node.text;
+                },
+                onClick: function (node) {
+                    var Text = $("#treeDept1").tree("getParent", node.target);
+                    var Treelevel = easyui_tree_options.getLevel(this, node);
+                    var ParentText = "";
+                    if (Treelevel == 4) {
+                        ParentText = $("#treeDept1").tree("getParent", Text.target)
+                    }
+                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
+                    var start = $("#StartDteFreeze").datebox("getValue")
+                    var end = $("#EndDteFreeze").datebox("getValue")
+                    InitGrid(queryData);
+                }
+            });
         }
         //对象居中的函数，调用例子：$("#loading").center();
         jQuery.fn.center = function () {
@@ -294,7 +328,7 @@
                             <th style='padding:3px;'><label for="txtVcMobile">移动号码：</label></th>
                             <td style='padding:3px;'><input type="text" id="txtVcMobile" class="easyui-numberbox" style="width:100px" /></td>
                             <td style='padding: 3px; text-align: right'>
-                                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="btnSearch" onclick="Query()">查询</a>
+                                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="btnSearch" >查询</a>
                             </td>
                         </tr>
                     </table>

@@ -77,37 +77,10 @@
             ForMatterDateBox("attYearMonth");
             var data = {};
             InitGridAccDebt(data);
-            initDeptTreeview();
+            //初始化导航树
+            initDeptTreeview("treeDept1");
             BindSearchEvent();
         });
-
-        function initDeptTreeview() {
-            $("#loading").show();
-            $('#treeDept1').tree({
-                url: '/ArcCustomerInfo/TreeCommunity_Server',
-                //添加图标
-                loadFilter: function (data, parent) {
-                    for (var i = 0; i < data.length; i++) {
-                        getLevel(data[i], 0);
-                    }
-                    return data;
-                },
-                onBeforeSelect: function (node) {
-                    fujiText = node.text;
-                },
-                onClick: function (node) {
-                    var Text = $("#treeDept1").tree("getParent", node.target);
-                    var Treelevel = easyui_tree_options.getLevel(this, node);
-                    var ParentText = "";
-                    if (Treelevel == 4) {
-                        ParentText = $("#treeDept1").tree("getParent", Text.target)
-                    }
-                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
-                    UserInfoGrid(queryData);
-                }
-            });
-            $("#loading").fadeOut(500);
-        }
 
         //待发行费用客户档案
         function UserInfoGrid(queryData) {
@@ -128,7 +101,7 @@
                 rownumbers: true,
                 sortOrder: 'asc',
                 remoteSort: false,
-               //singleSelect: true,
+                //singleSelect: true,
                 queryParams: queryData,
                 columns: [[
                     { field: 'ck', checkbox: true },   //选择
@@ -140,7 +113,7 @@
                     { title: '通信地址', field: '表地址', width: 100, sortable: true },
                     {
                         title: '费用日期', field: '费用日期', width: 100, align: 'center', sortable: true, formatter: function (val) {
-                            if (val != null){  return val == "9999-09-09 00:00:00" ? "-" : val.substring(0, 10); }                        
+                            if (val != null) { return val == "9999-09-09 00:00:00" ? "-" : val.substring(0, 10); }
                         }
                     },
                     { title: '上期读数', field: '上期读数', width: 80, sortable: true },
@@ -271,7 +244,7 @@
                         $("#usergrid").datagrid("reload");;
                     } else {
                         loading.hide();
-                        showError("算费失败"+" "+result.ErrorMsg);
+                        showError("算费失败" + " " + result.ErrorMsg);
                     }
                 }
             });
@@ -290,6 +263,22 @@
                     WHC_IntFlag: $("#orderType").combobox('getValue')
                 }
                 UserInfoGrid(queryData);
+            });
+
+            $('#treeDept1').tree({
+                onBeforeSelect: function (node) {
+                    fujiText = node.text;
+                },
+                onClick: function (node) {
+                    var Text = $("#treeDept1").tree("getParent", node.target);
+                    var Treelevel = easyui_tree_options.getLevel(this, node);
+                    var ParentText = "";
+                    if (Treelevel == 4) {
+                        ParentText = $("#treeDept1").tree("getParent", Text.target)
+                    }
+                    queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
+                    UserInfoGrid(queryData);
+                }
             });
         }
     </script>

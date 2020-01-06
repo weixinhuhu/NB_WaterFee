@@ -18,6 +18,21 @@ function QueryJson2(objJson, key1, value1, key2, value2) {
 //作者:来自深蓝QQ群257018781
 //版本:v0.1 (2017.06.26)
 
+//获取当前日期前一天
+function getYestoday(date) {
+    var yesterday_milliseconds = date.getTime() - 1000 * 60 * 60 * 24;
+    var yesterday = new Date();
+    yesterday.setTime(yesterday_milliseconds);
+
+    var strYear = yesterday.getFullYear();
+    var strDay = yesterday.getDate();
+    var strMonth = yesterday.getMonth() + 1;
+    if (strMonth < 10) {
+        strMonth = "0" + strMonth;
+    }
+    datastr = strYear + "-" + strMonth + "-" + strDay;
+    return datastr;
+}
 //格式化日期
 function ForMatterDateBox(view) {
     $('#' + view).datebox({
@@ -77,7 +92,21 @@ function myformatter(date) {
     var m = date.getMonth() + 1;
     return y + '-' + m;
 }
-
+//初始化用户列表
+function initDeptTreeview(view) {
+    $("#loading").show();
+    $('#'+view).tree({
+        url: '/ArcCustomerInfo/TreeCommunity_Server',
+        //添加图标
+        loadFilter: function (data, parent) {
+            for (var i = 0; i < data.length; i++) {
+                getLevel(data[i], 0);
+            }
+            return data;
+        }
+    });
+    $("#loading").fadeOut(500);
+}
 
 var isInitDivloading = false;
 var loading = {
