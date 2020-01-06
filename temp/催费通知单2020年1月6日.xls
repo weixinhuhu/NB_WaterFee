@@ -1,0 +1,31 @@
+<xml version>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-    microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+ <Styles>
+ <Style ss:ID="Default" ss:Name="Normal">
+ <Alignment ss:Vertical="Bottom"/>
+ <Borders/>
+ <Font/>
+ <Interior/>
+ <NumberFormat/>
+ <Protection/>
+ </Style>
+ <Style ss:ID="BoldColumn">
+ <Font x:Family="Swiss" ss:Bold="1"/>
+ </Style>
+ <Style     ss:ID="StringLiteral">
+ <NumberFormat ss:Format="@"/>
+ </Style>
+ <Style ss:ID="Decimal">
+ <NumberFormat ss:Format="#,##0.###"/>
+ </Style>
+ <Style ss:ID="Integer">
+ <NumberFormat ss:Format="0"/>
+ </Style>
+ <Style ss:ID="DateLiteral">
+ <NumberFormat ss:Format="yyyy-mm-dd;@"/>
+ </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1"><Table><Row><Cell ss:StyleID="BoldColumn"><Data ss:Type="String">客户编号</Data></Cell><Cell ss:StyleID="BoldColumn"><Data ss:Type="String">客户姓名</Data></Cell><Cell ss:StyleID="BoldColumn"><Data ss:Type="String">客户地址</Data></Cell><Cell ss:StyleID="BoldColumn"><Data ss:Type="String">客户小区</Data></Cell><Cell ss:StyleID="BoldColumn"><Data ss:Type="String">客户楼栋</Data></Cell><Cell ss:StyleID="BoldColumn"><Data ss:Type="String">客户单元</Data></Cell><Cell ss:StyleID="BoldColumn"><Data ss:Type="String">客户门牌</Data></Cell><Cell ss:StyleID="BoldColumn"><Data ss:Type="String">欠费月数</Data></Cell><Cell ss:StyleID="BoldColumn"><Data ss:Type="String">欠费总金额</Data></Cell></Row><Row><Cell ss:StyleID="Integer"><Data ss:Type="Number">1</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">1</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String"></Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">上奥世纪</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">B</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">2</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">1428</Data></Cell><Cell ss:StyleID="Integer"><Data ss:Type="Number">2</Data></Cell><Cell ss:StyleID="Decimal"><Data ss:Type="Number">4922.4000</Data></Cell></Row><Row><Cell ss:StyleID="Integer"><Data ss:Type="Number">22</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">测试采集器</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">2223333</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">万科</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">11</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">2</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">2402</Data></Cell><Cell ss:StyleID="Integer"><Data ss:Type="Number">2</Data></Cell><Cell ss:StyleID="Decimal"><Data ss:Type="Number">247.2000</Data></Cell></Row><Row><Cell ss:StyleID="Integer"><Data ss:Type="Number">10220005</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">客户05</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">05号</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">八区</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">05号楼</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">2</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">33</Data></Cell><Cell ss:StyleID="Integer"><Data ss:Type="Number">3</Data></Cell><Cell ss:StyleID="Decimal"><Data ss:Type="Number">34029.3200</Data></Cell></Row><Row><Cell ss:StyleID="Integer"><Data ss:Type="Number">2018000101</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">演示客户101</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">演示客户西二旗大街101</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">22</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">22</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">0</Data></Cell><Cell ss:StyleID="StringLiteral"><Data ss:Type="String">0</Data></Cell><Cell ss:StyleID="Integer"><Data ss:Type="Number">1</Data></Cell><Cell ss:StyleID="Decimal"><Data ss:Type="Number">4819.8800</Data></Cell></Row></Table> </Worksheet></Workbook>

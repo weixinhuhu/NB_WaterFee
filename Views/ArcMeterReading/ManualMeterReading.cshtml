@@ -66,14 +66,14 @@
                 //idField: 'ID',
                 //异步查询的参数
                 queryParams: queryData,
-                columns: [[
+                frozenColumns: [[
                     //{ field: 'ck', checkbox: true },   //选择
                     { title: 'ID', field: 'IntID', width: 80, sortable: true, hidden: true },
                     { title: '客户编号', field: 'IntNo', width: 80, sortable: true },
                     { title: '客户姓名', field: 'NvcName', width: 100, sortable: true },
                     { title: '通信地址', field: 'bVcAddr', width: 100, sortable: true },
-                    //{ title: '计量点', field: 'IntMP', width: 100, sortable: true, hidden: true },
-                    //{ title: '集中器', field: 'eNvcName', width: 100, sortable: true, hidden: true },
+                ]],
+                columns: [[                  
                     {
                         title: '阀门状态', field: 'VcDesc', width: 80, sortable: true
                     },

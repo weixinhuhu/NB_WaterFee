@@ -25,7 +25,7 @@
             BindSearchEvent();
             //初始化导航树
             initDeptTreeview("treeDept1");
-            
+
             var queryData = {};
             //初始化Datagrid表格数据
             InitGrid(queryData);
@@ -69,8 +69,15 @@
                 //idField: 'ID',
                 //异步查询的参数
                 queryParams: queryData,
-                columns: [[
+                frozenColumns: [[
                     //{ field: 'ck', checkbox: true },   //选择
+                    { title: 'ID', field: 'IntID', width: 80, sortable: true, hidden: true },
+                    { title: '客户编号', field: 'IntNo', width: 80, sortable: true },
+                    { title: '客户姓名', field: 'NvcName', width: 100, sortable: true },
+                    { title: '通信地址', field: 'bVcAddr', width: 100, sortable: true },
+                ]],
+                columns: [[
+                   
                     { title: 'ID', field: 'IntID', width: 80, sortable: true, hidden: true },
                     { title: '客户编号', field: 'IntNo', width: 80, sortable: true },
                     { title: '客户姓名', field: 'NvcName', width: 100, sortable: true },
@@ -207,7 +214,7 @@
                     queryData = { "WHC_Fuji": Text.text, "WHC_Text": node.text, "WHC_Treelevel": Treelevel.toString(), "WHC_TreePrentText": ParentText.text };
                     InitGrid(queryData);
                 }
-            });        
+            });
         }
 
         //弹出新增对话框
@@ -517,7 +524,7 @@
                 textField: 'VcDesc',
                 required: true,
             });
-        }   
+        }
     </script>
 
     <style>

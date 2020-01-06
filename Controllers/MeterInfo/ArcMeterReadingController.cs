@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using WHC.Framework.Commons;
 using WHC.NB_WaterFee.Controllers;
 
 namespace WHC.NB_WaterFee.Controllers
@@ -78,6 +79,8 @@ namespace WHC.NB_WaterFee.Controllers
             }
             //调用后台服务获取集中器信息          
             var dts = new ServiceDbClient().CollectData_Qry(endcode, customerinfo, WHC_StartDteFreeze, WHC_EndDteFreeze);
+
+          
 
             int rows = Request["rows"] == null ? 10 : int.Parse(Request["rows"]);
             int page = Request["page"] == null ? 1 : int.Parse(Request["page"]);

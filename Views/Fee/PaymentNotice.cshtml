@@ -60,7 +60,7 @@
 
     <!--常用的一些组件业务脚本函数,放置此处方便脚本提示-->
     <script src="~/Scripts/ComponentUtil.js"></script>
-    <script src="~/Scripts/dbjs.js"></script>
+    <script src="~/Scripts/EasyUIDataGridToExcle.js"></script>
 
     <script type="text/javascript">
 
@@ -80,7 +80,6 @@
             InitGrid(queryData);
             BindSearchEvent();
         });
-
 
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
@@ -104,7 +103,7 @@
                 //idField: 'ID', //不设置idField，翻页不会记录选择
                 queryParams: queryData,  //异步查询的参数
                 columns: [[
-                    { field: 'ck', checkbox: true },   //选择
+                    //{ field: 'ck', checkbox: true },   //选择
                     { title: 'ID', field: 'IntFeeID', width: 80, sortable: true, hidden: true },
                     { title: '客户编号', field: '客户编号', width: 80, sortable: true, align: 'center' },
                     { title: '客户姓名', field: '客户姓名', width: 100, sortable: false, align: 'center' },
@@ -113,7 +112,13 @@
                     { title: '客户单元', field: '客户单元', width: 100, sortable: true, align: 'center' },
                     { title: '客户门牌', field: '客户门牌', width: 100, sortable: true, align: 'center' },
                     { title: '欠费月数', field: '欠费月数', width: 80, sortable: true, align: 'right' },
-                    { title: '欠费总金额', field: '欠费总金额', width: 100, sortable: true, align: 'right' },
+                    {
+                        title: '欠费总金额', field: '欠费总金额', width: 100, sortable: true, align: 'right', formatter: function (value, row, index) {
+                            if (row != null) {
+                                return parseFloat(value).toFixed(2);
+                            }
+                        }
+},
 
                     //{ title: '建立时间', field: 'DtCreate', width: 100, sortable: true }
                 ]],
@@ -139,7 +144,20 @@
         };
 
         function Export() {
-            window.open("PaymentNoticeExport?WHC_IntCustNo=" + $("#txtIntNo").val())
+            var queryData = {
+                WHC_IntCustNo: $("#txtIntNo").val(),
+                WHC_NvcName: $("#txtNvcName").val(),
+                WHC_NvcAddr: $("#txtNvcAddr").val(),
+                WHC_VcMobile: $("#txtVcMobile").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "/AccDebt/PaymentNoticeExport",
+                data: queryData,
+                success: function () {
+                    window.open("/AccDebt/PaymentNoticeExport")
+                }
+            });
         }
 
         //绑定搜索按钮的的点击事件

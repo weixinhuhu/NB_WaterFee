@@ -14,7 +14,6 @@
     <script src="~/Scripts/dbjs.js"></script>
 
     <script type="text/javascript">
-
         $(function () {
             $(document).keydown(function (event) {
                 if (event.keyCode == 13) {
@@ -26,8 +25,6 @@
             easyui("#DtEnd").val(new Date().Format());
             BindSearchEvent();
         });
-
-
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
             $('#grid').datagrid({   //定位到Table标签，Table标签的ID是grid
@@ -50,11 +47,13 @@
                 singleSelect: true,
                 //idField: 'ID', //不设置idField，翻页不会记录选择
                 queryParams: queryData,  //异步查询的参数
-                columns: [[
-                    { field: 'ck', checkbox: true },   //选择
+                  frozenColumns: [[
+                   { field: 'ck', checkbox: true },   //选择
                     { title: 'ID', field: 'IntFeeID', width: 80, sortable: true, hidden: true },
                     { title: '客户编号', field: 'IntCustNo', width: 80, sortable: true, align: 'right' },
                     { title: '客户名称', field: 'NvcName', width: 100, sortable: false, align: 'center' },
+                ]],
+                columns: [[                   
                     { title: '客户小区', field: 'NvcVillage', width: 100, sortable: true, align: 'center' },
                     { title: '客户楼栋', field: 'VcBuilding', width: 100, sortable: true, align: 'center' },
                     { title: '客户门牌号', field: 'VcRoomNum', width: 100, sortable: true, align: 'center' },
@@ -83,9 +82,27 @@
                             return new Date(val.replace("-", "/")).Format();
                         }
                     },
-                    { title: '费用金额', field: 'MonFee', width: 80, sortable: true, align: 'right' },
-                    { title: '实际执行费用金额', field: 'MonFeeExec', width: 110, sortable: true, align: 'right' },
-                    { title: '违约金', field: 'MonPenalty', width: 80, sortable: true, align: 'right' },
+                    {
+                        title: '费用金额', field: 'MonFee', width: 80, sortable: true, align: 'right', formatter: function (value, row, index) {
+                            if (row != null) {
+                                return parseFloat(value).toFixed(2);
+                            }
+                        }
+                    },
+                    {
+                        title: '实际执行费用金额', field: 'MonFeeExec', width: 110, sortable: true, align: 'right', formatter: function (value, row, index) {
+                            if (row != null) {
+                                return parseFloat(value).toFixed(2);
+                            }
+                        }
+                    },
+                    {
+                        title: '违约金', field: 'MonPenalty', width: 80, sortable: true, align: 'right', formatter: function (value, row, index) {
+                            if (row != null) {
+                                return parseFloat(value).toFixed(2);
+                            }
+                        }
+                    },
                     { title: '违约天数', field: 'IntDays', width: 80, sortable: true, align: 'right' },
                     { title: '销账单位代码', field: 'IntPayUnit', width: 80, sortable: true, align: 'center' },
                     { title: '销账方式代码', field: 'IntPayMode', width: 80, sortable: true, align: 'center' },
@@ -110,21 +127,8 @@
                         //实现刷新栏目中的数据
                         $("#grid").datagrid("reload");
                     }
-                }],
-
-
-                onDblClickRow: function (rowIndex, rowData) {
-                    //$('#grid').datagrid('uncheckAll');
-                    //$('#grid').datagrid('checkRow', rowIndex);
-                }
-            });
-            //var heightMargin = $("#toolbar").height() + 60;
-            //var widthMargin = $(document.body).width() - $("#tb").width();
-            //// 第一次加载时和当窗口大小发生变化时，自动变化大小
-            //$('#grid').resizeDataGrid(heightMargin, widthMargin, 0, 0);
-            //$(window).resize(function () {
-            //    $('#grid').resizeDataGrid(heightMargin, widthMargin, 0, 0);
-            //});
+                }]
+            });      
         };
 
         function printView() {

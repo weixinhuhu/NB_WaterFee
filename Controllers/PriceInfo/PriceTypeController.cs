@@ -1,6 +1,7 @@
 ﻿using NB_WaterFee.DbServiceReference;
 using System;
 using System.Web.Mvc;
+using WHC.Framework.Commons;
 using WHC.NB_WaterFee.Controllers;
 
 namespace WHC.WaterFeeWeb.Controllers
@@ -42,7 +43,7 @@ namespace WHC.WaterFeeWeb.Controllers
             }
             catch (Exception ex)
             {
-                //LogTextHelper.Error(ex);//错误记录              
+                LogTextHelper.Error(ex);//错误记录              
             }
             return ToJsonContent(result);
         }
@@ -65,7 +66,7 @@ namespace WHC.WaterFeeWeb.Controllers
             }
             catch (Exception ex)
             {
-              //  LogTextHelper.Error(ex);//错误记录 
+              LogTextHelper.Error(ex);//错误记录 
                 result.ErrorMsg = ex.Message;
             }
             return ToJsonContent(result);

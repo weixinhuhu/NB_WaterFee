@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Web.Mvc;
+using WHC.Framework.Commons;
 
 namespace WHC.NB_WaterFee.Controllers
 {
@@ -50,17 +51,21 @@ namespace WHC.NB_WaterFee.Controllers
                         Session["UserInfo"] = info;
                         Session["IsSuperAdmin"] = info.IntComID == 1 ? true : false;
                         Session["EndCode"] = info.IntComID;
-                        #endregion                      
+                        #endregion
+                        LogTextHelper.Info(ip + " " + username + "登陆成功");//错误记录
                     }
                     else
-                    {
+                    {                    
                         result.ErrorMsg = "用户名输入错误或者您已经被禁用";
+                        LogTextHelper.Info(ip+" " +username +"登陆失败");//错误记录
                     }
                 }
                 catch (Exception ex)
                 {
+                    LogTextHelper.Error(ex);//错误记录
                     if (ex.Message.Contains("登录失败"))
                         result.ErrorMsg = "数据库账号或密码错误,请检查数据库是否正常";
+                    
                     else
                         result.ErrorMsg = ex.Message;
                 }

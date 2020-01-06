@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Web.Mvc;
+using WHC.Framework.Commons;
 
 namespace WHC.NB_WaterFee.Controllers
 {
@@ -111,15 +112,18 @@ namespace WHC.NB_WaterFee.Controllers
                 {
                     result.IsSuccess = true;
                     result.StrData1 = flag.StrData1;
+                    LogTextHelper.Info("缴费成功" + " 操作员:" + userid + " 用户编号" + custNo.ToIntOrZero() + " 缴费金额：" + payMoney.ToDouble());
                 }
                 else
                 {
+                    LogTextHelper.Error("缴费失败" + " 操作员:" + userid + " 用户编号" + custNo.ToIntOrZero() + " 缴费金额：" + payMoney.ToDouble());
                     result.ErrorMsg = flag.ErrorMsg;
                     result.IsSuccess = false;
                 }
             }
             catch (Exception ex)
             {
+                LogTextHelper.Error("缴费异常错误" + ex);
                 result.IsSuccess = false;
                 result.ErrorMsg = ex.Message;
             }
@@ -190,44 +194,6 @@ namespace WHC.NB_WaterFee.Controllers
                 result.ErrorMsg = "操作失败!错误如下:" + ex.Message;
             }
             return ToJsonContent(result);
-        }
-
-
-        public ActionResult PaymentNoticeExport()
-        {
-            var CustNo = Request["WHC_IntCustNo"] ?? "0";
-            var NvcName = Request["WHC_NvcName"];
-            var NvcAddr = Request["WHC_NvcAddr"];
-            var VcMobile = Request["WHC_VcMobile"];
-            var custinfo = new Customer
-            {
-                IntNo = CustNo.ToIntOrDefault(),
-                NvcName = NvcName,
-                NvcAddr = NvcAddr,
-                VcMobile = VcMobile
-            };
-            var dt = new ServiceDbClient().Account_GetPaymentNotice(endcode, custinfo);
-            if (dt.Rows.Count > 0)
-            {
-                //导出目录创建与清空
-                var root = Server.MapPath("~\\");
-                var dir = new System.IO.DirectoryInfo(root + "temp\\");
-                if (dir.Exists == false) dir.Create();
-                try
-                {
-                    foreach (var item in dir.GetFiles())
-                    {
-                        item.Delete();
-                    }
-                }
-                catch { }
-                var filename = dir + Guid.NewGuid().ToString() + ".xls";
-                var ds = new System.Data.DataSet();
-                ds.Tables.Add(dt);
-                // ExcelHelper.DataSetToExcel(ds, filename);
-                return Redirect(filename.Replace(root, "/").Replace("\\", "/"));
-            }
-            return View();
         }
 
         public ActionResult PrintTicket()

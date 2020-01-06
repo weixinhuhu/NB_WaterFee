@@ -67,9 +67,7 @@
             };//可添加一些预设条件
             InitGrid(queryData);
             BindSearchEvent();
-
         });
-
 
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
@@ -96,7 +94,14 @@
                 columns: [[
                     //{ field: 'ck', checkbox: true },   //选择
                     { title: '编号', field: 'IntID', width: 80, sortable: false, align: 'center' },
-                    { title: '金额', field: 'MonAmount', width: 80, sortable: false, align: 'right' },
+                    {
+                        title: '金额', field: 'MonAmount', width: 80, sortable: false, align: 'right', formatter: function (value, row, index) {
+                        if (row != null) {
+                            return parseFloat(value).toFixed(2);
+                        }
+                    }
+
+                    },
                     { title: '流水号', field: 'VcFlowNo', width: 155, sortable: false, align: 'center' },
                     {
                         title: '业务类型', field: 'IntType', width: 80, sortable: false, align: 'center',

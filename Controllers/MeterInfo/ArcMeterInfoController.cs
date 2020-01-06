@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 
 using System.Web.Mvc;
+using WHC.Framework.Commons;
 
 namespace WHC.NB_WaterFee.Controllers
 {
@@ -170,7 +171,7 @@ namespace WHC.NB_WaterFee.Controllers
             }
             catch (Exception ex)
             {
-                //LogTextHelper.Error(ex);//错误记录
+                LogTextHelper.Error(ex);//错误记录
                 result.ErrorMsg = ex.Message;
             }
             return ToJsonContent(result);
