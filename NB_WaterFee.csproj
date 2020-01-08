@@ -189,6 +189,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EasyTreeData.cs" />
+    <Compile Include="Models\TokenHelper.cs" />
     <Compile Include="Models\TreeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -214,6 +215,9 @@
     <Content Include="Connected Services\DbServiceReference\NB_WaterFee.DbServiceReference.PriceType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\DbServiceReference\NB_WaterFee.DbServiceReference.AuthHeader.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\DbServiceReference\Service.disco" />
     <None Include="Connected Services\DbServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\DbServiceReference\configuration.svcinfo" />
@@ -233,6 +237,9 @@
     <None Include="Connected Services\DbServiceReference\Service6.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Connected Services\ServiceReference1\NB_WaterFee.ServiceReference1.AuthHeader.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ServiceReference1\ServAuthority.disco" />
     <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
@@ -4615,21 +4622,6 @@
     <Content Include="Content\layui\lay\modules\tree.js" />
     <Content Include="Content\layui\lay\modules\upload.js" />
     <Content Include="Content\layui\lay\modules\util.js" />
-    <Content Include="Content\My97DatePicker\calendar.js" />
-    <Content Include="Content\My97DatePicker\config.js" />
-    <Content Include="Content\My97DatePicker\demo.htm" />
-    <Content Include="Content\My97DatePicker\lang\en.js" />
-    <Content Include="Content\My97DatePicker\lang\zh-cn.js" />
-    <Content Include="Content\My97DatePicker\lang\zh-tw.js" />
-    <Content Include="Content\My97DatePicker\My97DatePicker.htm" />
-    <Content Include="Content\My97DatePicker\skin\datePicker.gif" />
-    <Content Include="Content\My97DatePicker\skin\default\datepicker.css" />
-    <Content Include="Content\My97DatePicker\skin\default\img.gif" />
-    <Content Include="Content\My97DatePicker\skin\WdatePicker.css" />
-    <Content Include="Content\My97DatePicker\skin\whyGreen\bg.jpg" />
-    <Content Include="Content\My97DatePicker\skin\whyGreen\datepicker.css" />
-    <Content Include="Content\My97DatePicker\skin\whyGreen\img.gif" />
-    <Content Include="Content\My97DatePicker\WdatePicker.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -5081,9 +5073,7 @@
     <Content Include="Content\layui\font\iconfont.eot" />
     <Content Include="Content\layui\font\iconfont.ttf" />
     <Content Include="Content\layui\font\iconfont.woff" />
-    <Content Include="Content\Template\CRM\客户联系人-模板.xls" />
-    <Content Include="Content\Template\CustomerInfo\综合档案信息导入模板.xls" />
-    <Content Include="Content\Template\政策法规模板.doc" />
+    <Content Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
@@ -5150,6 +5140,7 @@
     <Content Include="Views\CountFee\CountReleaseFee.cshtml" />
     <Content Include="Views\CountFee\DepositAccount.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\User\DeletedList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

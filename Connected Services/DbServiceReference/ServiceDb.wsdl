@@ -335,6 +335,12 @@
   <wsdl:message name="IServiceDb_Param_EndUser_Opr_OutputMessage">
     <wsdl:part name="parameters" element="tns:Param_EndUser_OprResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceDb_DoNothing_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoNothing" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDb_DoNothing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoNothingResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceDb">
     <wsdl:operation name="SayHello">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/SayHello" message="tns:IServiceDb_SayHello_InputMessage" />
@@ -551,6 +557,10 @@
     <wsdl:operation name="Param_EndUser_Opr">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/Param_EndUser_Opr" message="tns:IServiceDb_Param_EndUser_Opr_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/Param_EndUser_OprResponse" message="tns:IServiceDb_Param_EndUser_Opr_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoNothing">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDb/DoNothing" message="tns:IServiceDb_DoNothing_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDb/DoNothingResponse" message="tns:IServiceDb_DoNothing_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceDb" type="tns:IServiceDb">
@@ -1034,6 +1044,15 @@
     </wsdl:operation>
     <wsdl:operation name="Param_EndUser_Opr">
       <soap:operation soapAction="http://tempuri.org/IServiceDb/Param_EndUser_Opr" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoNothing">
+      <soap:operation soapAction="http://tempuri.org/IServiceDb/DoNothing" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

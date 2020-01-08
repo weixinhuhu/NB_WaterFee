@@ -2562,6 +2562,7 @@ namespace NB_WaterFee.DbServiceReference {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.EasyTreeData[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.EasyTreeData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.DbServiceReference.AuthHeader))]
     public partial class CommonResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -3516,6 +3517,83 @@ namespace NB_WaterFee.DbServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthHeader", Namespace="http://schemas.datacontract.org/2004/07/DbServer.Model")]
+    [System.SerializableAttribute()]
+    public partial class AuthHeader : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NonceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SignatureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TimestampField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nonce {
+            get {
+                return this.NonceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NonceField, value) != true)) {
+                    this.NonceField = value;
+                    this.RaisePropertyChanged("Nonce");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Signature {
+            get {
+                return this.SignatureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SignatureField, value) != true)) {
+                    this.SignatureField = value;
+                    this.RaisePropertyChanged("Signature");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Timestamp {
+            get {
+                return this.TimestampField;
+            }
+            set {
+                if ((this.TimestampField.Equals(value) != true)) {
+                    this.TimestampField = value;
+                    this.RaisePropertyChanged("Timestamp");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DbServiceReference.IServiceDb")]
     public interface IServiceDb {
@@ -3843,6 +3921,12 @@ namespace NB_WaterFee.DbServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/Param_EndUser_Opr", ReplyAction="http://tempuri.org/IServiceDb/Param_EndUser_OprResponse")]
         System.Threading.Tasks.Task<string> Param_EndUser_OprAsync(NB_WaterFee.DbServiceReference.ParamEndUser Param);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/DoNothing", ReplyAction="http://tempuri.org/IServiceDb/DoNothingResponse")]
+        NB_WaterFee.DbServiceReference.AuthHeader DoNothing();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDb/DoNothing", ReplyAction="http://tempuri.org/IServiceDb/DoNothingResponse")]
+        System.Threading.Tasks.Task<NB_WaterFee.DbServiceReference.AuthHeader> DoNothingAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -4302,6 +4386,14 @@ namespace NB_WaterFee.DbServiceReference {
         
         public System.Threading.Tasks.Task<string> Param_EndUser_OprAsync(NB_WaterFee.DbServiceReference.ParamEndUser Param) {
             return base.Channel.Param_EndUser_OprAsync(Param);
+        }
+        
+        public NB_WaterFee.DbServiceReference.AuthHeader DoNothing() {
+            return base.Channel.DoNothing();
+        }
+        
+        public System.Threading.Tasks.Task<NB_WaterFee.DbServiceReference.AuthHeader> DoNothingAsync() {
+            return base.Channel.DoNothingAsync();
         }
     }
 }

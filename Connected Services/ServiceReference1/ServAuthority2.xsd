@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth" />
+  <xs:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DbServer.Common" />
   <xs:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DbServer.Model" />
   <xs:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="Sys_Login_CheckUser">
@@ -16,7 +16,7 @@
   <xs:element name="Sys_Login_CheckUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth" minOccurs="0" name="Sys_Login_CheckUserResult" nillable="true" type="q1:LogonUser" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DbServer.Common" minOccurs="0" name="Sys_Login_CheckUserResult" nillable="true" type="q1:LogonUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -97,7 +97,7 @@
   <xs:element name="Sys_Menu_Qry">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth" minOccurs="0" name="menu" nillable="true" type="q3:Menu" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DbServer.Common" minOccurs="0" name="menu" nillable="true" type="q3:Menu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -123,7 +123,7 @@
   <xs:element name="Sys_Menu_Opr">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth" minOccurs="0" name="menu" nillable="true" type="q4:Menu" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DbServer.Common" minOccurs="0" name="menu" nillable="true" type="q4:Menu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -207,7 +207,7 @@
   <xs:element name="Sys_OU_Opr">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth" minOccurs="0" name="OrgInfo" nillable="true" type="q8:OU" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DbServer.Common" minOccurs="0" name="OrgInfo" nillable="true" type="q8:OU" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -280,7 +280,7 @@
   <xs:element name="Sys_Role_Opr">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth" minOccurs="0" name="RoleInfo" nillable="true" type="q13:Role" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DbServer.Common" minOccurs="0" name="RoleInfo" nillable="true" type="q13:Role" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -352,7 +352,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="iCode" type="xs:int" />
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth" minOccurs="0" name="Usr" nillable="true" type="q16:User" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DbServer.Common" minOccurs="0" name="Usr" nillable="true" type="q16:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -378,7 +378,7 @@
   <xs:element name="Sys_User_Opr">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth" minOccurs="0" name="Usr" nillable="true" type="q17:User" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DbServer.Common" minOccurs="0" name="Usr" nillable="true" type="q17:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -403,6 +403,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="Sys_User_DelResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DoNothing">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DoNothingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="DoNothingResult" nillable="true" type="q19:AuthHeader" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

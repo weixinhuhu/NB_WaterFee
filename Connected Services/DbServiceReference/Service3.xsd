@@ -1075,4 +1075,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="DoNothing">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DoNothingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/DbServer.Model" minOccurs="0" name="DoNothingResult" nillable="true" type="q43:AuthHeader" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

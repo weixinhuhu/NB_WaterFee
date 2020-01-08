@@ -4,7 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth" />
+      <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DbServer.Common" />
       <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DbServer.Model" />
       <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
       <xsd:import schemaLocation="http://118.190.199.54:9009/DbServer/ServAuthority.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -148,6 +148,12 @@
   <wsdl:message name="IAuthority_Sys_User_Del_OutputMessage">
     <wsdl:part name="parameters" element="tns:Sys_User_DelResponse" />
   </wsdl:message>
+  <wsdl:message name="IAuthority_DoNothing_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoNothing" />
+  </wsdl:message>
+  <wsdl:message name="IAuthority_DoNothing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoNothingResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAuthority">
     <wsdl:operation name="Sys_Login_CheckUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthority/Sys_Login_CheckUser" message="tns:IAuthority_Sys_Login_CheckUser_InputMessage" />
@@ -240,6 +246,10 @@
     <wsdl:operation name="Sys_User_Del">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthority/Sys_User_Del" message="tns:IAuthority_Sys_User_Del_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthority/Sys_User_DelResponse" message="tns:IAuthority_Sys_User_Del_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoNothing">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthority/DoNothing" message="tns:IAuthority_DoNothing_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthority/DoNothingResponse" message="tns:IAuthority_DoNothing_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IAuthority" type="tns:IAuthority">
@@ -444,6 +454,15 @@
     </wsdl:operation>
     <wsdl:operation name="Sys_User_Del">
       <soap:operation soapAction="http://tempuri.org/IAuthority/Sys_User_Del" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoNothing">
+      <soap:operation soapAction="http://tempuri.org/IAuthority/DoNothing" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

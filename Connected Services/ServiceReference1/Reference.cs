@@ -15,7 +15,7 @@ namespace NB_WaterFee.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LogonUser", Namespace="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LogonUser", Namespace="http://schemas.datacontract.org/2004/07/DbServer.Common")]
     [System.SerializableAttribute()]
     public partial class LogonUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -361,7 +361,7 @@ namespace NB_WaterFee.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Menu", Namespace="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Menu", Namespace="http://schemas.datacontract.org/2004/07/DbServer.Common")]
     [System.SerializableAttribute()]
     public partial class Menu : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -678,7 +678,7 @@ namespace NB_WaterFee.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OU", Namespace="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OU", Namespace="http://schemas.datacontract.org/2004/07/DbServer.Common")]
     [System.SerializableAttribute()]
     public partial class OU : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1036,6 +1036,7 @@ namespace NB_WaterFee.ServiceReference1 {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.ServiceReference1.User))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.ServiceReference1.EasyTreeData[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.ServiceReference1.EasyTreeData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NB_WaterFee.ServiceReference1.AuthHeader))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(int[]))]
@@ -1194,7 +1195,7 @@ namespace NB_WaterFee.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Role", Namespace="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Role", Namespace="http://schemas.datacontract.org/2004/07/DbServer.Common")]
     [System.SerializableAttribute()]
     public partial class Role : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1495,7 +1496,7 @@ namespace NB_WaterFee.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/DbServer.DTOAuth")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/DbServer.Common")]
     [System.SerializableAttribute()]
     public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1986,6 +1987,83 @@ namespace NB_WaterFee.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthHeader", Namespace="http://schemas.datacontract.org/2004/07/DbServer.Model")]
+    [System.SerializableAttribute()]
+    public partial class AuthHeader : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NonceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SignatureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TimestampField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nonce {
+            get {
+                return this.NonceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NonceField, value) != true)) {
+                    this.NonceField = value;
+                    this.RaisePropertyChanged("Nonce");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Signature {
+            get {
+                return this.SignatureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SignatureField, value) != true)) {
+                    this.SignatureField = value;
+                    this.RaisePropertyChanged("Signature");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Timestamp {
+            get {
+                return this.TimestampField;
+            }
+            set {
+                if ((this.TimestampField.Equals(value) != true)) {
+                    this.TimestampField = value;
+                    this.RaisePropertyChanged("Timestamp");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IAuthority")]
     public interface IAuthority {
@@ -2127,6 +2205,12 @@ namespace NB_WaterFee.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthority/Sys_User_Del", ReplyAction="http://tempuri.org/IAuthority/Sys_User_DelResponse")]
         System.Threading.Tasks.Task<string> Sys_User_DelAsync(int iMode, int[] LstID, string sUserID, string sUserName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthority/DoNothing", ReplyAction="http://tempuri.org/IAuthority/DoNothingResponse")]
+        NB_WaterFee.ServiceReference1.AuthHeader DoNothing();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthority/DoNothing", ReplyAction="http://tempuri.org/IAuthority/DoNothingResponse")]
+        System.Threading.Tasks.Task<NB_WaterFee.ServiceReference1.AuthHeader> DoNothingAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2338,6 +2422,14 @@ namespace NB_WaterFee.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> Sys_User_DelAsync(int iMode, int[] LstID, string sUserID, string sUserName) {
             return base.Channel.Sys_User_DelAsync(iMode, LstID, sUserID, sUserName);
+        }
+        
+        public NB_WaterFee.ServiceReference1.AuthHeader DoNothing() {
+            return base.Channel.DoNothing();
+        }
+        
+        public System.Threading.Tasks.Task<NB_WaterFee.ServiceReference1.AuthHeader> DoNothingAsync() {
+            return base.Channel.DoNothingAsync();
         }
     }
 }

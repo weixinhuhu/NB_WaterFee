@@ -13,14 +13,8 @@
     <script src="~/Scripts/ComponentUtil.js"></script>
 
     <script type="text/javascript">
-
-        @*var FactoryCode = @ViewBag.FactoryCode;
-        var AreaCode = @ViewBag.AreaCode;*@
-
         var FactoryCode = "";
         var AreaCode = "";
-
-        var isAddOrEdit = 'add';//标识是新增还是编辑对话框弹出，用于删除附件的操作
 
         $(function () {
             var queryData = {
@@ -252,13 +246,10 @@
 
      
         //弹出新增对话框
-        function ShowAddDialog() {
-            isAddOrEdit = 'add';//新增对话框标识
-
+        function ShowAddDialog() {          
             clearInput();
             setDefault();
             BindAddEvent();
-
             $("#DivAdd").dialog('open').dialog('setTitle', '添加信息');
         }
 
@@ -377,14 +368,8 @@
         }
 
         //绑定编辑详细信息的方法
-        function BindEditInfo(row) {
-            //首先用户发送一个异步请求去后台实现方法
-           // var ID = $("#grid").datagrid("getSelections")[0].IntID;  //获取到了用用户选择的ID
-            isAddOrEdit = 'edit';//新增对话框标识
-
-            //$("#ffAdd input[type='text']").val("");
-            clearInput();
-          
+        function BindEditInfo(row) {       
+            clearInput();       
             $("#editVcAddr").val(row.VcAddr);
             $("#editNvcName").val(row.NvcName);
             $("#editNvcAddr").val(row.NvcAddr);

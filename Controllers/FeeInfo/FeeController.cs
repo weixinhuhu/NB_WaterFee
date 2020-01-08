@@ -1,7 +1,10 @@
 ﻿using NB_WaterFee.DbServiceReference;
 using System;
 using System.Data;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Web.Mvc;
+using TokenTest;
 using WHC.Framework.Commons;
 
 namespace WHC.NB_WaterFee.Controllers
@@ -99,37 +102,47 @@ namespace WHC.NB_WaterFee.Controllers
         /// <returns></returns>
         public ActionResult PayGetMoney_Server(string custNo)
         {
-            CommonResult result = new CommonResult();
-            try
+            //认证模块
+            ServiceDbClient dbClient = new ServiceDbClient();
+            using (OperationContextScope Scope = new OperationContextScope(dbClient.InnerChannel))
             {
-                var payMoney = Request["payMoney"] ?? "0";
-                var sRemark = "";
-                var iUserID = userid;
-                var sReceiptNo = "";
-                ServiceDbClient DbServer = new ServiceDbClient();
-                var flag = DbServer.Account_DepositOperate(endcode, custNo.ToIntOrZero(), payMoney.ToDouble(), sRemark, iUserID, sReceiptNo);
-                if (flag.IsSuccess)
+                CommonResult result = new CommonResult();
+                AuthHeader AuthObj = new AuthHeader()
                 {
-                    result.IsSuccess = true;
-                    result.StrData1 = flag.StrData1;
-                    LogTextHelper.Info("缴费成功" + " 操作员:" + userid + " 用户编号" + custNo.ToIntOrZero() + " 缴费金额：" + payMoney.ToDouble());
+                    Nonce = new Random().Next(0, 100).ToString(),
+                    Timestamp = DateTime.Now
+                };
+                AuthObj.Signature = TokenHelper.GetSignature(AuthObj.Timestamp, AuthObj.Nonce);
+                OperationContext.Current.OutgoingMessageHeaders.Add(MessageHeader.CreateHeader("Auth", "http://tempuri.org", AuthObj));
+                try
+                {
+                    var payMoney = Request["payMoney"] ?? "0";
+                    var sRemark = "";
+                    var iUserID = userid;
+                    var sReceiptNo = "";
+                    var flag = dbClient.Account_DepositOperate(endcode, custNo.ToIntOrZero(), payMoney.ToDouble(), sRemark, iUserID, sReceiptNo);
+                    if (flag.IsSuccess)
+                    {
+                        result.IsSuccess = true;
+                        result.StrData1 = flag.StrData1;
+                        LogTextHelper.Info("缴费成功" + " 操作员:" + userid + " 用户编号" + custNo.ToIntOrZero() + " 缴费金额：" + payMoney.ToDouble());
+                    }
+                    else
+                    {
+                        LogTextHelper.Error("缴费失败" + " 操作员:" + userid + " 用户编号" + custNo.ToIntOrZero() + " 缴费金额：" + payMoney.ToDouble());
+                        result.ErrorMsg = flag.ErrorMsg;
+                        result.IsSuccess = false;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    LogTextHelper.Error("缴费失败" + " 操作员:" + userid + " 用户编号" + custNo.ToIntOrZero() + " 缴费金额：" + payMoney.ToDouble());
-                    result.ErrorMsg = flag.ErrorMsg;
+                    LogTextHelper.Error("缴费异常错误" + ex);
                     result.IsSuccess = false;
+                    result.ErrorMsg = ex.Message;
                 }
+                return ToJsonContentDate(result);
             }
-            catch (Exception ex)
-            {
-                LogTextHelper.Error("缴费异常错误" + ex);
-                result.IsSuccess = false;
-                result.ErrorMsg = ex.Message;
-            }
-            return ToJsonContentDate(result);
         }
-
         [HttpPost]
         public ActionResult CloseAccount_Query_Server(string custNo)
         {

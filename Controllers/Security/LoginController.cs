@@ -90,13 +90,11 @@ namespace WHC.NB_WaterFee.Controllers
             {
                 userIP = Request.UserHostAddress;
             }
-
             //替换本机默认的::1
             if (userIP == "::1")
             {
                 userIP = "127.0.0.1";
             }
-
             return userIP;
         }
 

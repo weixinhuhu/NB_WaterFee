@@ -86,8 +86,7 @@
             $("#loading").fadeOut(500);
         }
 
-        var isAddOrEdit = 'add';//标识是新增还是编辑对话框弹出，用于删除附件的操作
-
+      
         //实现对DataGird控件的绑定操作
         function InitGrid(queryData) {
             $('#grid').datagrid({   //定位到Table标签，Table标签的ID是grid
@@ -304,9 +303,7 @@
 
         //弹出新增对话框
         function ShowAddDialog() {
-            isAddOrEdit = 'add';//新增对话框标识
-            //CKEDITOR.instances.Content.setData('');  //清空编辑器的数据
-
+          
             $("#DivAdd").dialog('open').dialog('setTitle', '添加信息');
         }
 
@@ -383,7 +380,7 @@
             $("#AuditStatus1").combobox('setValue', info.IntAuditStatus);
             $("#Com_ID1").combotree('setValue', info.NvcComID);
             $("#Dept_ID1").combotree('setValue', info.NvcDeptID);
-            isAddOrEdit = 'edit';//新增对话框标识
+           
         }
 
         //绑定修改按钮的事件

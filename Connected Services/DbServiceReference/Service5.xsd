@@ -55,4 +55,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CommonResult" nillable="true" type="tns:CommonResult" />
+  <xs:complexType name="AuthHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Nonce" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Signature" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthHeader" nillable="true" type="tns:AuthHeader" />
 </xs:schema>
